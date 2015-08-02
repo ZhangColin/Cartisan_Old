@@ -1,0 +1,15 @@
+﻿using System;
+using Cartisan.IoC;
+
+namespace Cartisan.CommandProcessor {
+    public class DefaultCommandBus: ICommandBus {
+        public void Submit<TCommand>(TCommand command) where TCommand: ICommand {
+            var handler = ServiceLocator.GetService<ICommandHandler<TCommand>>();
+            if(handler==null) {
+                throw new Exception(string.Format("未找到命令处理器：{0}。", typeof(TCommand)));
+            }
+
+            handler.Execute(command);
+        }
+    }
+}
