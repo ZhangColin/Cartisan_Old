@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Cartisan.Utility;
 
 namespace Cartisan.Domain {
     /// <summary>
     /// 实体基类
     /// </summary>
     /// <typeparam name="TId">实体标识（主键）的类型</typeparam>
-    public abstract class Entity<TId>: IEntity<TId> where TId: struct,IComparable {
+    public abstract class Entity<TId> : IEntity<TId> where TId : struct, IComparable {
         private object _id;
 
         /// <summary>
@@ -14,7 +16,7 @@ namespace Cartisan.Domain {
         /// </summary>
         public virtual TId Id {
             get {
-                if(_id == null && typeof(TId) == typeof(Guid)) {
+                if (_id == null && typeof(TId) == typeof(Guid)) {
                     _id = Guid.NewGuid();
                 }
 
@@ -26,6 +28,8 @@ namespace Cartisan.Domain {
             }
             //            protected set { _id = value; }
         }
+
+        protected abstract IEnumerable<object> GetIdentityComponents();
 
         /// <summary>
         /// 检查对象是否是瞬时的
@@ -62,6 +66,8 @@ namespace Cartisan.Domain {
                         otherType.IsAssignableFrom(thisType);
             }
 
+            //            return this.GetIdentityComponents().SequenceEqual(other.GetIdentityComponents());
+
             // 以上条件皆不成立，不相等
             return false;
         }
@@ -79,15 +85,16 @@ namespace Cartisan.Domain {
         }
 
         public override int GetHashCode() {
-            if(Equals(Id, default(TId))) {
+            if (Equals(Id, default(TId))) {
                 return base.GetHashCode();
             }
             return EqualityComparer<TId>.Default.GetHashCode(this.Id);
+            //            return HashCodeUtil.CombineHashCodes(this.GetIdentityComponents());
         }
     }
 
     /// <summary>
     /// 实体基类
     /// </summary>
-    public abstract class Entity: Entity<long> { }
+    public abstract class Entity : Entity<long> { }
 }

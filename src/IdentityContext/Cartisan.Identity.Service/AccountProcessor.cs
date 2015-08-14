@@ -24,7 +24,7 @@ namespace Cartisan.Identity.Service {
         }
 
         public void Execute(DeleteUser command) {
-            _userRepository.Delete(command.UserId);
+            _userRepository.Remove(command.UserId);
         }
     }
 }

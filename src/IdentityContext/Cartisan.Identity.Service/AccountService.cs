@@ -43,8 +43,8 @@ namespace Cartisan.Identity.Service {
 //            _userRepository.Save(userAccount);
 //        }
 //
-//        public void Delete(Guid userId) {
-//            _userRepository.Delete(userId);
+//        public void Remove(Guid userId) {
+//            _userRepository.Remove(userId);
 //        }
     }
 }

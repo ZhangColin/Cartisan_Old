@@ -1,75 +1,29 @@
-﻿//using System;
-//using System.Linq;
-//using System.Linq.Expressions;
-//using Cartisan.Core.Domain;
-//using Cartisan.Core.Repository;
-//
-//namespace Cartisan.EntityFramework {
-//    public class EntityRepository<TEntity, TId>: RepositoryBase<TEntity, TId>, IRepository<TEntity, TId>
-//        where TEntity: class, IAggregateRoot, IEntity<TId>
-//        where TId: IComparable {
-//        private readonly IEntitiesContext _context;
-//
-//        public EntityRepository(IUnitOfWork unitOfWork, IEntitiesContext context)
-//            : base(unitOfWork) {
-//            if (context == null) {
-//                throw new ArgumentNullException("context");
-//            }
-//            this._context = context;
-//        }
-//
-//        public override void Add(TEntity entity) {
-//            _context.SetAsAdded(entity);
-//        }
-//
-//        public override void Save(TEntity entity) {
-//            _context.SetAsModified(entity);
-//        }
-//
-//        public override void Remove(TEntity entity) {
-//            _context.SetAsDeleted(entity);
-//        }
-//
-//        public override IQueryable<TEntity> GetAll() {
-//            return this._context.Set<TEntity>();
-//        }
-//
-//        public override IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate) {
-//            return this._context.Set<TEntity>().Where(predicate);
-//        }
-//
-//        public override TEntity Load(TId id) {
-//            return this._context.Set<TEntity>().Find(id);
-//        }
-//
-//        public override TEntity Get(TId id) {
-//            return this._context.Set<TEntity>().Find(id);
-//        }
-//    }
-//
-//    public class EntityRepository<TEntity>: EntityRepository<TEntity, long>, IRepository<TEntity>, IRepository<TEntity, long>
-//        where TEntity: class, IAggregateRoot, IEntity<long> {
-//        public EntityRepository(IUnitOfWork unitOfWork, IEntitiesContext context) : base(unitOfWork, context) { }
-//    }
-//}
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Cartisan.Domain;
+using Cartisan.Extensions;
 using Cartisan.Repository;
+using Cartisan.Specification;
 
 namespace Cartisan.EntityFramework {
-    public class EfRepository<TEntity>: IRepository<TEntity> where TEntity: class, new() {
-        private readonly DbContext _context;
+    public class EfRepository<TAggregateRoot>: IRepository<TAggregateRoot> where TAggregateRoot: class, IAggregateRoot, new() {
+        private readonly ContextBase _context;
 
-        public EfRepository(DbContext context) {
-            AssertionConcern.NotNull(context, "");
+        public EfRepository(ContextBase context) {
+            AssertionConcern.NotNull(context, "没有数据库上下文，仓储无法工作。");
 
             _context = context;
+        }
+
+        private IDbSet<TAggregateRoot> _dbSet;
+
+        private IDbSet<TAggregateRoot> DbSet {
+            get { return _dbSet ?? (_dbSet = _context.Set<TAggregateRoot>()); }
         }
 
         public void Dispose() {
@@ -79,12 +33,11 @@ namespace Cartisan.EntityFramework {
             _context.Dispose();
         }
 
-        public void Add(TEntity entity) {
+        public void Add(TAggregateRoot entity) {
             AssertionConcern.NotNull(entity, "");
 
             try {
-                _context.Set<TEntity>().Add(entity);
-
+                _context.SetAsAdded(entity);
                 _context.SaveChanges();
             }
             catch(DbEntityValidationException dbEx) {
@@ -100,14 +53,11 @@ namespace Cartisan.EntityFramework {
             
         }
 
-        public void Add(IEnumerable<TEntity> entities) {
+        public void Add(IEnumerable<TAggregateRoot> entities) {
             AssertionConcern.NotNull(entities, "");
 
             try {
-                foreach (TEntity entity in entities) {
-                    _context.Set<TEntity>().Add(entity);
-                }
-
+                entities.ForEach(entity => this._context.SetAsAdded(entity));
                 _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx) {
@@ -122,32 +72,30 @@ namespace Cartisan.EntityFramework {
             }
         }
 
-        public async Task<object> AddAsync(TEntity entity) {
+        public async Task<object> AddAsync(TAggregateRoot entity) {
             AssertionConcern.NotNull(entity, "");
 
-            _context.Set<TEntity>().Add(entity);
+            _context.SetAsAdded(entity);
 
             await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public async Task<object> AddAsync(IEnumerable<TEntity> entities) {
+        public async Task<object> AddAsync(IEnumerable<TAggregateRoot> entities) {
             AssertionConcern.NotNull(entities, "");
 
-            foreach(TEntity entity in entities) {
-                _context.Set<TEntity>().Add(entity);
-            }
+            entities.ForEach(entity => this._context.SetAsAdded(entity));
 
             await _context.SaveChangesAsync();
 
             return entities;
         }
 
-        public void Save(TEntity entity) {
+        public void Save(TAggregateRoot entity) {
             try {
                 AssertionConcern.NotNull(entity, "");
-
+                _context.SetAsModified(entity);
                 _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx) {
@@ -162,10 +110,10 @@ namespace Cartisan.EntityFramework {
             }
         }
 
-        public void Save(IEnumerable<TEntity> entities) {
+        public void Save(IEnumerable<TAggregateRoot> entities) {
             try {
                 AssertionConcern.NotNull(entities, "");
-
+                entities.ForEach(entity => this._context.SetAsModified(entity));
                 _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx) {
@@ -180,33 +128,33 @@ namespace Cartisan.EntityFramework {
             }
         }
 
-        public async Task<object> SaveAsync(TEntity entity) {
+        public async Task<object> SaveAsync(TAggregateRoot entity) {
             AssertionConcern.NotNull(entity, "");
-
+            _context.SetAsModified(entity);
             await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public async Task<object> SaveAsync(IEnumerable<TEntity> entities) {
+        public async Task<object> SaveAsync(IEnumerable<TAggregateRoot> entities) {
             AssertionConcern.NotNull(entities, "");
-
+            entities.ForEach(entity => this._context.SetAsModified(entity));
             await _context.SaveChangesAsync();
 
             return entities;
         }
 
-        public void Delete(object key) {
+        public void Remove(object key) {
             AssertionConcern.NotNull(key, "");
 
-            Delete(Get(key));
+            Remove(Get(key));
         }
 
-        public void Delete(TEntity entity) {
+        public void Remove(TAggregateRoot entity) {
             AssertionConcern.NotNull(entity, "");
 
             try {
-                _context.Set<TEntity>().Remove(entity);
+                _context.SetAsDeleted(entity);
 
                 _context.SaveChanges();
             }
@@ -223,13 +171,12 @@ namespace Cartisan.EntityFramework {
             
         }
 
-        public void Delete(Expression<Func<TEntity, bool>> predicate) {
+        public void Remove(Expression<Func<TAggregateRoot, bool>> predicate) {
             AssertionConcern.NotNull(predicate, "");
 
             try {
-                foreach (TEntity entity in Query(predicate)) {
-                    _context.Set<TEntity>().Remove(entity);
-                }
+                Query(predicate).ForEach(entity => _context.SetAsDeleted(entity));
+                
                 _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx) {
@@ -252,31 +199,29 @@ namespace Cartisan.EntityFramework {
             return null;
         }
 
-        public async Task<object> DeleteAsync(TEntity entity) {
+        public async Task<object> DeleteAsync(TAggregateRoot entity) {
             AssertionConcern.NotNull(entity, "");
 
-            _context.Set<TEntity>().Remove(entity);
+            _context.SetAsDeleted(entity);
 
             await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public async Task<object> DeleteAsync(Expression<Func<TEntity, bool>> predicate) {
+        public async Task<object> DeleteAsync(Expression<Func<TAggregateRoot, bool>> predicate) {
             AssertionConcern.NotNull(predicate, "");
 
-            foreach(TEntity entity in Query(predicate)) {
-                _context.Set<TEntity>().Remove(entity);
-            }
+            Query(predicate).ForEach(entity => _context.SetAsDeleted(entity));
             await _context.SaveChangesAsync();
 
             return null;
         }
 
-        public TEntity Get(object key) {
+        public TAggregateRoot Get(object key) {
             AssertionConcern.NotNull(key, "");
 
-            return _context.Set<TEntity>().Find(key);
+            return DbSet.Find(key);
         }
 
         //        public TEntity Get(Expression<Func<TEntity, bool>> predicate, params string[] includePaths)  {
@@ -285,7 +230,7 @@ namespace Cartisan.EntityFramework {
         //            return GetSetWithIncludePaths(includePaths).SingleOrDefault(predicate);
         //        }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties) {
+        public TAggregateRoot Get(Expression<Func<TAggregateRoot, bool>> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
             AssertionConcern.NotNull(predicate, "");
 
             return GetSetWithIncludeProperties(includeProperties).SingleOrDefault(predicate);
@@ -295,7 +240,7 @@ namespace Cartisan.EntityFramework {
         //            return Query(null, includePaths);
         //        }
 
-        public IQueryable<TEntity> All(params Expression<Func<TEntity, object>>[] includeProperties) {
+        public IQueryable<TAggregateRoot> All(params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
             return Query(null, includeProperties);
         }
 
@@ -307,7 +252,7 @@ namespace Cartisan.EntityFramework {
         //            return query;
         //        }
 
-        public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties) {
+        public IQueryable<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
             var query = GetSetWithIncludeProperties(includeProperties);
             if(predicate != null) {
                 return query.Where(predicate);
@@ -315,8 +260,9 @@ namespace Cartisan.EntityFramework {
             return query;
         }
 
-        public Paginated<TEntity> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> keySelector) {
-            return Paginate(pageIndex, pageSize, keySelector, null);
+        public Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector) {
+            throw new NotImplementedException();
+            //return Paginate(pageIndex, pageSize, keySelector, null);
         }
 
         //        public Paginated<TEntity> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> keySelector, Expression<Func<TEntity, bool>> predicate,
@@ -324,8 +270,8 @@ namespace Cartisan.EntityFramework {
         //            throw new NotImplementedException();
         //        }
 
-        public Paginated<TEntity> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> keySelector, Expression<Func<TEntity, bool>> predicate,
-            params Expression<Func<TEntity, object>>[] includeProperties) {
+        public Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector, Expression<Func<TAggregateRoot, bool>> predicate,
+            params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
             var query = Query(predicate, includeProperties);
             query = query.OrderBy(keySelector);
 
@@ -342,14 +288,50 @@ namespace Cartisan.EntityFramework {
         //            return query;
         //        }
 
-        private IQueryable<TEntity> GetSetWithIncludeProperties(Expression<Func<TEntity, object>>[] includeProperties) {
-            IQueryable<TEntity> query = _context.Set<TEntity>();
+        private IQueryable<TAggregateRoot> GetSetWithIncludeProperties(Expression<Func<TAggregateRoot, object>>[] includeProperties) {
+            IQueryable<TAggregateRoot> query = DbSet.AsQueryable();
 
-            foreach(Expression<Func<TEntity, object>> expression in includeProperties ?? Enumerable.Empty<Expression<Func<TEntity, object>>>()) {
+            foreach(Expression<Func<TAggregateRoot, object>> expression in includeProperties ?? Enumerable.Empty<Expression<Func<TAggregateRoot, object>>>()) {
                 query = query.Include(expression);
             }
 
             return query;
+        }
+
+        public TAggregateRoot Get(ISpecification<TAggregateRoot> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
+            throw new NotImplementedException();
+        }
+
+        public bool Exists(ISpecification<TAggregateRoot> predicate) {
+            throw new NotImplementedException();
+        }
+
+        public bool Exists(Expression<Func<TAggregateRoot, bool>> predicate) {
+            throw new NotImplementedException();
+        }
+
+        public long Count(ISpecification<TAggregateRoot> predicate) {
+            throw new NotImplementedException();
+        }
+
+        public long Count(Expression<Func<TAggregateRoot, bool>> predicate) {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TAggregateRoot> All() {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> predicate) {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TAggregateRoot> Query(ISpecification<TAggregateRoot> predicate) {
+            throw new NotImplementedException();
+        }
+
+        public Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector, ISpecification<TAggregateRoot> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
+            throw new NotImplementedException();
         }
     }
 }

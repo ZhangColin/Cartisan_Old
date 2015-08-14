@@ -9,6 +9,6 @@ namespace Cartisan.Identity.Service {
 
 //        void Add(string name);
 //        void Update(Guid userId, string name);
-//        void Delete(Guid userId);
+//        void Remove(Guid userId);
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Cartisan.Domain;
+using Cartisan.Specification;
 
 namespace Cartisan.Repository {
 //    /// <summary>
@@ -38,7 +40,7 @@ namespace Cartisan.Repository {
 //        /// </summary>
 //        /// <param name="predicate"></param>
 //        /// <returns></returns>
-//        IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
+//        IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate);
 //
 //        /// <summary>
 //        /// 添加实体
@@ -70,43 +72,54 @@ namespace Cartisan.Repository {
 //        where TEntity: class, IEntity<long>, IAggregateRoot {
 //    }
 
-    public interface IRepository<TEntity>: IDisposable where TEntity: class, new() {
-        void Add(TEntity entity);
-        void Add(IEnumerable<TEntity> entities);
+    public interface IRepository<TAggregateRoot>: IDisposable where TAggregateRoot: class, IAggregateRoot, new() {
+        void Add(TAggregateRoot entity);
+        void Add(IEnumerable<TAggregateRoot> entities);
 
-        Task<object> AddAsync(TEntity entity);
-        Task<object> AddAsync(IEnumerable<TEntity> entities);
+        Task<object> AddAsync(TAggregateRoot entity);
+        Task<object> AddAsync(IEnumerable<TAggregateRoot> entities);
 
-        void Save(TEntity entity);
-        void Save(IEnumerable<TEntity> entities);
+        void Save(TAggregateRoot entity);
+        void Save(IEnumerable<TAggregateRoot> entities);
 
-        Task<object> SaveAsync(TEntity entity);
-        Task<object> SaveAsync(IEnumerable<TEntity> entities);
+        Task<object> SaveAsync(TAggregateRoot entity);
+        Task<object> SaveAsync(IEnumerable<TAggregateRoot> entities);
 
-        void Delete(object key);
-        void Delete(TEntity entity);
-        void Delete(Expression<Func<TEntity, bool>> predicate);
+        void Remove(object key);
+        void Remove(TAggregateRoot entity);
+        void Remove(Expression<Func<TAggregateRoot, bool>> predicate);
 
         Task<object> DeleteAsync(object key);
-        Task<object> DeleteAsync(TEntity entity);
-        Task<object> DeleteAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<object> DeleteAsync(TAggregateRoot entity);
+        Task<object> DeleteAsync(Expression<Func<TAggregateRoot, bool>> predicate);
 
-        TEntity Get(object key);
+        TAggregateRoot Get(object key);
         //        TEntity Get(Expression<Func<TEntity, bool>> predicate, params string[] includePaths);
-        TEntity Get(Expression<Func<TEntity, bool>> predicate,
-            params Expression<Func<TEntity, object>>[] includeProperties);
+        TAggregateRoot Get(Expression<Func<TAggregateRoot, bool>> predicate,
+            params Expression<Func<TAggregateRoot, object>>[] includeProperties);
+        TAggregateRoot Get(ISpecification<TAggregateRoot> predicate,
+            params Expression<Func<TAggregateRoot, object>>[] includeProperties);
+
+        bool Exists(ISpecification<TAggregateRoot> predicate);
+        bool Exists(Expression<Func<TAggregateRoot, bool>> predicate);
+
+        long Count(ISpecification<TAggregateRoot> predicate);
+        long Count(Expression<Func<TAggregateRoot, bool>> predicate);
 
         //        IQueryable<TEntity> All(params string[] includePaths);
-        IQueryable<TEntity> All(params Expression<Func<TEntity, object>>[] includeProperties);
+        IQueryable<TAggregateRoot> All();
         //        IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate, params string[] includePaths);
-        IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate,
-            params Expression<Func<TEntity, object>>[] includeProperties);
+        IQueryable<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> predicate);
+        IQueryable<TAggregateRoot> Query(ISpecification<TAggregateRoot> predicate);
 
-        Paginated<TEntity> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> keySelector);
+        Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector);
         //        Paginated<TEntity> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> keySelector,
         //            Expression<Func<TEntity, bool>> predicate, params string[] includePaths);
-        Paginated<TEntity> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> keySelector,
-            Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
+        Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector,
+            Expression<Func<TAggregateRoot, bool>> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties);
+
+        Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector,
+            ISpecification<TAggregateRoot> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties);
     }
 }
 

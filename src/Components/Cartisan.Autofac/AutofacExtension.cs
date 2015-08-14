@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Reflection;
 using Autofac;
+using Cartisan.DependencyInjection;
 using Cartisan.Extensions;
-using Cartisan.IoC;
 
 namespace Cartisan.Autofac {
     public static class AutofacExtension {

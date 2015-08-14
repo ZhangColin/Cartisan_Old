@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "正在执行";
+    
+}
+<div class="alert alert-block alert-warning" style="display: none" id="confirm">
+    <p>
+        <strong>
+            <i class="ace-icon fa fa-check"></i>
+            @ViewBag.ConfirmInfo
+        </strong>
+    </p>
+
+    <p>
+        <a class="btn btn-sm btn-primary" id="btnRun">确定</a>
+        <a class="btn btn-sm btn-default" href="@ViewBag.BackUrl">取消</a>
+    </p>
+</div>
+<div class="alert alert-block alert-info" style="display: none" id="operator">
+    <p>
+        <strong>
+            <i class="ace-icon fa fa-check"></i>
+            @ViewBag.Message
+            <i class="ace-icon fa fa-spinner fa-spin bigger-125"></i>
+        </strong>
+    </p>
+
+    <p>
+        <a class="btn btn-sm btn-danger" href="@ViewBag.BackUrl">终止并返回</a>
+    </p>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function() {
+            var confirmInfo = @(string.IsNullOrEmpty(ViewBag.ConfirmInfo)?"false":"true");
+            var operationUrl = '@ViewBag.OperationUrl';
+
+            if (confirmInfo) {
+                $('#confirm').show();
+            } else {
+                window.location.href = operationUrl;
+                $('#operator').show();
+            }
+
+            $('#btnRun').on('click', function(event) {
+                window.location.href = operationUrl;
+                $('#confirm').hide();
+                $('#operator').show();
+            });
+        });
+    </script>
+}

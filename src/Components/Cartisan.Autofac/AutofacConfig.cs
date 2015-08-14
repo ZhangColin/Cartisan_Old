@@ -6,7 +6,7 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Cartisan.CommandProcessor;
-using Cartisan.IoC;
+using Cartisan.DependencyInjection;
 using Cartisan.Web.WebApi;
 
 namespace Cartisan.Autofac {

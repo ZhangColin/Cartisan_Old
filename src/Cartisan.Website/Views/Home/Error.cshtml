@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "执行失败";
+}
+
+<div class="alert alert-block alert-danger">
+    <p>
+        <strong>
+            <i class="ace-icon fa fa-check"></i>
+            @ViewBag.Message
+        </strong>
+    </p>
+
+    <p>
+        <a class="btn btn-sm btn-primary" href="@ViewBag.OperationUrl">重试</a>
+        <a class="btn btn-sm btn-default" href="@ViewBag.BackUrl">返回</a>
+    </p>
+</div>
+

@@ -1,0 +1,43 @@
+﻿using System.Collections.Generic;
+
+namespace Cartisan.Domain {
+    /// <summary>
+    /// 聚合根基类
+    /// </summary>
+    public abstract class AggregateRoot: Entity, IAggregateRoot {
+        /*protected IDomainEventBus EventBus {
+           get { return IoCFactory.Resolve<IDomainEventBus>(); }
+       }*/
+
+        /*private string _aggreagetRootType;
+
+        protected string AggregateRootName {
+            get {
+                if(string.IsNullOrWhiteSpace(_aggreagetRootType)) {
+                    Type aggregateRootType = this.GetType();
+                    if("EntityProxyModule"==this.GetType().Module.ToString()) {
+                        aggregateRootType = aggregateRootType.BaseType;
+                    }
+                    _aggreagetRootType = aggregateRootType.FullName;
+                }
+                return _aggreagetRootType;
+            }
+        }*/
+
+        /*protected virtual void OnEvent<TDomainEvent>(TDomainEvent @event) where TDomainEvent: class, IDomainEvent {
+            HandleEvent(@event);
+            @event.AggregateRootName = AggregateRootName;
+            EventBus.Publish(@event);
+        }
+
+        private void HandleEvent<TDomainEvent>(TDomainEvent @event) where TDomainEvent: class, IDomainEvent {
+            IEventSubscriber<TDomainEvent> subscriber = this as IEventSubscriber<TDomainEvent>;
+            if(subscriber!=null) {
+                subscriber.Handle(@event);
+            }
+        }*/
+        protected override IEnumerable<object> GetIdentityComponents() {
+            throw new System.NotImplementedException();
+        }
+    }
+}

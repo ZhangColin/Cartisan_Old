@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Web.Http;
-using Cartisan.IoC;
+using Cartisan.DependencyInjection;
 
 namespace Cartisan.Web.WebApi {
     public class ApiResolver: IResolver {
@@ -21,5 +21,21 @@ namespace Cartisan.Web.WebApi {
         public IEnumerable<TService> GetServices<TService>() {
             return (IEnumerable<TService>)GlobalConfiguration.Configuration.DependencyResolver.GetServices(typeof(TService));
         }
+
+//        public object Resolve(Type serviceType) {
+//            return GlobalConfiguration.Configuration.DependencyResolver.GetService(serviceType);
+//        }
+//
+//        public TService Resolve<TService>() {
+//            return (TService)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(TService));
+//        }
+//
+//        public TService ResolveNamed<TService>(string serviceName) {
+//            throw new NotImplementedException();
+//        }
+//
+//        public TService ResolveKeyed<TService>(object serviceKey) {
+//            throw new NotImplementedException();
+//        }
     }
 }

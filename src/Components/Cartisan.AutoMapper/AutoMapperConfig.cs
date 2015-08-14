@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using Cartisan.DependencyInjection;
 using Cartisan.Extensions;
-using Cartisan.IoC;
 
 namespace Cartisan.AutoMapper {
     public static class AutoMapperConfig {

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "执行成功";
+}
+
+<div class="alert alert-block alert-success">
+    <p>
+        <strong>
+            <i class="ace-icon fa fa-check"></i>
+            @ViewBag.Message
+        </strong>
+    </p>
+    <p>
+        3秒钟后将自动跳转，如果没跳转请点击下面返回按钮手动跳转！
+    </p>
+    <p>
+        <a class="btn btn-sm btn-success" href="@ViewBag.BackUrl">返回</a>
+    </p>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function() {
+            setTimeout(function() {
+                window.location.href = '@ViewBag.BackUrl';
+            }, 3000);
+        });
+    </script>
+}

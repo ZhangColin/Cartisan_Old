@@ -15,7 +15,7 @@
 //        public abstract TEntity Load(TId id);
 //        public abstract TEntity Get(TId id);
 //        public abstract IQueryable<TEntity> GetAll();
-//        public abstract IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
+//        public abstract IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate);
 //
 //        public virtual void Add(TEntity entity) {
 //            this._unitOfWork.RegisterNew(entity);
@@ -30,7 +30,7 @@
 //        }
 //
 //        public virtual void Remove(Expression<Func<TEntity, bool>> predicate) {
-//            this.FindBy(predicate).ToList().ForEach(entity => Remove(entity));
+//            this.Query(predicate).ToList().ForEach(entity => Remove(entity));
 //        }
 //    }
 //}

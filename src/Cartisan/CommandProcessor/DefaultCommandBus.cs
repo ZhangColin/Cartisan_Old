@@ -1,5 +1,5 @@
 ﻿using System;
-using Cartisan.IoC;
+using Cartisan.DependencyInjection;
 
 namespace Cartisan.CommandProcessor {
     public class DefaultCommandBus: ICommandBus {
