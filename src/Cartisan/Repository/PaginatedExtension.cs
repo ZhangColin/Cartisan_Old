@@ -32,13 +32,6 @@ namespace Cartisan.Repository {
         /// <param name="pageSize"></param>
         /// <returns></returns>
         private static Paginated<T> Paginate<T>(IQueryable<T> query, int pageIndex, int pageSize) {
-            // TODO: 断言需要处理参数异常
-//            if (pageIndex <= 0) {
-//                throw new ArgumentException("pageIndex必须大于等于零。", "pageIndex");
-//            }
-//            if (pageSize <= 0) {
-//                throw new ArgumentException("pageSize必须大于等于零。", "pageSize");
-//            }
             AssertionConcern.True(pageIndex > 0, "页码必须大于零。");
             AssertionConcern.True(pageSize > 0, "每页显示记录数必须大于零。");
             int totalCount = query.Count();

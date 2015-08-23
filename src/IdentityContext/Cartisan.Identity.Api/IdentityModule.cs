@@ -16,7 +16,7 @@ namespace Cartisan.Identity.Api {
             builder.RegisterType<IdentityContext>()
                 .As<DbContext>()
                 .WithParameter("connectionString", "cartisanConnectionString");
-            builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>));
+            builder.RegisterGeneric(typeof(EntityFrameworkRepository<>)).As(typeof(IRepository<>));
                 //.UsingConstructor(()=>ServiceLocator.GetService<IdentityContext>());
 
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerRequest();

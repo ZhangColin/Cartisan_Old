@@ -43,6 +43,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartisan.Web.Tests", "Carti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartisan.Quartz", "Components\Cartisan.Quartz\Cartisan.Quartz.csproj", "{74F45BEC-2DC7-4AC6-AD05-4773A98B20DD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{93BA6410-AAE2-4C46-A8E1-56E3A542CAB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartisan.EntityFramework.Tests", "Components\Cartisan.EntityFramework.Tests\Cartisan.EntityFramework.Tests.csproj", "{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +121,10 @@ Global
 		{74F45BEC-2DC7-4AC6-AD05-4773A98B20DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74F45BEC-2DC7-4AC6-AD05-4773A98B20DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74F45BEC-2DC7-4AC6-AD05-4773A98B20DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,5 +143,7 @@ Global
 		{05210979-3D43-4F6A-A3E2-2EF9BC3CAFFC} = {14682D79-0B99-4357-92B8-FDE74B95F7D4}
 		{7924BD7B-F21F-417A-B059-6E2172125AFD} = {092367A6-7D56-407B-AAE4-80794CA3BD6C}
 		{74F45BEC-2DC7-4AC6-AD05-4773A98B20DD} = {14682D79-0B99-4357-92B8-FDE74B95F7D4}
+		{93BA6410-AAE2-4C46-A8E1-56E3A542CAB7} = {14682D79-0B99-4357-92B8-FDE74B95F7D4}
+		{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0} = {93BA6410-AAE2-4C46-A8E1-56E3A542CAB7}
 	EndGlobalSection
 EndGlobal

@@ -26,11 +26,7 @@ namespace Cartisan.Repository {
         /// <summary>
         /// 总页数
         /// </summary>
-        public int PageTotal {
-            get {
-                return (int)Math.Ceiling((decimal)Total / PageSize);
-            }
-        }
+        public int PageTotal { get; private set; }
 
         /// <summary>
         /// 是否有上一页
@@ -51,7 +47,7 @@ namespace Cartisan.Repository {
         }
 
         public Paginated(IEnumerable<T> source, int pageIndex, int pageSize, int total) {
-            AssertionConcern.NotNull(source, "数据源不能为Null。");
+            AssertionConcern.ArgumentNotNull(source, "数据源不能为Null。");
             // Check: Do we need to check if pageSize > Total.
             // Check: Do we need to check if int parameters < 0.
 
@@ -60,6 +56,7 @@ namespace Cartisan.Repository {
             PageIndex = pageIndex;
             PageSize = pageSize;
             Total = total;
+            PageTotal = (int)Math.Ceiling((decimal)Total / PageSize);
         }
     }
 }

@@ -11,12 +11,12 @@ using Cartisan.Repository;
 using Cartisan.Specification;
 
 namespace Cartisan.EntityFramework {
-    public class EfRepository<TAggregateRoot>: IRepository<TAggregateRoot> where TAggregateRoot: class, IAggregateRoot, new() {
+    public class EntityFrameworkRepository<TAggregateRoot>: IRepository<TAggregateRoot> where TAggregateRoot: class, IAggregateRoot, new() {
         private readonly ContextBase _context;
 
-        public EfRepository(ContextBase context) {
-            AssertionConcern.NotNull(context, "没有数据库上下文，仓储无法工作。");
 
+        public EntityFrameworkRepository(ContextBase context) {
+            AssertionConcern.NotNull(context, "没有数据库上下文，仓储无法工作。");
             _context = context;
         }
 
@@ -191,15 +191,15 @@ namespace Cartisan.EntityFramework {
             }
         }
 
-        public async Task<object> DeleteAsync(object key) {
+        public async Task<object> RemoveAsync(object key) {
             AssertionConcern.NotNull(key, "");
 
-            await DeleteAsync(Get(key));
+            await RemoveAsync(Get(key));
 
             return null;
         }
 
-        public async Task<object> DeleteAsync(TAggregateRoot entity) {
+        public async Task<object> RemoveAsync(TAggregateRoot entity) {
             AssertionConcern.NotNull(entity, "");
 
             _context.SetAsDeleted(entity);
@@ -209,7 +209,7 @@ namespace Cartisan.EntityFramework {
             return entity;
         }
 
-        public async Task<object> DeleteAsync(Expression<Func<TAggregateRoot, bool>> predicate) {
+        public async Task<object> RemoveAsync(Expression<Func<TAggregateRoot, bool>> predicate) {
             AssertionConcern.NotNull(predicate, "");
 
             Query(predicate).ForEach(entity => _context.SetAsDeleted(entity));
@@ -224,11 +224,11 @@ namespace Cartisan.EntityFramework {
             return DbSet.Find(key);
         }
 
-        //        public TEntity Get(Expression<Func<TEntity, bool>> predicate, params string[] includePaths)  {
-        //            AssertionConcern.NotNull(predicate, "");
-        //
-        //            return GetSetWithIncludePaths(includePaths).SingleOrDefault(predicate);
-        //        }
+        public async Task<TAggregateRoot> GetAsync(object key) {
+            AssertionConcern.NotNull(key, "");
+            return await Task.Run(() => DbSet.Find(key));
+        }
+
 
         public TAggregateRoot Get(Expression<Func<TAggregateRoot, bool>> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
             AssertionConcern.NotNull(predicate, "");
@@ -236,28 +236,49 @@ namespace Cartisan.EntityFramework {
             return GetSetWithIncludeProperties(includeProperties).SingleOrDefault(predicate);
         }
 
-        //        public IQueryable<TEntity> All(params string[] includePaths)  {
-        //            return Query(null, includePaths);
-        //        }
-
-        public IQueryable<TAggregateRoot> All(params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
-            return Query(null, includeProperties);
+        public async Task<TAggregateRoot> GetAsync(Expression<Func<TAggregateRoot, bool>> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
+            return await DbSet.SingleOrDefaultAsync(predicate);
         }
 
-        //        public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate, params string[] includePaths)  {
-        //            var query = GetSetWithIncludePaths(includePaths);
-        //            if (predicate!=null) {
-        //                return query.Where(predicate);
-        //            }
-        //            return query;
-        //        }
+        public TAggregateRoot Get(ISpecification<TAggregateRoot> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
+            throw new NotImplementedException();
+        }
 
-        public IQueryable<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
-            var query = GetSetWithIncludeProperties(includeProperties);
-            if(predicate != null) {
-                return query.Where(predicate);
-            }
-            return query;
+
+//        public IQueryable<TAggregateRoot> All(params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
+//            return Query(null, includeProperties);
+//        }
+
+        public IQueryable<TAggregateRoot> All() {
+            return DbSet.AsQueryable();
+        }
+
+        public ICollection<TAggregateRoot> GetAll() {
+            return DbSet.ToList();
+        }
+
+        public async Task<ICollection<TAggregateRoot>> GetAllAsync() {
+            return await DbSet.ToListAsync();
+        }
+
+//        public IQueryable<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
+//            var query = GetSetWithIncludeProperties(includeProperties);
+//            if(predicate != null) {
+//                return query.Where(predicate);
+//            }
+//            return query;
+//        }
+
+        public ICollection<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> predicate) {
+            return DbSet.Where(predicate).ToList();
+        }
+
+        public async Task<ICollection<TAggregateRoot>> QueryAsync(Expression<Func<TAggregateRoot, bool>> predicate) {
+            return await DbSet.Where(predicate).ToListAsync();
+        }
+
+        public IQueryable<TAggregateRoot> Query(ISpecification<TAggregateRoot> predicate) {
+            throw new NotImplementedException();
         }
 
         public Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector) {
@@ -265,28 +286,16 @@ namespace Cartisan.EntityFramework {
             //return Paginate(pageIndex, pageSize, keySelector, null);
         }
 
-        //        public Paginated<TEntity> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TEntity, TKey>> keySelector, Expression<Func<TEntity, bool>> predicate,
-        //            params string[] includePaths) {
-        //            throw new NotImplementedException();
-        //        }
 
         public Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector, Expression<Func<TAggregateRoot, bool>> predicate,
             params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
-            var query = Query(predicate, includeProperties);
-            query = query.OrderBy(keySelector);
-
-            return query.ToPaginated(pageIndex, pageSize);
+            throw new NotImplementedException();
+            //            var query = Query(predicate, includeProperties);
+            //            query = query.OrderBy(keySelector);
+            //
+            //            return query.ToPaginated(pageIndex, pageSize);
         }
 
-        //        private IQueryable<TEntity> GetSetWithIncludePaths(IEnumerable<string> includePaths) {
-        //            IQueryable<TEntity> query = _context.Set<TEntity>();
-        //
-        //            foreach (string path in includePaths ?? Enumerable.Empty<string>()) {
-        //                query = query.Include(path);
-        //            }
-        //
-        //            return query;
-        //        }
 
         private IQueryable<TAggregateRoot> GetSetWithIncludeProperties(Expression<Func<TAggregateRoot, object>>[] includeProperties) {
             IQueryable<TAggregateRoot> query = DbSet.AsQueryable();
@@ -298,11 +307,11 @@ namespace Cartisan.EntityFramework {
             return query;
         }
 
-        public TAggregateRoot Get(ISpecification<TAggregateRoot> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {
+        public bool Exists(ISpecification<TAggregateRoot> predicate) {
             throw new NotImplementedException();
         }
 
-        public bool Exists(ISpecification<TAggregateRoot> predicate) {
+        public Task<bool> ExistsAsync(ISpecification<TAggregateRoot> predicate) {
             throw new NotImplementedException();
         }
 
@@ -310,24 +319,24 @@ namespace Cartisan.EntityFramework {
             throw new NotImplementedException();
         }
 
+        public Task<bool> ExistsAsync(Expression<Func<TAggregateRoot, bool>> predicate) {
+            throw new NotImplementedException();
+        }
+
         public long Count(ISpecification<TAggregateRoot> predicate) {
             throw new NotImplementedException();
         }
 
+        public Task<long> CountAsync(ISpecification<TAggregateRoot> predicate) {
+            throw new NotImplementedException();
+        }
+
         public long Count(Expression<Func<TAggregateRoot, bool>> predicate) {
-            throw new NotImplementedException();
+            return DbSet.Where(predicate).Count();
         }
 
-        public IQueryable<TAggregateRoot> All() {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> predicate) {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<TAggregateRoot> Query(ISpecification<TAggregateRoot> predicate) {
-            throw new NotImplementedException();
+        public async Task<long> CountAsync(Expression<Func<TAggregateRoot, bool>> predicate) {
+            return await DbSet.Where(predicate).CountAsync();
         }
 
         public Paginated<TAggregateRoot> Paginate<TKey>(int pageIndex, int pageSize, Expression<Func<TAggregateRoot, TKey>> keySelector, ISpecification<TAggregateRoot> predicate, params Expression<Func<TAggregateRoot, object>>[] includeProperties) {

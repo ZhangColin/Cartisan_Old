@@ -50,6 +50,12 @@ namespace Cartisan {
             }
         }
 
+        public static void ArgumentNotNull(object object1, string message) {
+            if(object1 == null) {
+                throw new ArgumentNullException(message);
+            }
+        }
+
         public static void Range(double value, double minimum, double maximum, string message) {
             if(value < minimum || value > maximum) {
                 throw new InvalidOperationException(message);
