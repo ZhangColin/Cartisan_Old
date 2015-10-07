@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{93BA6410
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartisan.EntityFramework.Tests", "Components\Cartisan.EntityFramework.Tests\Cartisan.EntityFramework.Tests.csproj", "{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartisan.Admin", "Cartisan.Website\Administration\Cartisan.Admin.csproj", "{6F3EF4E1-0B6C-4829-BA73-CE03948B3560}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71EB412A-FC2F-46B0-A2B7-17828BCEAFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F3EF4E1-0B6C-4829-BA73-CE03948B3560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F3EF4E1-0B6C-4829-BA73-CE03948B3560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F3EF4E1-0B6C-4829-BA73-CE03948B3560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F3EF4E1-0B6C-4829-BA73-CE03948B3560}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -104,6 +104,9 @@
     <Compile Include="Authentication\User.cs" />
     <Compile Include="CartisanHttpModule.cs" />
     <Compile Include="CookiePersister.cs" />
+    <Compile Include="Data\DataSettings.cs" />
+    <Compile Include="Data\DataSettingsHelper.cs" />
+    <Compile Include="Data\DataSettingsManager.cs" />
     <Compile Include="DefaultStoreProvider.cs" />
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
     <Compile Include="HostEnvironment.cs" />
