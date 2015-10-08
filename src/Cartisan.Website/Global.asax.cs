@@ -18,15 +18,15 @@ namespace Cartisan.Website {
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e) {
-//            if(!DataSettingsHelper.DatabaseIsInstalled()) {
-//                string installUrl = string.Format("{0}/install",
-//                    "http://" + HttpContext.Current.Request.ServerVariables["HTTP_HOST"]);
-//
-//                if(!this.Request.RawUrl.Contains("install")) {
-//                    this.Response.Redirect(installUrl);
-//                }
-//                
-//            }
+            if(!DataSettingsHelper.DatabaseIsInstalled()) {
+                string installUrl = string.Format("{0}/install",
+                    "http://" + HttpContext.Current.Request.ServerVariables["HTTP_HOST"]);
+
+                if(!this.Request.RawUrl.Contains("install")) {
+                    this.Response.Redirect(installUrl);
+                }
+                
+            }
         }
     }
 }
