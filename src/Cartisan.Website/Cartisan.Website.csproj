@@ -4509,6 +4509,7 @@
     <Content Include="Scripts\cartisan.js" />
     <Content Include="Scripts\cartisan.linq.js" />
     <Content Include="Scripts\cartisan.loader.js" />
+    <Content Include="Scripts\Install\InstallIndex.js" />
     <Content Include="Scripts\validateExtensions.js" />
     <Content Include="Web.config" />
   </ItemGroup>
