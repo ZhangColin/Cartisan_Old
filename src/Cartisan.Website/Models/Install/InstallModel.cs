@@ -8,7 +8,7 @@ namespace Cartisan.Website.Models.Install {
     [Validator(typeof(InstallValidator))]
     public class InstallModel {
         public InstallModel() {
-            this.AvailableLanguages = new List<SelectListItem>();
+//            this.AvailableLanguages = new List<SelectListItem>();
         }
 
         [AllowHtml]
@@ -46,6 +46,6 @@ namespace Cartisan.Website.Models.Install {
         public bool DisableSampleDataOption { get; set; }
         public bool InstallSampleData{ get; set; }
 
-        public List<SelectListItem> AvailableLanguages { get; set; }
+//        public List<SelectListItem> AvailableLanguages { get; set; }
     }
 }
