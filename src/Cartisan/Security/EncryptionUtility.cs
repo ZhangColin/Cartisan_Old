@@ -104,5 +104,22 @@ namespace Cartisan.Security {
         public static string Base64_Decode(string originalString) {
             return Encoding.UTF8.GetString(Convert.FromBase64String(originalString));
         }
+
+        public static string Md5EncryptPassword(string data) {
+            if (data == null) {
+                return null;
+            }
+            return string.Join("", System.Security.Cryptography.MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(data)).Select(d => d.ToString("x2")));
+        }
+
+        public static string GetMd5Hash(string input) {
+            MD5 md5Hasher = System.Security.Cryptography.MD5.Create();
+            byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(input));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++) {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
     }
 }
