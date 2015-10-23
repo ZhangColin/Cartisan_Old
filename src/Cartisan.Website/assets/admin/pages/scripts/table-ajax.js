@@ -14,7 +14,9 @@ var TableAjax = function () {
 
         grid.init({
             src: $("#datatable_ajax"),
-            onSuccess: function (grid) {
+            onSuccess: function (grid, response) {
+                // grid:        grid object
+                // response:    json object of server side ajax response
                 // execute some code after table records loaded
             },
             onError: function (grid) {

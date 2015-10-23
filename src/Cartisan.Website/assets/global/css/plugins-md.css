@@ -1,6 +1,13 @@
 /******************************
  3RD PARTY PLUGIN CUSTOMIZATION 
 ******************************/
+/*--------------------------------------------------
+    [TRANSITION]
+----------------------------------------------------*/
+/* Cubic Bezier Transition */
+/*--------------------------------------------------
+    [RGBA Opacity]
+----------------------------------------------------*/
 .md-shadow-z-1 {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.18);
 }
@@ -62,31 +69,44 @@
   position: absolute;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 50%;
+  opacity: 0;
   -webkit-animation: scale(0);
   -moz-transform: scale(0);
   transform: scale(0);
 }
 .md-click-circle.md-click-animate {
-  -webkit-animation: mdClickEffect 0.55s linear;
-  -moz-animation: mdClickEffect 0.55s linear;
-  animation: mdClickEffect 0.55s linear;
+  -webkit-animation: mdClickEffect 0.65s linear;
+  -moz-animation: mdClickEffect 0.65s linear;
+  animation: mdClickEffect 0.65s linear;
 }
 
 @-webkit-keyframes mdClickEffect {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(0);
+  }
   100% {
-    opacity: 0;
-    -webkit-transform: scale(1.5);
+    opacity: 0 !important;
+    -webkit-transform: scale(2.5);
   }
 }
 @-moz-keyframes mdClickEffect {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(0);
+  }
   100% {
-    opacity: 0;
+    opacity: 0 !important;
     -moz-transform: scale(2.5);
   }
 }
 @keyframes mdClickEffect {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(0);
+  }
   100% {
-    opacity: 0;
+    opacity: 0 !important;
     transform: scale(2.5);
   }
 }
@@ -415,6 +435,12 @@ Bootstrap Modal
 .modal-backdrop {
   position: fixed;
   bottom: 0;
+}
+
+.modal-scrollable {
+  overflow: hidden !important;
+  z-index: 10051;
+  overflow-y: scroll !important;
 }
 
 .modal {
@@ -982,6 +1008,42 @@ Bootbox
 .mapChart a {
   color: #bbb !important;
   font-size: 12px !important;
+}
+
+/*--------------------------------------------------
+    [Column Line]
+----------------------------------------------------*/
+.columnLine {
+  width: 100%;
+  height: 350px;
+  font-size: 11px;
+}
+
+.amcharts-graph-graph2 .amcharts-graph-stroke {
+  stroke-dasharray: 4px 5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  -webkit-animation: am-moving-dashes 1s linear infinite;
+  animation: am-moving-dashes 1s linear infinite;
+}
+
+@-webkit-keyframes am-moving-dashes {
+  100% {
+    stroke-dashoffset: -28px;
+  }
+}
+@keyframes am-moving-dashes {
+  100% {
+    stroke-dashoffset: -28px;
+  }
+}
+/*--------------------------------------------------
+    [Animated Pie Chart]
+----------------------------------------------------*/
+.animated-pie-chart {
+  width: 100%;
+  height: 350px;
+  font-size: 11px;
 }
 
 /***

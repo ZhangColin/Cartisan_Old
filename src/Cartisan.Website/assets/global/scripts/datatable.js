@@ -114,7 +114,7 @@ var Datatable = function() {
                             }
 
                             if (tableOptions.onSuccess) {
-                                tableOptions.onSuccess.call(undefined, the);
+                                tableOptions.onSuccess.call(undefined, the, res);
                             }
 
                             Metronic.unblockUI(tableContainer);

@@ -94,19 +94,19 @@ namespace Cartisan.Website.Controllers {
 
 
 
-            if (ModelState.IsValid) {
-                var settingsManager = new DataSettingsManager();
-                try {
-                    string connectionString;
-                    if(model.) {
-                        
-                    }
-                }
-                catch(Exception) {
-                    
-                    throw;
-                }
-            }
+//            if (ModelState.IsValid) {
+//                var settingsManager = new DataSettingsManager();
+//                try {
+//                    string connectionString;
+//                    if(model.) {
+//                        
+//                    }
+//                }
+//                catch(Exception) {
+//                    
+//                    throw;
+//                }
+//            }
 
             return View(model);
         }
