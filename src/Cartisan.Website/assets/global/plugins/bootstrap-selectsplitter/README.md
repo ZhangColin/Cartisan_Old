@@ -47,7 +47,7 @@ Add the dependency files (jQuery and Bootstrap 3 CSS):
 
 ```HTML
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//ajax.useso.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script src="bootstrap-selectsplitter.js"></script>
 ```

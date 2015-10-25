@@ -1,0 +1,24 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using Cartisan.Identity.Contract.Dtos;
+using Cartisan.Identity.Service;
+
+namespace Cartisan.Admin.Controllers {
+    public class AccountController: Controller {
+        private readonly IAccountService _accountService;
+        public AccountController(IAccountService  accountService) {
+            _accountService = accountService;
+        }
+
+        public ActionResult Index() {
+            return View();
+        }
+
+//        public async Task<JsonResult> AccountList() {
+////            List<AccountDto> accountDtos = await "http://localhost:50217/api/accounts".GetAsync().ReceiveJson<List<AccountDto>>();
+//
+//            return Json(accountDtos, JsonRequestBehavior.AllowGet);
+//        }
+    }
+}

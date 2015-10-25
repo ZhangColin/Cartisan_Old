@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Cartisan.Identity.Service.Dtos;
+using Cartisan.Identity.Contract.Dtos;
 
 namespace Cartisan.Identity.Service {
     public interface IAccountService {

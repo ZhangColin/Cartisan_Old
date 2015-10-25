@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Cartisan.Identity.Contract.Dtos;
 using Cartisan.Identity.Domain.Models;
-using Cartisan.Identity.Service.Dtos;
 
-namespace Cartisan.Identity.Api {
+namespace Cartisan.Identity.Service {
     public class IdentityMapperProfile: Profile {
         public override string ProfileName {
             get {
@@ -11,7 +11,7 @@ namespace Cartisan.Identity.Api {
         }
 
         protected override void Configure() {
-            Mapper.CreateMap<UserAccount, AccountDto>().ForMember(dto => dto.UserId, cfg => cfg.MapFrom(ua => ua.Id));
+            Mapper.CreateMap<UserAccount, AccountDto>();
         }
     }
 }

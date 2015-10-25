@@ -13,7 +13,7 @@ namespace Cartisan.WebHost
     {
         protected void Application_Start()
         {
-            AutofacConfig.Initialize();
+            WebApiAutofacConfig.Initialize();
             AutoMapperConfig.Initialize();
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }

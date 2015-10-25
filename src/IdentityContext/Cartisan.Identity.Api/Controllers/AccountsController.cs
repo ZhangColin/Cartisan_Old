@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Cartisan.CommandProcessor;
+using Cartisan.Identity.Contract.Dtos;
 using Cartisan.Identity.Service;
 using Cartisan.Identity.Service.Commands;
-using Cartisan.Identity.Service.Dtos;
 
 namespace Cartisan.Identity.Api.Controllers
 {
@@ -14,11 +14,15 @@ namespace Cartisan.Identity.Api.Controllers
         private readonly ICommandBus _commandBus;
         private readonly ICommandHandler<AddUser> _addUserCommand;
 
-        public AccountsController(IAccountService accountService, ICommandBus commandBus, ICommandHandler<AddUser> addUserCommand) {
+        public AccountsController(IAccountService accountService) {
             _accountService = accountService;
-            _commandBus = commandBus;
-            _addUserCommand = addUserCommand;
         }
+
+        //        public AccountsController(IAccountService accountService, ICommandBus commandBus, ICommandHandler<AddUser> addUserCommand) {
+//            _accountService = accountService;
+//            _commandBus = commandBus;
+//            _addUserCommand = addUserCommand;
+//        }
 
         // GET: api/Account
         public IEnumerable<AccountDto> GetAccounts() {

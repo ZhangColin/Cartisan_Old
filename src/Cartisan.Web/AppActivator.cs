@@ -7,7 +7,7 @@ namespace Cartisan.Web {
     public static class AppActivator {
         public static void PreStart() {
             // Code that runs before Application_Start.
-            ValueProviderConfig.Initialize();
+            // ValueProviderConfig.Initialize();
         }
         public static void PostStart() {
             // Code that runs after Application_Start.

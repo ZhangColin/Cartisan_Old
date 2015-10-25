@@ -15,7 +15,7 @@ To get started, all you need to do is include the JavaScript and CSS files for t
     
 	    <link href="../jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
     
-	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+	    <script src="http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 	    <script src="../jqvmap/jquery.vmap.js" type="text/javascript"></script>
 	    <script src="../jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
     

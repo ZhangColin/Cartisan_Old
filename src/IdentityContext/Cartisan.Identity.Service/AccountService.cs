@@ -4,10 +4,10 @@ using System.Configuration;
 using System.Linq;
 using Cartisan.AutoMapper;
 using Cartisan.Identity.Domain.Models;
-using Cartisan.Identity.Service.Dtos;
 using Cartisan.Repository;
 using Dapper;
 using MySql.Data.MySqlClient;
+using Cartisan.Identity.Contract.Dtos;
 
 namespace Cartisan.Identity.Service {
     public class AccountService: IAccountService {
@@ -27,10 +27,11 @@ namespace Cartisan.Identity.Service {
         }
 
         public IList<AccountDto> GetAll() {
-            return _userRepository.All().ToList().Select(account => account.MapTo<AccountDto>()).ToList();
+            var userAccounts = _userRepository.All().ToList();
+            return userAccounts.Select(account => account.MapTo<AccountDto>()).ToList();
         }
 
-//        public void Add(string name) {
+        //        public void Add(string name) {
 //            _userRepository.Add(new UserAccount() {
 //                Name = name
 //            });

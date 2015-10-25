@@ -7,7 +7,7 @@ using Cartisan.EntityFramework;
 using MySql.Data.Entity;
 
 namespace Cartisan.Identity.Repository {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class IdentityContext: ContextBase {
         public IdentityContext(string connectionString) : base(connectionString) {
             Configuration.ProxyCreationEnabled = false;

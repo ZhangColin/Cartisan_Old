@@ -42,7 +42,7 @@ To use the easy pie chart plugin you need to load the current version of jQuery 
 ```html
 <div class="chart" data-percent="73" data-scale-color="#ffb400">73%</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="/path/to/jquery.easy-pie-chart.js"></script>
 <script>
     $(function() {
@@ -76,7 +76,7 @@ If you don't want to use jQuery, implement the Vanilla JS version without any de
     <div easypiechart options="options" percent="percent"></div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+<script src="https://ajax.useso.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
 <script src="../dist/angular.easypiechart.min.js"></script>
 <script>
     var app = angular.module('app', ['easypiechart']);

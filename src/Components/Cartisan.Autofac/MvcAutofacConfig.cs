@@ -4,13 +4,15 @@ using System.Text.RegularExpressions;
 using System.Web.Compilation;
 using System.Web.Http;
 using Autofac;
-using Autofac.Integration.WebApi;
 using Cartisan.CommandProcessor;
 using Cartisan.DependencyInjection;
 using Cartisan.Web.WebApi;
+using System.Web.Mvc;
+using Cartisan.Web.Mvc;
+using Autofac.Integration.Mvc;
 
 namespace Cartisan.Autofac {
-    public static class AutofacConfig {
+    public static class MvcAutofacConfig {
         private static string assemblySkipLoadingPattern =
            "^System|^mscorlib|^Microsoft|^CppCodeProvider|^VJSharpCodeProvider|^WebDev|^Castle|^Iesi|^log4net|^NHibernate|^nunit|^TestDriven|^MbUnit|^Rhino|^QuickGraph|^TestFu|^Telerik|^ComponentArt|^MvcContrib|^AjaxControlToolkit|^Antlr3|^Remotion|^Recaptcha";
         private static string assemblyRestrictToLoadingPattern = ".*";
@@ -43,15 +45,11 @@ namespace Cartisan.Autofac {
             builder.RegisterAssemblyModules(assemblies);
 
 
-//            builder.RegisterControllers(assemblies);
-            builder.RegisterApiControllers(assemblies);
+            builder.RegisterControllers(assemblies);
 
             IContainer container = builder.Build();
-//            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-//            ServiceLocator.Resolver = new MvcResolver();
-
-            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            ServiceLocator.Resolver = new ApiResolver();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            ServiceLocator.Resolver = new MvcResolver();
         }
 
         private static bool Matches(string assemblyFullName) {

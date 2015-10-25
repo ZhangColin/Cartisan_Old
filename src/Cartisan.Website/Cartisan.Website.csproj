@@ -5084,6 +5084,14 @@
       <Project>{FA5EF4B7-C651-4458-BF1C-DEEBC8D4D6FF}</Project>
       <Name>Cartisan</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Components\Cartisan.Autofac\Cartisan.Autofac.csproj">
+      <Project>{79A5C5EB-4338-460A-812A-B82577D80A8A}</Project>
+      <Name>Cartisan.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\Cartisan.AutoMapper\Cartisan.AutoMapper.csproj">
+      <Project>{9C045711-D097-4F05-B7EB-6CF39D407933}</Project>
+      <Name>Cartisan.AutoMapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

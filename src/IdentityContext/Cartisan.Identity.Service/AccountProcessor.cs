@@ -12,13 +12,13 @@ namespace Cartisan.Identity.Service {
 
         public void Execute(AddUser command) {
             _userRepository.Add(new UserAccount() {
-                Name = command.Name
+//                Name = command.Name
             });
         }
 
         public void Execute(UpdateUser command) {
             var userAccount = _userRepository.Get(command.UserId);
-            userAccount.Name = command.Name;
+//            userAccount.Name = command.Name;
             
             _userRepository.Save(userAccount);
         }
