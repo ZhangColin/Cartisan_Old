@@ -16,11 +16,11 @@ namespace Cartisan.Admin.Controllers {
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<JsonResult> AccountList() {
             List<AccountDto> accountDtos = await "http://localhost:50217/api/accounts".GetAsync().ReceiveJson<List<AccountDto>>();
 
-            return Json(accountDtos, JsonRequestBehavior.AllowGet);
+            return Json(accountDtos);
         }
     }
 }

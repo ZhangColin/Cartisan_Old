@@ -500,57 +500,37 @@ License: You must have a valid license purchased only from themeforest(the above
                         </form>
                         <!-- END RESPONSIVE QUICK SEARCH FORM -->
                     </li>
-                    <li class="start ">
-                        <a href="javascript:;">
+                    <!-- BEGIN ANGULARJS LINK -->
+                    <li class="start tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="控制台">
+                        <a href="@Url.Action("Index", "Home")">
                             <i class="icon-home"></i>
-                            <span class="title">控制台</span>
-                            <span class="arrow "></span>
+                            <span class="title">
+                                控制台
+                            </span>
                         </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="index.html">
-                                    <i class="icon-bar-chart"></i>
-                                    Default Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index_2.html">
-                                    <i class="icon-bulb"></i>
-                                    New Dashboard #1
-                                </a>
-                            </li>
-                        </ul>
                     </li>
+
                     <li class="active open">
                         <a href="javascript:;">
-                            <i class="icon-rocket"></i>
-                            <span class="title">Page Layouts</span>
+                            <i class="icon-user"></i>
+                            <span class="title">用户</span>
                             <span class="selected"></span>
                             <span class="arrow open"></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
                                 <a href="layout_horizontal_sidebar_menu.html">
-                                    Horizontal & Sidebar Menu
+                                    用户管理
                                 </a>
                             </li>
                             <li>
                                 <a href="index_horizontal_menu.html">
-                                    Dashboard & Mega Menu
+                                    角色管理
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <!-- BEGIN ANGULARJS LINK -->
-                    <li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="AngularJS version demo">
-                        <a href="angularjs" target="_blank">
-                            <i class="icon-paper-plane"></i>
-                            <span class="title">
-                                AngularJS Version
-                            </span>
-                        </a>
-                    </li>
-                    <!-- END ANGULARJS LINK -->
+
                     <li class="heading">
                         <h3 class="uppercase">常用</h3>
                     </li>
@@ -755,7 +735,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <i class="fa fa-angle-right"></i>
                         </li>
                         <li>
-                            <a href="#">Page Layouts</a>
+                            <a href="#">用户</a>
                             <i class="fa fa-angle-right"></i>
                         </li>
                         <li>
@@ -1507,6 +1487,8 @@ License: You must have a valid license purchased only from themeforest(the above
             Demo.init(); // init demo features
         });
     </script>
+
+    @RenderSection("scripts", false)
     <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

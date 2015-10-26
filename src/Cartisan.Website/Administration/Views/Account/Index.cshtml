@@ -27,28 +27,28 @@
             <img src="../../assets/admin/layout/img/loading.gif" alt="loading" />
         </div>
         <div id="site_statistics_content" class="display-none">
-            
+
         </div>
     </div>
 </div>
 <!-- END PORTLET-->
 <!-- BEGIN EXAMPLE TABLE PORTLET-->
 <div class="portlet box grey-cascade">
-@*    <div class="portlet-title">*@
-@*        <div class="caption">*@
-@*            <i class="fa fa-globe"></i>Managed Table*@
-@*        </div>*@
-@*        <div class="tools">*@
-@*            <a href="javascript:;" class="collapse">*@
-@*            </a>*@
-@*            <a href="#portlet-config" data-toggle="modal" class="config">*@
-@*            </a>*@
-@*            <a href="javascript:;" class="reload">*@
-@*            </a>*@
-@*            <a href="javascript:;" class="remove">*@
-@*            </a>*@
-@*        </div>*@
-@*    </div>*@
+    @*    <div class="portlet-title">*@
+    @*        <div class="caption">*@
+    @*            <i class="fa fa-globe"></i>Managed Table*@
+    @*        </div>*@
+    @*        <div class="tools">*@
+    @*            <a href="javascript:;" class="collapse">*@
+    @*            </a>*@
+    @*            <a href="#portlet-config" data-toggle="modal" class="config">*@
+    @*            </a>*@
+    @*            <a href="javascript:;" class="reload">*@
+    @*            </a>*@
+    @*            <a href="javascript:;" class="remove">*@
+    @*            </a>*@
+    @*        </div>*@
+    @*    </div>*@
     <div class="portlet-body">
         <div class="table-toolbar">
             <div class="row">
@@ -85,80 +85,210 @@
                 </div>
             </div>
         </div>
-        <table class="table table-striped table-bordered table-hover" id="sample_1">
+        <table class="table table-striped table-bordered table-hover" id="accountsTable">
             <thead>
                 <tr>
                     <th class="table-checkbox">
                         <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
                     </th>
                     <th>
-                        Username
+                        用户Id
+                    </th>
+                    <th>
+                        用户Guid
+                    </th>
+                    <th>
+                        用户名
                     </th>
                     <th>
                         Email
                     </th>
                     <th>
-                        Points
+                        Email已验证
                     </th>
                     <th>
-                        Joined
+                        手机
                     </th>
                     <th>
-                        Status
+                        手机已验证
                     </th>
+                    <th>
+                        真实姓名
+                    </th>
+                    <th>
+                        昵称
+                    </th>
+                    <th>
+                        创建日期
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="odd gradeX">
-                    <td>
-                        <input type="checkbox" class="checkboxes" value="1" />
-                    </td>
-                    <td>
-                        shuxer
-                    </td>
-                    <td>
-                        <a href="mailto:shuxer@gmail.com">
-                            shuxer@gmail.com
-                        </a>
-                    </td>
-                    <td>
-                        120
-                    </td>
-                    <td class="center">
-                        12 Jan 2012
-                    </td>
-                    <td>
-                        <span class="label label-sm label-success">
-                            Approved
-                        </span>
-                    </td>
-                </tr>
-                <tr class="odd gradeX">
-                    <td>
-                        <input type="checkbox" class="checkboxes" value="1" />
-                    </td>
-                    <td>
-                        looper
-                    </td>
-                    <td>
-                        <a href="mailto:looper90@gmail.com">
-                            looper90@gmail.com
-                        </a>
-                    </td>
-                    <td>
-                        120
-                    </td>
-                    <td class="center">
-                        12.12.2011
-                    </td>
-                    <td>
-                        <span class="label label-sm label-warning">
-                            Suspended
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
+            @*            <tbody>*@
+            @*                <tr class="odd gradeX">*@
+            @*                    <td>*@
+            @*                        <input type="checkbox" class="checkboxes" value="1" />*@
+            @*                    </td>*@
+            @*                    <td>*@
+            @*                        shuxer*@
+            @*                    </td>*@
+            @*                    <td>*@
+            @*                        <a href="mailto:shuxer@gmail.com">*@
+            @*                            shuxer@gmail.com*@
+            @*                        </a>*@
+            @*                    </td>*@
+            @*                    <td>*@
+            @*                        120*@
+            @*                    </td>*@
+            @*                    <td class="center">*@
+            @*                        12 Jan 2012*@
+            @*                    </td>*@
+            @*                    <td>*@
+            @*                        <span class="label label-sm label-success">*@
+            @*                            Approved*@
+            @*                        </span>*@
+            @*                    </td>*@
+            @*                </tr>*@
+            @*                <tr class="odd gradeX">*@
+            @*                    <td>*@
+            @*                        <input type="checkbox" class="checkboxes" value="1" />*@
+            @*                    </td>*@
+            @*                    <td>*@
+            @*                        looper*@
+            @*                    </td>*@
+            @*                    <td>*@
+            @*                        <a href="mailto:looper90@gmail.com">*@
+            @*                            looper90@gmail.com*@
+            @*                        </a>*@
+            @*                    </td>*@
+            @*                    <td>*@
+            @*                        120*@
+            @*                    </td>*@
+            @*                    <td class="center">*@
+            @*                        12.12.2011*@
+            @*                    </td>*@
+            @*                    <td>*@
+            @*                        <span class="label label-sm label-warning">*@
+            @*                            Suspended*@
+            @*                        </span>*@
+            @*                    </td>*@
+            @*                </tr>*@
+            @*            </tbody>*@
         </table>
     </div>
 </div>
 <!-- END EXAMPLE TABLE PORTLET-->
+
+
+@section scripts{
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>
+@*<script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>*@
+<script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+    <script type="text/javascript">
+        $(function () {
+            var accountsTable = $('#accountsTable')
+
+            var dt = accountsTable.dataTable({
+//                processing: false,
+//                searching: false,
+//                serverSide: true,
+//                autoWidth: true,
+//                dom: "t<'row'<'col-xs-2'l><'col-xs-4'i><'col-xs-6'p>>",
+                language: {
+                    emptyTable: '没有数据',
+                    loadingRecords: '加载中...',
+                    processing: '查询中...',
+                    search: '检索:',
+                    lengthMenu: '每页 _MENU_ 条',
+                    zeroRecords: '没有数据',
+                    paginate: {
+                        first: '第一页',
+                        last: '最后一页',
+                        next: '下一页',
+                        previous: '上一页'
+                    },
+                    info: '第 _PAGE_ 页 / 总 _PAGES_ 页',
+                    infoEmpty: '没有数据',
+                    infoFiltered: '(过滤总件数 _MAX_ 条)'
+                },
+                ajax: {
+                    url: '@Url.Action("AccountList")',
+                    type: 'POST',
+                    data: function(d) {
+                        $('#searchForm').serializeArray().map(function(x) { d[x.name] = x.value; });
+                    }
+                },
+                columns: [
+                    {
+                        data: '',
+                        orderable: false,
+                        render: function(data, type, row) {
+                            return '<label class="pos-rel"><input type="checkbox" class="ace" /><span class="lbl"></span></label>';
+                        },
+                        className: "center"
+                    }, {
+                        data: 'Id',
+                        orderable: false
+                    }, {
+                        data: 'UserGuid',
+                        orderable: false
+                    }, {
+                        data: 'UserName',
+                        orderable: false
+                    }, {
+                        data: 'Email',
+                        orderable: false
+                    }, {
+                        data: 'IsEmailVerified',
+                        render: function(data, type, row) {
+                            return data ? '是' : '否';
+                        },
+                        orderable: false
+                    }, {
+                        data: 'Mobile',
+                        orderable: false
+                    }, {
+                        data: 'IsMobileVerified',
+                        render: function(data, type, row) {
+                            return data ? '是' : '否';
+                        },
+                        orderable: false
+                    }, {
+                        data: 'TrueName',
+                        orderable: false
+                    }, {
+                        data: 'NickName',
+                        orderable: false
+                    }, {
+                        data: 'Created',
+                        render: function(data, type, row) {
+                            return data ? moment(data).format('YYYY-MM-DD HH:mm') : '';
+                        }
+                    }, {
+                        data: null,
+                        orderable: false,
+                        render: function(data, type, row) {
+//                            var operators = [];
+//                            operators.push('<div class="btn-group">');
+//                            operators.push('<button class="view btn btn-sm btn-info" resourceId="' + row.Id + '">查看</button>');
+//                            operators.push('<button data-toggle="dropdown" class="btn btn-sm btn-info dropdown-toggle"><span class="ace-icon fa fa-caret-down icon-only"></span></button>');
+//                            operators.push('<ul class="dropdown-menu dropdown-default">');
+//                            if (row.State == 0) {
+//                                operators.push('<li><a class="edit" resourceId="' + row.Id + '">编辑</a></li>');
+//                                operators.push('<li><a class="delete" resourceId="' + row.Id + '">删除</a></li>');
+//                            }
+//                            operators.push('<li><a class="copy" resourceId="' + row.Id + '">复制</a></li>');
+//                            operators.push('</ul>');
+//                            operators.push('</div>');
+//                            return operators.join('');
+                        }
+                    }
+                ],
+                order: [[0, 'asc']]
+            });
+        });
+    </script>
+}
