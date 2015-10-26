@@ -11,8 +11,8 @@ namespace Cartisan.Identity.Api.Controllers
     public class AccountsController : ApiController
     {
         private readonly IAccountService _accountService;
-        private readonly ICommandBus _commandBus;
-        private readonly ICommandHandler<AddUser> _addUserCommand;
+//        private readonly ICommandBus _commandBus;
+//        private readonly ICommandHandler<AddUser> _addUserCommand;
 
         public AccountsController(IAccountService accountService) {
             _accountService = accountService;
@@ -47,17 +47,17 @@ namespace Cartisan.Identity.Api.Controllers
         // POST: api/Account
         public void PostAccount(AddUser addUser) {
 //            _addUserCommand.Execute(addUser);
-            _commandBus.Submit(addUser);
+//            _commandBus.Submit(addUser);
         }
 
         // PUT: api/Account/5
         public void PutAccount(UpdateUser updateUser) {
-            _commandBus.Submit(updateUser);
+//            _commandBus.Submit(updateUser);
         }
 
         // DELETE: api/Account/5
         public void DeleteAccount(DeleteUser deleteUser) {
-            _commandBus.Submit(deleteUser);
+//            _commandBus.Submit(deleteUser);
         }
     }
 }
