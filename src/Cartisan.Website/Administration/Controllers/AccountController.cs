@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Cartisan.Identity.Contract.Dtos;
 using Cartisan.Identity.Service;
+using Flurl.Http;
 
 namespace Cartisan.Admin.Controllers {
     public class AccountController: Controller {
@@ -15,10 +16,11 @@ namespace Cartisan.Admin.Controllers {
             return View();
         }
 
-//        public async Task<JsonResult> AccountList() {
-////            List<AccountDto> accountDtos = await "http://localhost:50217/api/accounts".GetAsync().ReceiveJson<List<AccountDto>>();
-//
-//            return Json(accountDtos, JsonRequestBehavior.AllowGet);
-//        }
+        [HttpGet]
+        public async Task<JsonResult> AccountList() {
+            List<AccountDto> accountDtos = await "http://localhost:50217/api/accounts".GetAsync().ReceiveJson<List<AccountDto>>();
+
+            return Json(accountDtos, JsonRequestBehavior.AllowGet);
+        }
     }
 }
