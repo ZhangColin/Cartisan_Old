@@ -121,7 +121,7 @@
                     <th>
                         创建日期
                     </th>
-                    <th></th>
+                    <th>操作</th>
                 </tr>
             </thead>
             @*            <tbody>*@
@@ -179,47 +179,40 @@
 </div>
 <!-- END EXAMPLE TABLE PORTLET-->
 
+@section styles{
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <!-- END PAGE LEVEL STYLES -->
+}
 
 @section scripts{
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>
+@*<script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>*@
 @*<script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>*@
 <script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/moment.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
     <script type="text/javascript">
         $(function () {
-            var accountsTable = $('#accountsTable')
+            var accountsTable = $('#accountsTable');
 
             var dt = accountsTable.dataTable({
 //                processing: false,
 //                searching: false,
 //                serverSide: true,
 //                autoWidth: true,
-//                dom: "t<'row'<'col-xs-2'l><'col-xs-4'i><'col-xs-6'p>>",
+                dom: "t<'row'<'col-xs-2'l><'col-xs-4'i><'col-xs-6'p>>",
                 language: {
-                    emptyTable: '没有数据',
-                    loadingRecords: '加载中...',
-                    processing: '查询中...',
-                    search: '检索:',
-                    lengthMenu: '每页 _MENU_ 条',
-                    zeroRecords: '没有数据',
-                    paginate: {
-                        first: '第一页',
-                        last: '最后一页',
-                        next: '下一页',
-                        previous: '上一页'
-                    },
-                    info: '第 _PAGE_ 页 / 总 _PAGES_ 页',
-                    infoEmpty: '没有数据',
-                    infoFiltered: '(过滤总件数 _MAX_ 条)'
+                    url: '../../assets/global/plugins/datatables/datatables_oLanguage.json'
                 },
                 ajax: {
                     url: '@Url.Action("AccountList")',
-                    type: 'POST',
-                    data: function(d) {
-                        $('#searchForm').serializeArray().map(function(x) { d[x.name] = x.value; });
-                    }
+                    type: 'POST'
+//                    data: function(d) {
+//                        $('#searchForm').serializeArray().map(function(x) { d[x.name] = x.value; });
+//                    }
                 },
                 columns: [
                     {
