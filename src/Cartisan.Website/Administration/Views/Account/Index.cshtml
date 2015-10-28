@@ -5,30 +5,54 @@
 
 <!-- BEGIN PORTLET-->
 <div class="portlet light ">
-    <div class="portlet-title">
-        <div class="caption">
-            <i class="icon-bar-chart font-green-sharp hide"></i>
-            <span class="caption-subject font-green-sharp bold uppercase">Site Visits</span>
-            <span class="caption-helper">weekly stats...</span>
-        </div>
-        <div class="actions">
-            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                <label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
-                    <input type="radio" name="options" class="toggle" id="option1">New
-                </label>
-                <label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-                    <input type="radio" name="options" class="toggle" id="option2">Returning
-                </label>
+@*    <div class="portlet-title">*@
+@*        <div class="caption">*@
+@*            <i class="icon-bar-chart font-green-sharp hide"></i>*@
+@*            <span class="caption-subject font-green-sharp bold uppercase">Site Visits</span>*@
+@*            <span class="caption-helper">weekly stats...</span>*@
+@*        </div>*@
+@*        <div class="actions">*@
+@*            <div class="btn-group btn-group-devided" data-toggle="buttons">*@
+@*                <label class="btn btn-transparent grey-salsa btn-circle btn-sm active">*@
+@*                    <input type="radio" name="options" class="toggle" id="option1">New*@
+@*                </label>*@
+@*                <label class="btn btn-transparent grey-salsa btn-circle btn-sm">*@
+@*                    <input type="radio" name="options" class="toggle" id="option2">Returning*@
+@*                </label>*@
+@*            </div>*@
+@*        </div>*@
+@*    </div>*@
+    <div class="portlet-body form">
+@*        <div id="site_statistics_loading">*@
+@*            <img src="../../assets/admin/layout/img/loading.gif" alt="loading" />*@
+@*        </div>*@
+@*        <div id="site_statistics_content" class="display-none">*@
+@**@
+@*        </div>*@
+        <form role="form">
+            <div class="form-body">
+                <div class="form-group">
+                    <label>客户角色</label>
+                    <div class="checkbox-list">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox1" value="option1"> 管理员
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox2" value="option2"> 论坛版主
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox2" value="option2"> 游客
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox2" value="option2"> 注册
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox2" value="option2"> 论坛版主
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="portlet-body">
-        <div id="site_statistics_loading">
-            <img src="../../assets/admin/layout/img/loading.gif" alt="loading" />
-        </div>
-        <div id="site_statistics_content" class="display-none">
-
-        </div>
+        </form>
     </div>
 </div>
 <!-- END PORTLET-->
@@ -203,7 +227,7 @@
                 //                searching: false,
                 serverSide: true,
                 //                autoWidth: true,
-                //dom: "t<'row'<'col-xs-2'l><'col-xs-4'i><'col-xs-6'p>>",
+                dom: "t<'row'<'col-xs-6'li><'col-xs-6'p>>",
                 language: {
                     url: '../../assets/global/plugins/datatables/datatables_oLanguage.json'
                 },
