@@ -188,43 +188,47 @@
 
 @section scripts{
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-@*<script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>*@
-@*<script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>*@
-<script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
-<script type="text/javascript" src="../../assets/global/plugins/moment.min.js"></script>
-<!-- END PAGE LEVEL PLUGINS -->
+    @*<script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>*@
+    @*<script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>*@
+    <script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="../../assets/global/plugins/moment.min.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
     <script type="text/javascript">
         $(function () {
             var accountsTable = $('#accountsTable');
 
             var dt = accountsTable.dataTable({
-//                processing: false,
-//                searching: false,
-//                serverSide: true,
-//                autoWidth: true,
-                dom: "t<'row'<'col-xs-2'l><'col-xs-4'i><'col-xs-6'p>>",
+                //                processing: false,
+                //                searching: false,
+                serverSide: true,
+                //                autoWidth: true,
+                //dom: "t<'row'<'col-xs-2'l><'col-xs-4'i><'col-xs-6'p>>",
                 language: {
                     url: '../../assets/global/plugins/datatables/datatables_oLanguage.json'
                 },
                 ajax: {
                     url: '@Url.Action("AccountList")',
-                    type: 'POST'
-//                    data: function(d) {
-//                        $('#searchForm').serializeArray().map(function(x) { d[x.name] = x.value; });
-//                    }
+                    type: 'POST',
+                    data: function (d) {
+                        console.log(d);
+                    }
                 },
+                columnDefs: [{
+                    defaultContent: '',
+                    targets: ['_all']
+                }],
                 columns: [
                     {
                         data: '',
                         orderable: false,
-                        render: function(data, type, row) {
-                            return '<label class="pos-rel"><input type="checkbox" class="ace" /><span class="lbl"></span></label>';
+                        render: function (data, type, row) {
+                            return '<div class="checker"><span><input type="checkbox" class="checkboxes" value="1"></span></div>';
                         },
                         className: "center"
                     }, {
                         data: 'Id',
-                        orderable: false
+                        orderable: true
                     }, {
                         data: 'UserGuid',
                         orderable: false
@@ -236,7 +240,7 @@
                         orderable: false
                     }, {
                         data: 'IsEmailVerified',
-                        render: function(data, type, row) {
+                        render: function (data, type, row) {
                             return data ? '是' : '否';
                         },
                         orderable: false
@@ -245,7 +249,7 @@
                         orderable: false
                     }, {
                         data: 'IsMobileVerified',
-                        render: function(data, type, row) {
+                        render: function (data, type, row) {
                             return data ? '是' : '否';
                         },
                         orderable: false
@@ -257,30 +261,31 @@
                         orderable: false
                     }, {
                         data: 'Created',
-                        render: function(data, type, row) {
+                        orderable: false,
+                        render: function (data, type, row) {
                             return data ? moment(data).format('YYYY-MM-DD HH:mm') : '';
                         }
                     }, {
                         data: null,
                         orderable: false,
-                        render: function(data, type, row) {
-//                            var operators = [];
-//                            operators.push('<div class="btn-group">');
-//                            operators.push('<button class="view btn btn-sm btn-info" resourceId="' + row.Id + '">查看</button>');
-//                            operators.push('<button data-toggle="dropdown" class="btn btn-sm btn-info dropdown-toggle"><span class="ace-icon fa fa-caret-down icon-only"></span></button>');
-//                            operators.push('<ul class="dropdown-menu dropdown-default">');
-//                            if (row.State == 0) {
-//                                operators.push('<li><a class="edit" resourceId="' + row.Id + '">编辑</a></li>');
-//                                operators.push('<li><a class="delete" resourceId="' + row.Id + '">删除</a></li>');
-//                            }
-//                            operators.push('<li><a class="copy" resourceId="' + row.Id + '">复制</a></li>');
-//                            operators.push('</ul>');
-//                            operators.push('</div>');
-//                            return operators.join('');
+                        render: function (data, type, row) {
+                            //                            var operators = [];
+                            //                            operators.push('<div class="btn-group">');
+                            //                            operators.push('<button class="view btn btn-sm btn-info" resourceId="' + row.Id + '">查看</button>');
+                            //                            operators.push('<button data-toggle="dropdown" class="btn btn-sm btn-info dropdown-toggle"><span class="ace-icon fa fa-caret-down icon-only"></span></button>');
+                            //                            operators.push('<ul class="dropdown-menu dropdown-default">');
+                            //                            if (row.State == 0) {
+                            //                                operators.push('<li><a class="edit" resourceId="' + row.Id + '">编辑</a></li>');
+                            //                                operators.push('<li><a class="delete" resourceId="' + row.Id + '">删除</a></li>');
+                            //                            }
+                            //                            operators.push('<li><a class="copy" resourceId="' + row.Id + '">复制</a></li>');
+                            //                            operators.push('</ul>');
+                            //                            operators.push('</div>');
+                            //                            return operators.join('');
                         }
                     }
                 ],
-                order: [[0, 'asc']]
+                order: [[1, 'desc']]
             });
         });
     </script>
