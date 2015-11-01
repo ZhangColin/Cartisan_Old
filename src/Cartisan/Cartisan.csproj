@@ -71,6 +71,8 @@
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\IAggregateRoot.cs" />
     <Compile Include="Domain\IEntity.cs" />
+    <Compile Include="Domain\IPassivable.cs" />
+    <Compile Include="Domain\ISoftDelete.cs" />
     <Compile Include="Domain\ValueObject.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\IEventPublisher.cs" />

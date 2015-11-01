@@ -29,6 +29,10 @@ namespace Cartisan.Domain {
             //            protected set { _id = value; }
         }
 
+        public bool IsTransient() {
+            return EqualityComparer<TId>.Default.Equals(Id, default(TId));
+        }
+
         protected abstract IEnumerable<object> GetIdentityComponents();
 
         /// <summary>

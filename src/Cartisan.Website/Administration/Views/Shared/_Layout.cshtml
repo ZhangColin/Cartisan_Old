@@ -515,19 +515,29 @@ License: You must have a valid license purchased only from themeforest(the above
                     <li class="active open">
                         <a href="javascript:;">
                             <i class="icon-user"></i>
-                            <span class="title">用户</span>
+                            <span class="title">管理</span>
                             <span class="selected"></span>
                             <span class="arrow open"></span>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="layout_horizontal_sidebar_menu.html">
-                                    用户管理
+                                <a href="@Url.Action("Index", "Account")">
+                                    用户
                                 </a>
                             </li>
                             <li>
                                 <a href="index_horizontal_menu.html">
-                                    角色管理
+                                    角色
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index_horizontal_menu.html">
+                                    审计日志
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index_horizontal_menu.html">
+                                    设置
                                 </a>
                             </li>
                         </ul>
@@ -546,31 +556,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             <li>
                                 <a href="email_template1/index.html">
                                     New Email Template 1
-                                </a>
-                            </li>
-                            <li>
-                                <a href="email_template2/index.html">
-                                    New Email Template 2
-                                </a>
-                            </li>
-                            <li>
-                                <a href="email_template3/index.html">
-                                    New Email Template 3
-                                </a>
-                            </li>
-                            <li>
-                                <a href="email_template4/index.html">
-                                    New Email Template 4
-                                </a>
-                            </li>
-                            <li>
-                                <a href="email_newsletter.html">
-                                    Old Email Template 1
-                                </a>
-                            </li>
-                            <li>
-                                <a href="email_system.html">
-                                    Old Email Template 2
                                 </a>
                             </li>
                         </ul>
@@ -727,7 +712,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END STYLE CUSTOMIZER -->
                 <!-- BEGIN PAGE HEADER-->
                 <h3 class="page-title">
-                    @ViewBag.Title <small>blank page</small>
+                    @ViewBag.Title <small>@ViewBag.Subtitle</small>
                 </h3>
                 <div class="page-bar">
                     <ul class="page-breadcrumb">

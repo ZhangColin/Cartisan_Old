@@ -53,6 +53,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartisan.Identity.Api.Test"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartisan.Autofac", "Components\Cartisan.Autofac\Cartisan.Autofac.csproj", "{79A5C5EB-4338-460A-812A-B82577D80A8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartisan.Nito.Async", "Components\Cartisan.Nito.Async\Cartisan.Nito.Async.csproj", "{D5707A71-328A-4178-99DC-C8381343C84B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QuestionAnswerContext", "QuestionAnswerContext", "{AA8A4926-EC26-4A0D-8F1F-F7E0E72880ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +143,10 @@ Global
 		{79A5C5EB-4338-460A-812A-B82577D80A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79A5C5EB-4338-460A-812A-B82577D80A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79A5C5EB-4338-460A-812A-B82577D80A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5707A71-328A-4178-99DC-C8381343C84B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5707A71-328A-4178-99DC-C8381343C84B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5707A71-328A-4178-99DC-C8381343C84B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5707A71-328A-4178-99DC-C8381343C84B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -161,5 +169,6 @@ Global
 		{04BA1F67-B244-40BB-832E-81332B49F086} = {EB5F63B1-217B-4DBD-A09A-E31FBC3D81F1}
 		{C2DF5E29-C05B-4E0E-9BAA-015BF281D08B} = {04BA1F67-B244-40BB-832E-81332B49F086}
 		{79A5C5EB-4338-460A-812A-B82577D80A8A} = {14682D79-0B99-4357-92B8-FDE74B95F7D4}
+		{D5707A71-328A-4178-99DC-C8381343C84B} = {14682D79-0B99-4357-92B8-FDE74B95F7D4}
 	EndGlobalSection
 EndGlobal

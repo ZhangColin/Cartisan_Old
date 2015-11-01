@@ -4802,9 +4802,12 @@
     <Content Include="assets\global\plugins\zoom\jquery.zoom.min.js" />
     <Content Include="assets\global\scripts\datatable.js" />
     <Content Include="assets\global\scripts\metronic.js" />
+    <Content Include="favicon.ico" />
     <Content Include="Content\css\Install\InstallIndex.css" />
     <Content Include="Global.asax" />
+    <Content Include="logo.png" />
     <Content Include="Refresh.html" />
+    <Content Include="Scripts\Account\login.js" />
     <Content Include="Scripts\cartisan.httpRequest.js" />
     <Content Include="Scripts\cartisan.js" />
     <Content Include="Scripts\cartisan.linq.js" />
@@ -4815,11 +4818,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Install\InstallModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\Install\InstallValidator.cs" />
@@ -4830,7 +4835,6 @@
     <Content Include="Config\log4net.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_WithoutNavLayout.cshtml" />
     <Content Include="assets\frontend\layout\img\.DS_Store" />
     <Content Include="assets\frontend\layout\img\icons\.DS_Store" />
     <Content Include="assets\frontend\pages\img\.DS_Store" />
@@ -5178,6 +5182,9 @@
     <Content Include="assets\global\plugins\datatables\extensions\FixedHeader\Readme.md" />
     <Content Include="assets\global\plugins\datatables\extensions\KeyTable\Readme.md" />
     <Content Include="assets\global\plugins\datatables\extensions\Scroller\Readme.md" />
+    <Content Include="App\Main\views\layout\layout.cshtml" />
+    <None Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5186,6 +5193,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\Main\filters\" />
+    <Folder Include="App\Main\images\" />
+    <Folder Include="App\Main\views\questions\" />
+    <Folder Include="App\Main\views\users\" />
     <Folder Include="App_Data\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="assets\global\plugins\datatables\extensions\AutoFill\examples\initialisation\" />

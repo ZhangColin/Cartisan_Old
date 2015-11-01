@@ -10,5 +10,7 @@ namespace Cartisan.Domain {
         /// 实体标识
         /// </summary>
         TId Id { get; set; }
+
+        bool IsTransient();
     }
 }
