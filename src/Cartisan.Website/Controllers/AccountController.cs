@@ -21,6 +21,7 @@ namespace Cartisan.Website.Controllers {
 
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel loginModel, string returnUrl = "") {
+
             if(!ModelState.IsValid) {
                 throw new Exception("表单填写错误。");
             }
