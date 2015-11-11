@@ -68,6 +68,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
         <form class="login-form" action="@Url.Action("Login", "Account")" method="post">
+            @Html.AntiForgeryToken()
             <h3 class="form-title">登录</h3>
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
@@ -78,11 +79,11 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="form-group">
                 <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                 <label class="control-label visible-ie8 visible-ie9">手机号/会员名/邮箱</label>
-                <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="手机号/会员名/邮箱" name="username" />
+                <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="手机号/会员名/邮箱" name="username"/>
             </div>
             <div class="form-group">
                 <label class="control-label visible-ie8 visible-ie9">密码</label>
-                <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password" />
+                <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
             </div>
             <div class="form-actions">
                 <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
@@ -93,25 +94,25 @@ License: You must have a valid license purchased only from themeforest(the above
                 @*                <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>*@
             </div>
             <div class="login-options">
-@*                <h4>Or login with</h4>*@
-@*                <ul class="social-icons">*@
-@*                    <li>*@
-@*                        <a class="social-icon-color facebook" data-original-title="facebook" href="javascript:;"></a>*@
-@*                    </li>*@
-@*                    <li>*@
-@*                        <a class="social-icon-color twitter" data-original-title="Twitter" href="javascript:;"></a>*@
-@*                    </li>*@
-@*                    <li>*@
-@*                        <a class="social-icon-color googleplus" data-original-title="Goole Plus" href="javascript:;"></a>*@
-@*                    </li>*@
-@*                    <li>*@
-@*                        <a class="social-icon-color linkedin" data-original-title="Linkedin" href="javascript:;"></a>*@
-@*                    </li>*@
-@*                </ul>*@
+                @*                <h4>Or login with</h4>*@
+                @*                <ul class="social-icons">*@
+                @*                    <li>*@
+                @*                        <a class="social-icon-color facebook" data-original-title="facebook" href="javascript:;"></a>*@
+                @*                    </li>*@
+                @*                    <li>*@
+                @*                        <a class="social-icon-color twitter" data-original-title="Twitter" href="javascript:;"></a>*@
+                @*                    </li>*@
+                @*                    <li>*@
+                @*                        <a class="social-icon-color googleplus" data-original-title="Goole Plus" href="javascript:;"></a>*@
+                @*                    </li>*@
+                @*                    <li>*@
+                @*                        <a class="social-icon-color linkedin" data-original-title="Linkedin" href="javascript:;"></a>*@
+                @*                    </li>*@
+                @*                </ul>*@
             </div>
             <div class="create-account">
                 <p>&nbsp;
-@*                    <a href="javascript:;" id="register-btn" class="uppercase">Create an account</a>*@
+                    @*                    <a href="javascript:;" id="register-btn" class="uppercase">Create an account</a>*@
                 </p>
             </div>
         </form>

@@ -7,7 +7,8 @@ namespace Cartisan.Website.Controllers {
             return View();
         }
 
-        [CartisanAuthorize]
+//        [CartisanAuthorize]
+[Authorize]
         public ActionResult Angular() {
             return View("~/App/Main/views/layout/layout.cshtml");
         }
