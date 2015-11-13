@@ -1,16 +1,43 @@
-﻿using System;
-using System.Configuration;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using Cartisan.Web.Authentication;
 using Cartisan.Website.Models.Account;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
 namespace Cartisan.Website.Controllers {
     public class AccountController: Controller {
+
+        private CartisanSignInManager _signInManager;
+        private CartisanUserManager _userManager;
+
+        public AccountController() {
+        }
+
+        public AccountController(CartisanUserManager userManager, CartisanSignInManager signInManager) {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public CartisanSignInManager SignInManager {
+            get {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<CartisanSignInManager>();
+            }
+            private set {
+                _signInManager = value;
+            }
+        }
+
+        public CartisanUserManager UserManager {
+            get {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<CartisanUserManager>();
+            }
+            private set {
+                _userManager = value;
+            }
+        }
         public ActionResult Login(string returnUrl = "") {
             if(string.IsNullOrWhiteSpace(returnUrl)) {
                 returnUrl = Request.ApplicationPath;
@@ -44,11 +71,12 @@ namespace Cartisan.Website.Controllers {
             //                    ModelState.AddModelError("", "无效的登录尝试。");
             //                    return View(model);
             //            }
+            var identity = new ClaimsIdentity(DefaultAuthenticationTypes.ApplicationCookie);
+            identity.AddClaim(new Claim("User", model.Username, ClaimValueTypes.String));
+            identity.AddClaim(new Claim("Password", model.Password, ClaimValueTypes.String));
             HttpContext.GetOwinContext().Authentication.SignIn(new AuthenticationProperties {
                 IsPersistent = true
-            }, new ClaimsIdentity(new[] {
-                new Claim("User", model.Username), new Claim("Password", model.Password)
-            }));
+            }, identity);
 
             return Redirect(returnUrl);
         }
