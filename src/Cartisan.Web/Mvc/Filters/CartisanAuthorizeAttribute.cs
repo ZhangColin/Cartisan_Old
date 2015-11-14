@@ -18,29 +18,7 @@ namespace Cartisan.Web.Mvc.Filters {
         }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext) {
-//            if(!base.AuthorizeCore(httpContext)) {
-//                return false;
-//            }
-
-            try {
-                HttpCookie authCookie = httpContext.Request.Cookies.Get("CartisanAuth");
-                if (authCookie == null || string.IsNullOrEmpty(authCookie.Value)) {
-                    return false;
-                }
-
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-                if (ticket == null) {
-                    return false;
-                }
-
-                User user = JsonConvert.DeserializeObject<User>(ticket.UserData);
-
-                httpContext.Session["User"] = user;
-                return true;
-            }
-            catch(Exception) {
-                return false;
-            }
+            return base.AuthorizeCore(httpContext);
         }
 
         public override void OnAuthorization(AuthorizationContext filterContext) {

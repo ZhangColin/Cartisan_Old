@@ -52,8 +52,8 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="container">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
-@*                    <a href="index.html"><img src="../../assets/admin/layout3/img/logo-default.png" alt="logo" class="logo-default"></a>*@
-                    <h1><a href=""  class="font-green-sharp bold uppercase" style="text-decoration: none">Cartisan</a></h1>
+                    @*                    <a href="index.html"><img src="../../assets/admin/layout3/img/logo-default.png" alt="logo" class="logo-default"></a>*@
+                    <h1><a href="" class="font-green-sharp bold uppercase" style="text-decoration: none">Cartisan</a></h1>
                 </div>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -414,8 +414,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="login.html">
-                                        <i class="icon-key"></i> Log Out
+                                    <form id="logoutForm" action="@Url.Action("Logout", "Account")" method="POST">
+                                        @Html.AntiForgeryToken()
+                                    </form>
+                                    <a id="btnLogout">
+                                        <i class="icon-key"></i> 退出
                                     </a>
                                 </li>
                             </ul>
@@ -1549,14 +1552,19 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END CORE PLUGINS -->
     <script src="../../assets/global/scripts/metronic.js" type="text/javascript"></script>
     <script src="../../assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
-<script src="../../assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
+    <script src="../../assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
     @RenderSection("Scripts", false)
     <script>
-      jQuery(document).ready(function() {
-         Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-Demo.init(); // init demo features
-      });
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            Demo.init(); // init demo features
+
+            $('#btnLogout').on('click', function(event) {
+                event.preventDefault();
+                $('#logoutForm').submit();
+            });
+        });
     </script>
     <!-- END JAVASCRIPTS -->
 </body>

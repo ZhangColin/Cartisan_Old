@@ -4858,10 +4858,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\CartisanClaimsIdentityFactory.cs" />
+    <Compile Include="App_Start\CartisanPasswordHasher.cs" />
+    <Compile Include="App_Start\CartisanRole.cs" />
+    <Compile Include="App_Start\CartisanRoleManager.cs" />
+    <Compile Include="App_Start\CartisanRoleStore.cs" />
     <Compile Include="App_Start\CartisanSignInManager.cs" />
     <Compile Include="App_Start\CartisanUserManager.cs" />
     <Compile Include="App_Start\CartisanUserStore.cs" />
+    <Compile Include="App_Start\CartisanUserValidation.cs" />
     <Compile Include="App_Start\EmailService.cs" />
+    <Compile Include="App_Start\PasswordValidation.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="Controllers\AccountController.cs" />

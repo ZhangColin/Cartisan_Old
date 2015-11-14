@@ -5,26 +5,28 @@ using Microsoft.Owin;
 
 namespace Cartisan.Website {
     // 配置此应用程序中使用的应用程序用户管理器。UserManager 在 ASP.NET Identity 中定义，并由此应用程序使用。
-    public class CartisanUserManager: UserManager<CartisanUser> {
-        public CartisanUserManager(IUserStore<CartisanUser> store): base(store) {
+    public class CartisanUserManager: UserManager<CartisanUser, string> {
+        public CartisanUserManager(IUserStore<CartisanUser, string> store): base(store) {
         }
 
         public static CartisanUserManager Create(IdentityFactoryOptions<CartisanUserManager> options, IOwinContext context) {
             var manager = new CartisanUserManager(new CartisanUserStore());
             // 配置用户名的验证逻辑
-            manager.UserValidator = new UserValidator<CartisanUser>(manager) {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-            };
+//            manager.UserValidator = new UserValidator<CartisanUser>(manager) {
+//                AllowOnlyAlphanumericUserNames = false,
+//                RequireUniqueEmail = true
+//            };
 
             // 配置密码的验证逻辑
-            manager.PasswordValidator = new PasswordValidator {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
-            };
+//            manager.PasswordValidator = new PasswordValidator {
+//                RequiredLength = 6,
+//                RequireNonLetterOrDigit = true,
+//                RequireDigit = true,
+//                RequireLowercase = true,
+//                RequireUppercase = true,
+//            };
+            
+            manager.PasswordHasher = new CartisanPasswordHasher();
 
             // 配置用户锁定默认值
             manager.UserLockoutEnabledByDefault = true;
