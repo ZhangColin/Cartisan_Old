@@ -30,7 +30,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +57,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IQuestionAnswerApplicationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionAnswerMapperProfile.cs" />
+    <Compile Include="QuestionAnswerModule.cs" />
+    <Compile Include="QuestionAnswerApplicationService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cartisan\Cartisan.csproj">
+      <Project>{FA5EF4B7-C651-4458-BF1C-DEEBC8D4D6FF}</Project>
+      <Name>Cartisan</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\Cartisan.AutoMapper\Cartisan.AutoMapper.csproj">
+      <Project>{9C045711-D097-4F05-B7EB-6CF39D407933}</Project>
+      <Name>Cartisan.AutoMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\Cartisan.EntityFramework\Cartisan.EntityFramework.csproj">
+      <Project>{D0E634ED-CB95-4A49-A416-75DE7E7A02C0}</Project>
+      <Name>Cartisan.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cartisan.QuestionAnswer.Contract\Cartisan.QuestionAnswer.Contract.csproj">
+      <Project>{6E534F00-F7C6-4DF8-B347-DAE90066259F}</Project>
+      <Name>Cartisan.QuestionAnswer.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cartisan.QuestionAnswer.Domain\Cartisan.QuestionAnswer.Domain.csproj">
+      <Project>{0C283FE7-761B-466E-8542-066CC4D571FE}</Project>
+      <Name>Cartisan.QuestionAnswer.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cartisan.QuestionAnswer.Repository\Cartisan.QuestionAnswer.Repository.csproj">
+      <Project>{022B6DCE-D6CA-4588-A6EF-8B53763AC7B4}</Project>
+      <Name>Cartisan.QuestionAnswer.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,10 +4,10 @@ using Microsoft.AspNet.Identity;
 
 namespace Cartisan.Website {
     public class CartisanUserStore: 
-        IUserStore<CartisanUser, string>, 
-        IUserLockoutStore<CartisanUser, string>, 
-        IUserPasswordStore<CartisanUser, string>, 
-        IUserTwoFactorStore<CartisanUser, string> {
+        IUserStore<CartisanUser, long>, 
+        IUserLockoutStore<CartisanUser, long>, 
+        IUserPasswordStore<CartisanUser, long>, 
+        IUserTwoFactorStore<CartisanUser, long> {
         #region IUserStore
         public void Dispose() {
         }
@@ -24,7 +24,7 @@ namespace Cartisan.Website {
             return Task.FromResult(0);
         }
 
-        public Task<CartisanUser> FindByIdAsync(string userId) {
+        public Task<CartisanUser> FindByIdAsync(long userId) {
             return Task.FromResult(new CartisanUser() {
                 Id = userId,
                 UserName = "Test"
@@ -33,7 +33,7 @@ namespace Cartisan.Website {
 
         public Task<CartisanUser> FindByNameAsync(string userName) {
             return Task.FromResult(new CartisanUser() {
-                Id = Guid.NewGuid().ToString(),
+                Id = 1,
                 UserName = userName
             });
         }

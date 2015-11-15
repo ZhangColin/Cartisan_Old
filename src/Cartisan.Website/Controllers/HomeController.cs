@@ -9,7 +9,7 @@ namespace Cartisan.Website.Controllers {
 
         [CartisanAuthorize]
         public ActionResult Angular() {
-            return View("~/App/Main/views/layout/layout.cshtml");
+            return View("~/App/views/layout/layout.cshtml");
         }
     }
 }

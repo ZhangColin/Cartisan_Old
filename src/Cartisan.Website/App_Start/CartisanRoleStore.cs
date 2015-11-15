@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
 namespace Cartisan.Website {
-    public class CartisanRoleStore: IRoleStore<CartisanRole, string> {
+    public class CartisanRoleStore: IRoleStore<CartisanRole, long> {
         public void Dispose() {
         }
 
@@ -19,7 +19,7 @@ namespace Cartisan.Website {
             return Task.FromResult(0);
         }
 
-        public Task<CartisanRole> FindByIdAsync(string roleId) {
+        public Task<CartisanRole> FindByIdAsync(long roleId) {
             return Task.FromResult(new CartisanRole() {
                 Id = roleId,
                 Name = "Test"
@@ -28,7 +28,7 @@ namespace Cartisan.Website {
 
         public Task<CartisanRole> FindByNameAsync(string roleName) {
             return Task.FromResult(new CartisanRole() {
-                Id = Guid.NewGuid().ToString(),
+                Id = 1,
                 Name = roleName
             });
         }

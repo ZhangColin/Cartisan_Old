@@ -11,7 +11,7 @@ namespace Cartisan.Repository {
     /// 仓储
     /// </summary>
     /// <typeparam name="TAggregateRoot">聚合类型</typeparam>
-    public interface IRepository<TAggregateRoot>: IDisposable where TAggregateRoot: class, IAggregateRoot, new() {
+    public interface IRepository<TAggregateRoot>: IDisposable where TAggregateRoot: class, IAggregateRoot {
         /// <summary>
         /// 添加聚合
         /// </summary>

@@ -7,8 +7,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
 namespace Cartisan.Website {
-    public class CartisanSignInManager: SignInManager<CartisanUser, string> {
-        public CartisanSignInManager(UserManager<CartisanUser, string> userManager, IAuthenticationManager authenticationManager): base(userManager, authenticationManager) {
+    public class CartisanSignInManager: SignInManager<CartisanUser, long> {
+        public CartisanSignInManager(UserManager<CartisanUser, long> userManager, IAuthenticationManager authenticationManager): base(userManager, authenticationManager) {
         }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(CartisanUser user) {
