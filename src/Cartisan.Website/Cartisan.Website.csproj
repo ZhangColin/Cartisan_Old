@@ -155,7 +155,6 @@
     <Content Include="App\views\layout\header.js" />
     <Content Include="App\views\layout\layout.js" />
     <Content Include="App\views\layout\page_head.js" />
-    <Content Include="App\views\questions\index.html" />
     <Content Include="assets\admin\layout2\css\custom.css" />
     <Content Include="assets\admin\layout2\css\layout.css" />
     <Content Include="assets\admin\layout2\css\themes\blue.css" />
