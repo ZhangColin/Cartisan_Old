@@ -85,14 +85,14 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
         // Questions
         .state("questions", {
             url: "/questions",
-            templateUrl: "/App/views/questions/index.html",
+            templateUrl: "/CartisanApp/Load?viewUrl=/App/views/questions/index.cshtml",
             menu: '提问'
         })
 
         // User Profile Account
         .state("questionDetail", {
             url: "/questions/:id",
-            templateUrl: "views/questions/detail.cshtml",
+            templateUrl: "/CartisanApp/Load?viewUrl=views/questions/detail.cshtml",
             menu: '提问'
         });
 
