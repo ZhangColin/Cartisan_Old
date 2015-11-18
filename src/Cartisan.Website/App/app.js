@@ -86,6 +86,7 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
         .state("questions", {
             url: "/questions",
             templateUrl: "/CartisanApp/Load?viewUrl=/App/views/questions/index.cshtml",
+            data: { pageTitle: '问答', pageSubTitle: '交流与分享' },
             menu: '提问'
         })
 
@@ -93,6 +94,7 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
         .state("questionDetail", {
             url: "/questions/:id",
             templateUrl: "/CartisanApp/Load?viewUrl=views/questions/detail.cshtml",
+            data: { pageTitle: '问答', pageSubTitle: '交流与分享' },
             menu: '提问'
         });
 
