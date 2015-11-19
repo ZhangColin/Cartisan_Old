@@ -151,10 +151,10 @@
     <Content Include="App\app.js" />
     <Content Include="App\filters\moment_filters.js" />
     <Content Include="App\directives.js" />
-    <Content Include="App\views\layout\footer.js" />
-    <Content Include="App\views\layout\header.js" />
-    <Content Include="App\views\layout\layout.js" />
-    <Content Include="App\views\layout\page_head.js" />
+    <Content Include="App\views\questions\createDialog.js" />
+    <Content Include="App\views\questions\detail.js" />
+    <Content Include="App\views\questions\index.js" />
+    <Content Include="App\views\questions\questions.css" />
     <Content Include="assets\admin\layout2\css\custom.css" />
     <Content Include="assets\admin\layout2\css\layout.css" />
     <Content Include="assets\admin\layout2\css\themes\blue.css" />
@@ -5251,6 +5251,7 @@
     <Content Include="App\views\layout\page_head.cshtml" />
     <Content Include="App\views\questions\index.cshtml" />
     <Content Include="App\views\questions\detail.cshtml" />
+    <Content Include="App\views\questions\createDialog.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">

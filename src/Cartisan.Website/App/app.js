@@ -34,12 +34,8 @@ cartisanApp.factory('settings', ['$rootScope', function ($rootScope) {
     return settings;
 }]);
 
-
-END: BREAKING CHANGE in AngularJS v1.3.x:
-*********************************************/
-
 /* Setup global settings */
-MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
+cartisanApp.factory('settings', ['$rootScope', function ($rootScope) {
     // supported languages
     var settings = {
         layout: {
@@ -57,8 +53,8 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
-    $scope.$on('$viewContentLoaded', function() {
+cartisanApp.controller('AppController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    $scope.$on('$viewContentLoaded', function () {
         Metronic.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
     });
@@ -71,38 +67,22 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', function($scope) {
-    $scope.$on('$includeContentLoaded', function() {
+cartisanApp.controller('HeaderController', ['$scope', function ($scope) {
+    $scope.$on('$includeContentLoaded', function () {
         Layout.initHeader(); // init header
     });
 }]);
 
 /* Setup Layout Part - Sidebar */
-MetronicApp.controller('SidebarController', ['$scope', function($scope) {
-    $scope.$on('$includeContentLoaded', function() {
-        Layout.initSidebar(); // init sidebar
-    });
-}]);
-
-/* Setup Layout Part - Quick Sidebar */
-MetronicApp.controller('QuickSidebarController', ['$scope', function($scope) {    
-    $scope.$on('$includeContentLoaded', function() {
-        setTimeout(function(){
-            QuickSidebar.init(); // init quick sidebar        
-        }, 2000)
-    });
-}]);
-
-/* Setup Layout Part - Theme Panel */
-MetronicApp.controller('ThemePanelController', ['$scope', function($scope) {    
-    $scope.$on('$includeContentLoaded', function() {
+cartisanApp.controller('PageHeadController', ['$scope', function ($scope) {
+    $scope.$on('$includeContentLoaded', function () {
         Demo.init(); // init theme panel
     });
 }]);
 
 /* Setup Layout Part - Footer */
-MetronicApp.controller('FooterController', ['$scope', function($scope) {
-    $scope.$on('$includeContentLoaded', function() {
+cartisanApp.controller('FooterController', ['$scope', function ($scope) {
+    $scope.$on('$includeContentLoaded', function () {
         Layout.initFooter(); // init footer
     });
 }]);
@@ -151,6 +131,18 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
             url: "/questions",
             templateUrl: "/CartisanApp/Load?viewUrl=/App/views/questions/index.cshtml",
             data: { pageTitle: '问答', pageSubTitle: '交流与分享' },
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'cartisanApp',
+                            insertBefore: '#ng_load_plugins_before',
+                            files: [
+                                '../App/views/questions/questions.css'
+                            ]
+                        });
+                    }
+                ]
+            },
             menu: '提问'
         })
 
