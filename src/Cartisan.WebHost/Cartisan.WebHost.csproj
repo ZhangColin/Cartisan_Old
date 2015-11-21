@@ -131,6 +131,10 @@
       <Project>{c656f3db-482f-46c4-9750-68c7749aa29a}</Project>
       <Name>Cartisan.Identity.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QuestionAnswerContext\Cartisan.QuestionAnswer.Api\Cartisan.QuestionAnswer.Api.csproj">
+      <Project>{8a50e4db-420a-43d6-9050-70746f83d0d4}</Project>
+      <Name>Cartisan.QuestionAnswer.Api</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

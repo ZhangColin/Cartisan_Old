@@ -5,7 +5,7 @@ var ChartsFlotcharts = function() {
 
         init: function() {
 
-            Metronic.addResizeHandler(function() {
+            App.addResizeHandler(function() {
                 Charts.initPieCharts();
             });
 
@@ -897,3 +897,10 @@ var ChartsFlotcharts = function() {
     };
 
 }();
+
+jQuery(document).ready(function() {    
+      ChartsFlotcharts.init();
+   ChartsFlotcharts.initCharts();
+   ChartsFlotcharts.initPieCharts();
+   ChartsFlotcharts.initBarCharts();
+});

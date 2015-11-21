@@ -1,7 +1,8 @@
 ﻿(function () {
     var controllerId = 'questions.createDialog';
-    angular.module('cartisanApp').controller(controllerId, [
-        'questionService', '$modalInstance', function ($state, questionService) {
+    var cartisanApp = angular.module('cartisanApp');
+    cartisanApp.controller(controllerId, [
+        'questions.questionService', '$modalInstance', function ($state, questionService) {
             var vm = this;
 
             vm.question = {

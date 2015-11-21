@@ -1,7 +1,8 @@
 ﻿(function () {
     var controllerId = 'questions.index';
-    angular.module('cartisanApp').controller(controllerId, [
-        'questionService', '$modal', function(questionService, $modal) {
+    var cartisanApp = angular.module('cartisanApp');
+    cartisanApp.controller(controllerId, [
+        'questions.questionService', '$modal', function (questionService, $modal) {
             var vm = this;
             vm.dosPermissions = {
                 canCreateQuestions: ''

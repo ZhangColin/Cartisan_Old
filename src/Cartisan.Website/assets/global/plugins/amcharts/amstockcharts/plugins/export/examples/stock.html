@@ -82,8 +82,6 @@
 
 			var chart = AmCharts.makeChart( "chartdiv", {
 				"type": "stock",
-				"theme": "none",
-				"pathToImages": "http://www.amcharts.com/lib/3/images/",
 				
 				"dataSets": [ {
 						"title": "first data set",
@@ -214,17 +212,7 @@
 				},
 
 				"export": {
-					"enabled": true,
-					"libs": {
-						"path": "../libs/"
-					},
-					// override some of the defaults (Stock Chart specific)
-					"periodSelector": {
-						"position": "left"
-					},
-					"dataSetSelector": {
-						"position": "left"
-					}
+					"enabled": true
 				}
 			} );
 		</script>

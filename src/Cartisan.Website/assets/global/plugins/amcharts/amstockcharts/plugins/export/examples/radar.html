@@ -30,7 +30,6 @@
 		<script type="text/javascript">
 			var chart = AmCharts.makeChart( "chartdiv", {
 				"type": "radar",
-				"pathToImages": "http://www.amcharts.com/lib/3/images/",
 				"dataProvider": [ {
 					"country": "Czech Republic",
 					"litres": 156.9,
@@ -67,7 +66,7 @@
 				} ],
 				"graphs": [ {
 					"valueField": "litres",
-					"title": "Litres (20114)",
+					"title": "Litres (2014)",
 					"bullet": "round",
 					"lineThickness": 2,
 					"balloonText": "[[value]] litres of beer per year"
@@ -82,10 +81,7 @@
 					"align": "center"
 				},
 				"export": {
-					"enabled": true,
-					"libs": {
-						"path": "../libs/"
-					}
+					"enabled": true
 				}
 			} );
 		</script>

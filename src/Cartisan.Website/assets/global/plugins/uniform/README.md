@@ -17,7 +17,7 @@ Installation of Uniform is quite simple. First, make sure you have jQuery instal
 
     <!-- Make sure your CSS file is listed before jQuery -->
 	<link rel="stylesheet" href="uniform.default.css" media="screen" />
-	<script src="http://ajax.useso.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 	<script src="jquery.uniform.js"></script>
 
 This relies upon a copy of jquery.uniform.js, uniform.default.css and the various images all being available on your webserver.
@@ -46,7 +46,7 @@ A complete set of tags in the HEAD section of your site can therefore look like 
 
     <!-- Make sure your CSS file is listed before jQuery -->
 	<link rel="stylesheet" href="uniform.default.css" media="screen" />
-	<script src="http://ajax.useso.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 	<script src="jquery.uniform.js"></script>
 	<script type='text/javascript'>
 		// On load, style typical form elements

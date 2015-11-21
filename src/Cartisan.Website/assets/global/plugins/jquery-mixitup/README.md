@@ -117,7 +117,7 @@ Avoid applying styles such as position: absolute or float: left/right to your el
 
 MixItUp uses the jQuery JavaScript library. Make sure you have jQuery loaded into your project's head before MixItUp:
 
-	<script src="http://ajax.useso.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="js/jquery.mixitup.min.js"></script>
 	...
 

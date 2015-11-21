@@ -19,13 +19,13 @@ namespace Cartisan.QuestionAnswer.Service {
             _acceptService = acceptService;
         }
 
-        public Paginated<QuestionDto> GetQuestions(int pageIndex, int pageSize, string sorting) {
+        public Task<Paginated<QuestionDto>> GetQuestions(int pageIndex, int pageSize, string sorting) {
             var questions = _questionRepository.Paginate(pageIndex, pageSize, q=>q.Id);
-            return new Paginated<QuestionDto>(questions.Datas.Select(data => data.MapTo<QuestionDto>()),
-                questions.PageIndex, questions.PageSize, questions.Total);
+            return Task.FromResult(new Paginated<QuestionDto>(questions.Datas.Select(data => data.MapTo<QuestionDto>()),
+                questions.PageIndex, questions.PageSize, questions.Total));
         }
 
-        public QuestionWithAnswersDto GetQuestion(long questionId, bool incrementViewCount) {
+        public Task<QuestionWithAnswersDto> GetQuestion(long questionId, bool incrementViewCount) {
             var question = _questionRepository.Get(questionId);
             if(incrementViewCount) {
                 question.ViewCount++;
@@ -35,7 +35,7 @@ namespace Cartisan.QuestionAnswer.Service {
             var questionWithAnswersDto = question.MapTo<QuestionWithAnswersDto>();
             questionWithAnswersDto.Answers =
                 _answerRepository.Query(a => a.QuestionId == questionId).ToList().Select(a => a.MapTo<AnswerDto>()).ToList();
-            return questionWithAnswersDto;
+            return Task.FromResult(questionWithAnswersDto);
         }
 
         public async Task CreateQuestion(string title, string content, long questioner) {

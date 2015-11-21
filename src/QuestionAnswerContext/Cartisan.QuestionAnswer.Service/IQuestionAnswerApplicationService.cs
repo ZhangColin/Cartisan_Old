@@ -4,8 +4,8 @@ using Cartisan.Repository;
 
 namespace Cartisan.QuestionAnswer.Service {
     public interface IQuestionAnswerApplicationService {
-        Paginated<QuestionDto> GetQuestions(int pageIndex, int pageSize, string sorting);
-        QuestionWithAnswersDto GetQuestion(long questionId, bool incrementViewCount);
+        Task<Paginated<QuestionDto>> GetQuestions(int pageIndex, int pageSize, string sorting);
+        Task<QuestionWithAnswersDto> GetQuestion(long questionId, bool incrementViewCount);
 
         Task CreateQuestion(string title, string content, long questioner);
         Task<int> VoteUp(long questionId);
