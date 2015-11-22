@@ -104,6 +104,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\app.js" />
+    <Content Include="App\directives.js" />
+    <Content Include="App\factory.js" />
+    <Content Include="App\filters\moment_filters.js" />
+    <Content Include="App\views\questions\index.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +130,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="App\views\layout\footer.cshtml" />
+    <Content Include="App\views\layout\header.cshtml" />
+    <Content Include="App\views\layout\layout.cshtml" />
+    <Content Include="App\views\layout\page_head.cshtml" />
+    <Content Include="App\views\layout\quick_sidebar.cshtml" />
+    <Content Include="App\views\layout\sidebar.cshtml" />
+    <Content Include="App\views\questions\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -133,6 +145,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,9 @@
-﻿var cartisanApp = angular.module("cartisanApp", [
+﻿/***
+Metronic AngularJS App Main Script
+***/
+
+/* Metronic App */
+var cartisanApp = angular.module("cartisanApp", [
     "ui.router",
     "ui.bootstrap",
     "oc.lazyLoad",
@@ -8,14 +13,58 @@
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
 cartisanApp.config(['$ocLazyLoadProvider', function ($ocLazyLoadProvider) {
     $ocLazyLoadProvider.config({
+        // global configs go here
     });
 }]);
 
+/********************************************
+ BEGIN: BREAKING CHANGE in AngularJS v1.3.x:
+*********************************************/
+/**
+`$controller` will no longer look for controllers on `window`.
+The old behavior of looking on `window` for controllers was originally intended
+for use in examples, demos, and toy apps. We found that allowing global controller
+functions encouraged poor practices, so we resolved to disable this behavior by
+default.
+
+To migrate, register your controllers with modules rather than exposing them
+as globals:
+
+Before:
+
+```javascript
+function MyController() {
+  // ...
+}
+```
+
+After:
+
+```javascript
+angular.module('myApp', []).controller('MyController', [function() {
+  // ...
+}]);
+
+Although it's not recommended, you can re-enable the old behavior like this:
+
+```javascript
+angular.module('myModule').config(['$controllerProvider', function($controllerProvider) {
+  // this option might be handy for migrating old apps, but please don't use it
+  // in new ones!
+  $controllerProvider.allowGlobals();
+}]);
+**/
+
+//AngularJS v1.3.x workaround for old style controller declarition in HTML
 cartisanApp.config(['$controllerProvider', function ($controllerProvider) {
     // this option might be handy for migrating old apps, but please don't use it
     // in new ones!
     $controllerProvider.allowGlobals();
 }]);
+
+/********************************************
+ END: BREAKING CHANGE in AngularJS v1.3.x:
+*********************************************/
 
 /* Setup global settings */
 cartisanApp.factory('settings', ['$rootScope', function ($rootScope) {
@@ -29,7 +78,7 @@ cartisanApp.factory('settings', ['$rootScope', function ($rootScope) {
         },
         assetsPath: '../assets',
         globalPath: '../assets/global',
-        layoutPath: '../assets/admin/layouts/layout3',
+        layoutPath: '../assets/layouts/layout4',
     };
 
     $rootScope.settings = settings;
@@ -65,20 +114,19 @@ cartisanApp.controller('SidebarController', ['$scope', function ($scope) {
     });
 }]);
 
-/* Setup Layout Part - Quick Sidebar */
-cartisanApp.controller('QuickSidebarController', ['$scope', function ($scope) {
-    $scope.$on('$includeContentLoaded', function () {
-        Layout.initContent();
-        setTimeout(function() {
-            QuickSidebar.init(); // init quick sidebar        
-        }, 2000);
-    });
-}]);
-
 /* Setup Layout Part - Sidebar */
 cartisanApp.controller('PageHeadController', ['$scope', function ($scope) {
     $scope.$on('$includeContentLoaded', function () {
         Demo.init(); // init theme panel
+    });
+}]);
+
+/* Setup Layout Part - Quick Sidebar */
+cartisanApp.controller('QuickSidebarController', ['$scope', function ($scope) {
+    $scope.$on('$includeContentLoaded', function () {
+        setTimeout(function () {
+            QuickSidebar.init(); // init quick sidebar        
+        }, 2000)
     });
 }]);
 
@@ -98,7 +146,6 @@ cartisanApp.controller('FooterController', ['$scope', function ($scope) {
 
 /* Setup Rounting For All Pages */
 cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-
     // Redirect any unmatched url
     $urlRouterProvider.otherwise("/questions");
 
@@ -108,59 +155,31 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
 //        .state('dashboard', {
 //            url: "/dashboard.html",
 //            templateUrl: "views/dashboard.html",
-//            data: { pageTitle: 'Dashboard', pageSubTitle: 'statistics & reports' },
+//            data: { pageTitle: 'Admin Dashboard Template' },
 //            controller: "DashboardController",
 //            resolve: {
 //                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
 //                    return $ocLazyLoad.load({
 //                        name: 'cartisanApp',
-//                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+//                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
 //                        files: [
-//                            '../../../assets/global/plugins/morris/morris.css',
-//                            '../../../assets/admin/pages/css/tasks.css',
+//                            '../assets/global/plugins/morris/morris.css',
+//                            '../assets/global/plugins/morris/morris.min.js',
+//                            '../assets/global/plugins/morris/raphael-min.js',
+//                            '../assets/global/plugins/jquery.sparkline.min.js',
 //
-//                            '../../../assets/global/plugins/morris/morris.min.js',
-//                            '../../../assets/global/plugins/morris/raphael-min.js',
-//                            '../../../assets/global/plugins/jquery.sparkline.min.js',
-//
-//                            '../../../assets/admin/pages/scripts/index3.js',
-//                            '../../../assets/admin/pages/scripts/tasks.js',
-//
-//                             'js/controllers/DashboardController.js'
+//                            '../assets/pages/scripts/dashboard.min.js',
+//                            'js/controllers/DashboardController.js',
 //                        ]
 //                    });
 //                }]
 //            }
 //        })
-
-
-        // Questions
-        .state("questions", {
+        .state('dashboard', {
             url: "/questions",
-            templateUrl: "/CartisanApp/Load?viewUrl=/App/views/questions/index.cshtml",
+            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/questions/index.cshtml",
             data: { pageTitle: '问答', pageSubTitle: '交流与分享' },
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name: 'cartisanApp',
-                            insertBefore: '#ng_load_plugins_before',
-                            files: [
-                                '../App/views/questions/questions.css'
-                            ]
-                        });
-                    }
-                ]
-            },
-            menu: '提问'
         })
-
-        // User Profile Account
-        .state("questionDetail", {
-            url: "/questions/:id",
-            templateUrl: "/CartisanApp/Load?viewUrl=views/questions/detail.cshtml",
-            data: { pageTitle: '问答', pageSubTitle: '交流与分享' },
-            menu: '提问'
-        });
 
 }]);
 

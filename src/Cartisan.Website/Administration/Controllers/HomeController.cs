@@ -6,6 +6,10 @@ namespace Cartisan.Admin.Controllers {
             return View();
         }
 
+        public ActionResult Angular() {
+            return View("~/Administration/App/views/layout/layout.cshtml");
+        }
+
         public ActionResult Operating(string message, string backUrl, string operationUrl, string confirmInfo) {
             ViewBag.Message = message ?? "正在执行，请耐心等待……";
             ViewBag.ConfirmInfo = confirmInfo ?? "";
