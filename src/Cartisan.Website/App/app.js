@@ -8,7 +8,6 @@
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
 cartisanApp.config(['$ocLazyLoadProvider', function ($ocLazyLoadProvider) {
     $ocLazyLoadProvider.config({
-        cssFilesInsertBefore: 'ng_load_plugins_before' // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
     });
 }]);
 
@@ -23,28 +22,14 @@ cartisanApp.factory('settings', ['$rootScope', function ($rootScope) {
     // supported languages
     var settings = {
         layout: {
-            pageAutoScrollOnLoad: 1000 // auto scroll to top on page load
-        },
-        layoutImgPath: Metronic.getAssetsPath() + 'admin/layout/img/',
-        layoutCssPath: Metronic.getAssetsPath() + 'admin/layout/css/'
-    };
-
-    $rootScope.settings = settings;
-
-    return settings;
-}]);
-
-/* Setup global settings */
-cartisanApp.factory('settings', ['$rootScope', function ($rootScope) {
-    // supported languages
-    var settings = {
-        layout: {
             pageSidebarClosed: false, // sidebar menu state
+            pageContentWhite: true, // set page content layout
             pageBodySolid: false, // solid body color state
             pageAutoScrollOnLoad: 1000 // auto scroll to top on page load
         },
-        layoutImgPath: Metronic.getAssetsPath() + 'admin/layout/img/',
-        layoutCssPath: Metronic.getAssetsPath() + 'admin/layout/css/'
+        assetsPath: '../assets',
+        globalPath: '../assets/global',
+        layoutPath: '../assets/admin/layouts/layout3',
     };
 
     $rootScope.settings = settings;
@@ -55,7 +40,7 @@ cartisanApp.factory('settings', ['$rootScope', function ($rootScope) {
 /* Setup App Main Controller */
 cartisanApp.controller('AppController', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.$on('$viewContentLoaded', function () {
-        Metronic.initComponents(); // init core components
+        App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
     });
 }]);
@@ -74,7 +59,30 @@ cartisanApp.controller('HeaderController', ['$scope', function ($scope) {
 }]);
 
 /* Setup Layout Part - Sidebar */
+cartisanApp.controller('SidebarController', ['$scope', function ($scope) {
+    $scope.$on('$includeContentLoaded', function () {
+        Layout.initSidebar(); // init sidebar
+    });
+}]);
+
+/* Setup Layout Part - Quick Sidebar */
+cartisanApp.controller('QuickSidebarController', ['$scope', function ($scope) {
+    $scope.$on('$includeContentLoaded', function () {
+        setTimeout(function () {
+            QuickSidebar.init(); // init quick sidebar        
+        }, 2000)
+    });
+}]);
+
+/* Setup Layout Part - Sidebar */
 cartisanApp.controller('PageHeadController', ['$scope', function ($scope) {
+    $scope.$on('$includeContentLoaded', function () {
+        Demo.init(); // init theme panel
+    });
+}]);
+
+/* Setup Layout Part - Theme Panel */
+cartisanApp.controller('ThemePanelController', ['$scope', function ($scope) {
     $scope.$on('$includeContentLoaded', function () {
         Demo.init(); // init theme panel
     });
@@ -86,7 +94,6 @@ cartisanApp.controller('FooterController', ['$scope', function ($scope) {
         Layout.initFooter(); // init footer
     });
 }]);
-
 
 /* Setup Rounting For All Pages */
 cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -159,4 +166,5 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
 /* Init global settings and run the app */
 cartisanApp.run(["$rootScope", "settings", "$state", function ($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
+    $rootScope.$settings = settings; // state to be accessed from view
 }]);

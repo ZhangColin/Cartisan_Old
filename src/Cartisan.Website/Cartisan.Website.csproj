@@ -107,6 +107,7 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -5573,6 +5574,7 @@
     <Compile Include="Controllers\CartisanAppController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -5967,6 +5969,7 @@
     <Content Include="assets\global\plugins\typeahead\README.md" />
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
+    <Content Include="App\views\layout\quick_sidebar.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
@@ -5999,6 +6002,10 @@
     <ProjectReference Include="..\Components\Cartisan.AutoMapper\Cartisan.AutoMapper.csproj">
       <Project>{9C045711-D097-4F05-B7EB-6CF39D407933}</Project>
       <Name>Cartisan.AutoMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuestionAnswerContext\Cartisan.QuestionAnswer.Contract\Cartisan.QuestionAnswer.Contract.csproj">
+      <Project>{6E534F00-F7C6-4DF8-B347-DAE90066259F}</Project>
+      <Name>Cartisan.QuestionAnswer.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

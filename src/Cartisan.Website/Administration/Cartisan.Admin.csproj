@@ -148,10 +148,6 @@
       <Project>{4B448A0B-1121-423F-A4D1-DF13798F43D4}</Project>
       <Name>Cartisan.Identity.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\IdentityContext\Cartisan.Identity.Service\Cartisan.Identity.Service.csproj">
-      <Project>{DAA7FAA4-4001-4201-8186-1C6AF9DFF02E}</Project>
-      <Name>Cartisan.Identity.Service</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -2,15 +2,17 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Cartisan.Identity.Contract.Dtos;
-using Cartisan.Identity.Service;
+//using Cartisan.Identity.Service;
 using Flurl.Http;
 
 namespace Cartisan.Admin.Controllers {
     public class AccountController: Controller {
-        private readonly IAccountService _accountService;
-        public AccountController(IAccountService  accountService) {
-            _accountService = accountService;
-        }
+//        private readonly IAccountService _accountService;
+//        public AccountController(IAccountService  accountService) {
+//            _accountService = accountService;
+//        }
+
+        public AccountController() {}
 
         public ActionResult Index() {
             return View();
