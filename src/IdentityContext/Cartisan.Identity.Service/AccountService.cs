@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Cartisan.AutoMapper;
+using Cartisan.DependencyInjection;
+using Cartisan.EntityFramework;
 using Cartisan.Identity.Domain.Models;
 using Cartisan.Repository;
 using Dapper;
@@ -13,6 +15,7 @@ namespace Cartisan.Identity.Service {
     public class AccountService: IAccountService {
         private readonly IRepository<UserAccount> _userRepository;
         public AccountService(IRepository<UserAccount> userRepository) {
+            var context = ServiceLocator.GetService<ContextBase>();
             _userRepository = userRepository;
         }
 

@@ -12,12 +12,12 @@ namespace Cartisan.EntityFramework {
         protected ContextBase() { }
         protected ContextBase(DbCompiledModel model)
             : base(model) { }
-        protected ContextBase(string nameOrConnectionString)
-            : base(nameOrConnectionString) { }
+        protected ContextBase(string connectionString)
+            : base(connectionString) { }
         protected ContextBase(DbConnection existingConnection, bool contextOwnsConnection)
             : base(existingConnection, contextOwnsConnection) { }
-        protected ContextBase(string nameOrConnectionString, DbCompiledModel model)
-            : base(nameOrConnectionString, model) { }
+        protected ContextBase(string connectionString, DbCompiledModel model)
+            : base(connectionString, model) { }
         protected ContextBase(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection)
             : base(existingConnection, model, contextOwnsConnection) { }
         protected ContextBase(ObjectContext objectContext, bool dbContextOwnsObjectContext)

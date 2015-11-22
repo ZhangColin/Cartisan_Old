@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Cartisan.DependencyInjection;
 
@@ -19,10 +20,14 @@ namespace Cartisan.Web.WebApi {
         }
 
         public IEnumerable<TService> GetServices<TService>() {
-            return (IEnumerable<TService>)GlobalConfiguration.Configuration.DependencyResolver.GetServices(typeof(TService));
+            var enumerable = GlobalConfiguration.Configuration.DependencyResolver.GetServices(typeof(TService));
+            if(!enumerable.Any()) {
+                return Enumerable.Empty<TService>();
+            }
+            return (IEnumerable<TService>)enumerable;
         }
 
-//        public object Resolve(Type serviceType) {
+        //        public object Resolve(Type serviceType) {
 //            return GlobalConfiguration.Configuration.DependencyResolver.GetService(serviceType);
 //        }
 //

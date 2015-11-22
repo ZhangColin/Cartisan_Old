@@ -1,12 +1,21 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web.Compilation;
 using System.Web.Http;
 using Autofac;
+using Autofac.Builder;
+using Autofac.Core;
 using Autofac.Integration.WebApi;
 using Cartisan.CommandProcessor;
+using Cartisan.Configuration;
 using Cartisan.DependencyInjection;
+using Cartisan.EntityFramework;
+using Cartisan.Repository;
 using Cartisan.Web.WebApi;
 
 namespace Cartisan.Autofac {
@@ -42,8 +51,25 @@ namespace Cartisan.Autofac {
 //            builder.RegisterType<UserContext>().InstancePerHttpRequest();
             builder.RegisterAssemblyModules(assemblies);
 
+            var dbContextTypes = AppDomain.CurrentDomain.GetAssemblies().Where(assembly=>assembly.FullName.StartsWith("Cartisan")).SelectMany(assembly=>assembly.GetTypes()).Where(type=>
+                type.IsPublic && !type.IsAbstract && type.IsClass && typeof(DbContext).IsAssignableFrom(type));
 
-//            builder.RegisterControllers(assemblies);
+            foreach(var dbContextType in dbContextTypes) {
+                var entityTypes = dbContextType.Assembly.GetTypes().Where(type => type.BaseType != null && type.BaseType.IsGenericType
+                    && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>))
+                    .Select(configType=>configType.BaseType.GenericTypeArguments[0]);
+
+                foreach(var entityType in entityTypes) {
+                    var implementationType = typeof(EntityFrameworkRepository<>).MakeGenericType(entityType);
+                    var defineType = typeof(IRepository<>).MakeGenericType(entityType);
+                    builder.RegisterType(implementationType).As(defineType)
+                        .WithParameter(new ResolvedParameter((pi, ctx)=>true, (pi, ctx)=>ctx.Resolve(dbContextType)));
+
+                }
+            }
+
+
+            //            builder.RegisterControllers(assemblies);
             builder.RegisterApiControllers(assemblies);
 
             IContainer container = builder.Build();
@@ -63,4 +89,5 @@ namespace Cartisan.Autofac {
             return Regex.IsMatch(assemblyFullName, pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
         }
     }
+    
 }

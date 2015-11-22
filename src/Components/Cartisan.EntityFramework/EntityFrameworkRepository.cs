@@ -11,7 +11,7 @@ using Cartisan.Repository;
 using Cartisan.Specification;
 
 namespace Cartisan.EntityFramework {
-    public class EntityFrameworkRepository<TAggregateRoot>: IRepository<TAggregateRoot> where TAggregateRoot: class, IAggregateRoot, new() {
+    public class EntityFrameworkRepository<TAggregateRoot>: IRepository<TAggregateRoot> where TAggregateRoot: class, IAggregateRoot {
         private readonly ContextBase _context;
 
 

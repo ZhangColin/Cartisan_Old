@@ -13,9 +13,9 @@ namespace Cartisan.Identity.Service {
             builder.RegisterType<IdentityMapperProfile>().As<Profile>().SingleInstance();
 
             builder.RegisterType<IdentityContext>()
-                .As<ContextBase>()
+                //.As<ContextBase>()
                 .WithParameter("connectionString", "cartisanConnectionString");
-            builder.RegisterGeneric(typeof(EntityFrameworkRepository<>)).As(typeof(IRepository<>));
+//            builder.RegisterGeneric(typeof(EntityFrameworkRepository<>)).As(typeof(IRepository<>));
                 //.UsingConstructor(()=>ServiceLocator.GetService<IdentityContext>());
 
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerRequest();

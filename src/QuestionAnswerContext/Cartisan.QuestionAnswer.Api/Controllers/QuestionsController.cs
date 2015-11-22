@@ -12,8 +12,12 @@ namespace Cartisan.QuestionAnswer.Api.Controllers {
             this._questionAnswerService = questionAnswerService;
         }
 
-        public async Task<Paginated<QuestionDto>> GetQuestions(int pageIndex, int pageSize, string sorting) {
-            return await _questionAnswerService.GetQuestions(pageIndex, pageSize, sorting);
+//        public async Task<Paginated<QuestionDto>> GetQuestions(int pageIndex, int pageSize, string sorting) {
+//            return await _questionAnswerService.GetQuestions(pageIndex, pageSize, sorting);
+//        }
+
+        public async Task<Paginated<QuestionDto>> GetQuestions() {
+            return await _questionAnswerService.GetQuestions(1, 10, "");
         }
 
         public async Task<QuestionWithAnswersDto> GetQuestion(long questionId, bool incrementViewCount) {

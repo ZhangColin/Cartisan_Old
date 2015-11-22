@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
-using Cartisan.CommandProcessor;
 using Cartisan.Identity.Contract.Dtos;
 using Cartisan.Identity.Service;
 using Cartisan.Identity.Service.Commands;
+using Cartisan.Repository;
 
-namespace Cartisan.Identity.Api.Controllers
-{
+namespace Cartisan.Identity.Api.Controllers {
     public class AccountsController : ApiController
     {
         private readonly IAccountService _accountService;
@@ -25,8 +25,9 @@ namespace Cartisan.Identity.Api.Controllers
 //        }
 
         // GET: api/Account
-        public IEnumerable<AccountDto> GetAccounts() {
-            return _accountService.GetAll();
+        public async Task<Paginated<AccountDto>> GetAccounts() {
+
+            return await Task.FromResult<Paginated<AccountDto>>(new Paginated<AccountDto>(_accountService.GetAll(), 1,10, 100));
         }
 
         // GET: api/Account/5

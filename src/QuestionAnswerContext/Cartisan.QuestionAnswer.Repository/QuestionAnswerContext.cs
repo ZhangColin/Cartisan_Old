@@ -7,7 +7,7 @@ using Cartisan.EntityFramework;
 
 namespace Cartisan.QuestionAnswer.Repository {
     public class QuestionAnswerContext: ContextBase {
-        public QuestionAnswerContext(string nameOrConnectionString) : base(nameOrConnectionString) { }
+        public QuestionAnswerContext(string connectionString) : base(connectionString) { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             var typesToRegister = typeof(QuestionAnswerContext).Assembly.GetTypes()

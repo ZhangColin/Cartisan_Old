@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Cartisan.AutoMapper;
+using Cartisan.DependencyInjection;
+using Cartisan.EntityFramework;
 using Cartisan.QuestionAnswer.Contract.Dtos;
 using Cartisan.QuestionAnswer.Domain.Models;
 using Cartisan.QuestionAnswer.Domain.Services;
@@ -20,7 +23,8 @@ namespace Cartisan.QuestionAnswer.Service {
         }
 
         public Task<Paginated<QuestionDto>> GetQuestions(int pageIndex, int pageSize, string sorting) {
-            var questions = _questionRepository.Paginate(pageIndex, pageSize, q=>q.Id);
+//            var questions = _questionRepository.Paginate(pageIndex, pageSize, q=>q.Id);
+            var questions = new Paginated<Question>(_questionRepository.All().ToList(),1,10,100); 
             return Task.FromResult(new Paginated<QuestionDto>(questions.Datas.Select(data => data.MapTo<QuestionDto>()),
                 questions.PageIndex, questions.PageSize, questions.Total));
         }
