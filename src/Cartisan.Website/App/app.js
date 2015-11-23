@@ -158,8 +158,21 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
         // User Profile Account
         .state("questionDetail", {
             url: "/questions/:id",
-            templateUrl: "/CartisanApp/Load?viewUrl=views/questions/detail.cshtml",
+            templateUrl: "/CartisanApp/Load?viewUrl=/App/views/questions/detail.cshtml",
             data: { pageTitle: '问答', pageSubTitle: '交流与分享' },
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'cartisanApp',
+                        insertBefore: '#ng_load_plugins_before',
+                        files: [
+                            '../App/views/questions/questions.css',
+                            '../App/views/questions/detail.js'
+                        ]
+                    });
+                }
+                ]
+            },
             menu: '提问'
         });
 
