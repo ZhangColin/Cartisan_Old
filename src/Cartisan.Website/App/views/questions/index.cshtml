@@ -10,61 +10,52 @@
 </ul>
 <!-- END PAGE BREADCRUMB -->
 <!-- BEGIN MAIN CONTENT -->
-@*<div ng-controller="DashboardController" class="margin-top-10">*@
-<div class="margin-top-10">
+<div ng-controller="questions.index as vm" class="margin-top-10">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <!-- BEGIN PORTLET-->
             <div class="portlet light ">
-                <div class="row list-separated question-stat">
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase question-stat-title">
-                            37
-                        </div>
-                        <div class="uppercase question-stat-text">
-                            Projects
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase question-stat-title">
-                            51
-                        </div>
-                        <div class="uppercase question-stat-text">
-                            Tasks
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase question-stat-title">
-                            61
-                        </div>
-                        <div class="uppercase question-stat-text">
-                            Uploads
-                        </div>
+                <div class="portlet-title">
+                    <div class="actions">
+                        <button class="btn btn-square btn-sm green"> 提问 </button>
                     </div>
                 </div>
-                <div class="row list-separated question-stat">
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase question-stat-title">
-                            37
+                <div class="portlet-body">
+                    <div class="row list-separated question-stat"  ng-repeat="question in vm.questions">
+                        <div class="col-md-1 col-sm-2 col-xs-6">
+                            <div class="question-stat-title">
+                                {{question.VoteCount}}
+                            </div>
+                            <div class="question-stat-text">
+                                投票
+                            </div>
                         </div>
-                        <div class="uppercase question-stat-text">
-                            Projects
+                        <div class="col-md-1 col-sm-2 col-xs-6">
+                            <div class="question-stat-title">
+                                {{question.AnswerCount}}
+                            </div>
+                            <div class="question-stat-text">
+                                回复
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase question-stat-title">
-                            51
+                        <div class="col-md-1 col-sm-2 col-xs-6">
+                            <div class="question-stat-title">
+                                {{question.ViewCount}}
+                            </div>
+                            <div class="question-stat-text">
+                                浏览
+                            </div>
                         </div>
-                        <div class="uppercase question-stat-text">
-                            Tasks
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase question-stat-title">
-                            61
-                        </div>
-                        <div class="uppercase question-stat-text">
-                            Uploads
+                        <div class="col-md-9 col-sm-6 col-xs-6">
+                            <div class="item">
+                                <div class="item-head">
+                                    <div class="item-details">
+                                        <a ng-href="#/questions/{{question.Id}}" class="item-name primary-link">{{question.Title}}</a>
+                                        <span class="item-label"></span>
+                                    </div>
+                                </div>
+                                <div class="item-body"> 分钟前 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -74,9 +65,3 @@
     </div>
 </div>
 <!-- END MAIN CONTENT -->
-<!-- BEGIN MAIN JS & CSS -->
-<script>
-    //Index.init();
-    //Tasks.initDashboardWidget();
-</script>
-<!-- BEGIN MAIN JS & CSS -->

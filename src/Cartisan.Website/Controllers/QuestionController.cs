@@ -29,7 +29,7 @@ namespace Cartisan.Website.Controllers {
                     Questioner = 2
                 }
             };
-            return Json(questionDtos, JsonRequestBehavior.AllowGet);
+            return Json(new {items = questionDtos , totalCount=2} , JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> GetQuestion(long questionId, bool incrementViewCount) {

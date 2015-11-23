@@ -2,7 +2,7 @@
     var controllerId = 'questions.index';
     var cartisanApp = angular.module('cartisanApp');
     cartisanApp.controller(controllerId, [
-        'questions.questionService', '$modal', function (questionService, $modal) {
+        '$rootScope', '$scope', 'questions.questionService', '$uibModal', function ($rootScope, $scope, questionService, $modal) {
             $scope.$on('$viewContentLoaded', function () {
                 // initialize core components
                 App.initAjax();
@@ -44,9 +44,11 @@
                     } else {
                         vm.questions = data.items;
                     }
+
+                    vm.totalQuestionCount = data.totalCount;
                 });
 
-                vm.totalQuestionCount = data.totalCount;
+                
             };
 
             vm.showNewQuestionDialog = function() {

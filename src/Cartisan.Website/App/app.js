@@ -145,7 +145,8 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                             name: 'cartisanApp',
                             insertBefore: '#ng_load_plugins_before',
                             files: [
-                                '../App/views/questions/questions.css'
+                                '../App/views/questions/questions.css',
+                                '../App/views/questions/index.js'
                             ]
                         });
                     }

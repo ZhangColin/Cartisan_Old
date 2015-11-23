@@ -1,4 +1,4 @@
-﻿(function(cartisan, angular) {
+﻿(function(angular) {
     if (!angular) {
         return;
     }
@@ -65,4 +65,4 @@
             }
         }
     ]);
-})((cartisan || (cartisan= {})), angular);
+})(angular);
