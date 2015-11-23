@@ -76,9 +76,12 @@ cartisanApp.factory('settings', ['$rootScope', function ($rootScope) {
             pageBodySolid: false, // solid body color state
             pageAutoScrollOnLoad: 1000 // auto scroll to top on page load
         },
-        assetsPath: '../assets',
-        globalPath: '../assets/global',
-        layoutPath: '../assets/layouts/layout4',
+//        assetsPath: '../assets',
+        assetsPath: '../../assets',
+//        globalPath: '../assets/global',
+        globalPath: '../../assets/global',
+//        layoutPath: '../assets/layouts/layout4',
+        layoutPath: '../../assets/admin/layouts/layout4',
     };
 
     $rootScope.settings = settings;
