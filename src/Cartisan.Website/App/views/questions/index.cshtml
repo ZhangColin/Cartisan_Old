@@ -24,7 +24,7 @@
                     <div class="row list-separated question-stat"  ng-repeat="question in vm.questions">
                         <div class="col-md-1 col-sm-2 col-xs-6">
                             <div class="question-stat-title">
-                                {{question.VoteCount}}
+                                {{question.voteCount}}
                             </div>
                             <div class="question-stat-text">
                                 投票
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-1 col-sm-2 col-xs-6">
                             <div class="question-stat-title">
-                                {{question.AnswerCount}}
+                                {{question.answerCount}}
                             </div>
                             <div class="question-stat-text">
                                 回复
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-md-1 col-sm-2 col-xs-6">
                             <div class="question-stat-title">
-                                {{question.ViewCount}}
+                                {{question.viewCount}}
                             </div>
                             <div class="question-stat-text">
                                 浏览
@@ -50,7 +50,7 @@
                             <div class="item">
                                 <div class="item-head">
                                     <div class="item-details">
-                                        <a ng-href="#/questions/{{question.Id}}" class="item-name primary-link">{{question.Title}}</a>
+                                        <a ng-href="#/questions/{{question.id}}" class="item-name primary-link">{{question.title}}</a>
                                         <span class="item-label"></span>
                                     </div>
                                 </div>

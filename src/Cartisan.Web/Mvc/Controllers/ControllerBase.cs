@@ -6,7 +6,7 @@ using Cartisan.Web.Mvc.Filters;
 using Cartisan.Web.Mvc.Results;
 
 namespace Cartisan.Web.Mvc.Controllers {
-    [Compress]
+//    [Compress]
     [HandleError]
     public abstract class ControllerBase: System.Web.Mvc.Controller {
         protected virtual PermanentRedirectResult PermanentRedirect(string url) {

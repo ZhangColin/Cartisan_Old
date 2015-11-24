@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Cartisan.QuestionAnswer.Contract.Dtos;
 using Flurl.Http;
+using ControllerBase = Cartisan.Web.Mvc.Controllers.ControllerBase;
 
 namespace Cartisan.Website.Controllers {
-    public class QuestionController: Controller {
+    public class QuestionController: ControllerBase {
         public async Task<JsonResult> GetQuestions() {
             //            return await _questionAnswerService.GetQuestions(1, 10, "");
             //            List<QuestionDto> questionDtos = await "http://localhost:50217/api/question".GetAsync().ReceiveJson<List<QuestionDto>>();

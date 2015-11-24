@@ -36,7 +36,8 @@
                 questionService.getQuestions({
                     skipCount: skipCount,
                     sorting: vm.sorting
-                }).success(function(data) {
+                }).success(function (data) {
+                    console.log(data);
                     if (append) {
                         for (var i = 0; i < data.items.length; i++) {
                             vm.questions.push(data.items[i]);

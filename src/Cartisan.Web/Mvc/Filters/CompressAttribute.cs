@@ -11,11 +11,11 @@ namespace Cartisan.Web.Mvc.Filters {
             HttpResponseBase response = filterContext.HttpContext.Response;
 
             if (preferredEncoding == CompressionScheme.Gzip) {
-                //response.AppendHeader("Content-encoding", "gzip");
+//                response.AppendHeader("Content-encoding", "gzip");
                 response.Filter = new GZipStream(response.Filter, CompressionMode.Compress);
             }
             else if (preferredEncoding == CompressionScheme.Deflate) {
-                //response.AppendHeader("Content-encoding", "deflate");
+//                response.AppendHeader("Content-encoding", "deflate");
                 response.Filter = new DeflateStream(response.Filter, CompressionMode.Compress);
             }
         }

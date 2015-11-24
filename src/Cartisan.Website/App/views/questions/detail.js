@@ -2,7 +2,7 @@
     var controllerId = 'questions.detail';
     var cartisanApp = angular.module('cartisanApp');
     cartisanApp.controller(controllerId, [
-        '$state', 'questions.questionService', function ($state, questionService) {
+        '$rootScope', '$scope', '$state', 'questions.questionService', function ($rootScope, $scope, $state, questionService) {
             $scope.$on('$viewContentLoaded', function () {
                 // initialize core components
                 App.initAjax();
@@ -66,7 +66,7 @@
                     incrementViewCount: true
                 }).success(function(data) {
                     vm.question = data.question;
-                    vm.ownQuestion = vm.question.creatorUserId == ''; // Todo: current user id
+                    vm.ownQuestion = vm.question.creatorUserId == '1'; // Todo: current user id
 
                     var acceptedAnswerIndex = -1;
                     for (var i = 0; i < vm.question.answers.length; i++) {
@@ -84,7 +84,7 @@
                 });
             };
 
-            loadQuestions();
+            loadQuestion();
         }
     ]);
 })();

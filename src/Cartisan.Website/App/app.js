@@ -154,8 +154,6 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
             },
             menu: '提问'
         })
-
-        // User Profile Account
         .state("questionDetail", {
             url: "/questions/:id",
             templateUrl: "/CartisanApp/Load?viewUrl=/App/views/questions/detail.cshtml",
