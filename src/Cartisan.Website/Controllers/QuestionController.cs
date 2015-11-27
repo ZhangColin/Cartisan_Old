@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using Cartisan.QuestionAnswer.Contract.Dtos;
-using Flurl.Http;
 using ControllerBase = Cartisan.Web.Mvc.Controllers.ControllerBase;
 
 namespace Cartisan.Website.Controllers {
     public class QuestionController: ControllerBase {
+        
+
         public async Task<JsonResult> GetQuestions() {
             //            return await _questionAnswerService.GetQuestions(1, 10, "");
             //            List<QuestionDto> questionDtos = await "http://localhost:50217/api/question".GetAsync().ReceiveJson<List<QuestionDto>>();
@@ -39,26 +40,33 @@ namespace Cartisan.Website.Controllers {
             return Json(new {});
         }
 
+
+        [HttpPost]
         public async Task<JsonResult> CreateQuestion(string title, string content, long questioner) {
             //            await _questionAnswerService.CreateQuestion(title, content, questioner);
-            return Json(new { });
+            return Json(new {
+            });
         }
 
+        [HttpPost]
         public async Task<JsonResult> VoteUp(long questionId) {
             //            return await _questionAnswerService.VoteUp(questionId);
             return Json(new { });
         }
 
+        [HttpPost]
         public async Task<JsonResult> VoteDown(long questionId) {
             //            return await VoteDown(questionId);
             return Json(new { });
         }
 
+        [HttpPost]
         public async Task<JsonResult> SubmitAnswer(long questionId, string content, long answerer) {
             //            return await SubmitAnswer(questionId, content, answerer);
             return Json(new { });
         }
 
+        [HttpPost]
         public async Task<JsonResult> AcceptAnswer(long answerId) {
             //            await _questionAnswerService.AcceptAnswer(answerId);
             return Json(new { });

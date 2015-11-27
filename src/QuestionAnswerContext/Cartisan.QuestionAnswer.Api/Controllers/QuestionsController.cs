@@ -2,46 +2,67 @@
 using System.Web.Http;
 using Cartisan.QuestionAnswer.Contract.Dtos;
 using Cartisan.QuestionAnswer.Service;
-using Cartisan.Repository;
 
 namespace Cartisan.QuestionAnswer.Api.Controllers {
-    public class QuestionsController: ApiController {
+
+
+    public class QuestionsController : ApiController {
         private readonly IQuestionAnswerApplicationService _questionAnswerService;
 
         public QuestionsController(IQuestionAnswerApplicationService questionAnswerService) {
             this._questionAnswerService = questionAnswerService;
         }
 
-//        public async Task<Paginated<QuestionDto>> GetQuestions(int pageIndex, int pageSize, string sorting) {
-//            return await _questionAnswerService.GetQuestions(pageIndex, pageSize, sorting);
-//        }
-
-        public async Task<Paginated<QuestionDto>> GetQuestions() {
-            return await _questionAnswerService.GetQuestions(1, 10, "");
+        public async Task<IHttpActionResult> GetQuestions(int pageIndex, int pageSize, string sorting) {
+            var paginated = await _questionAnswerService.GetQuestions(pageIndex, pageSize, sorting);
+            return Ok(paginated);
         }
 
-        public async Task<QuestionWithAnswersDto> GetQuestion(long questionId, bool incrementViewCount) {
-            return await _questionAnswerService.GetQuestion(questionId, incrementViewCount);
+        public async Task<IHttpActionResult> GetQuestion(long questionId, bool incrementViewCount) {
+            var questionWithAnswersDto = await _questionAnswerService.GetQuestion(questionId, incrementViewCount);
+            return Ok(questionWithAnswersDto);
         }
 
-        public async Task CreateQuestion(string title, string content, long questioner) {
-            await _questionAnswerService.CreateQuestion(title, content, questioner);
+        [HttpPost]
+        public async Task<IHttpActionResult> PostQuestion(QuestionDto question) {
+            await _questionAnswerService.CreateQuestion(question.Title, question.Content, question.Questioner);
+
+            return Ok();
         }
 
-        public async Task<int> VoteUp(long questionId) {
-            return await _questionAnswerService.VoteUp(questionId);
+        [HttpPut]
+        [Route("Api/Questions/{questionId}/VoteUp")]
+        public async Task<IHttpActionResult> VoteUp(long questionId) {
+            var count = await _questionAnswerService.VoteUp(questionId);
+            return Ok(count);
         }
 
-        public async Task<int> VoteDown(long questionId) {
-            return await VoteDown(questionId);
+        [HttpPut]
+        [Route("Api/Questions/{questionId}/VoteDown")]
+        public async Task<IHttpActionResult> VoteDown(long questionId) {
+            var count = await _questionAnswerService.VoteDown(questionId);
+            return Ok(count);
         }
 
-        public async Task<AnswerDto> SubmitAnswer(long questionId, string content, long answerer) {
-            return await SubmitAnswer(questionId, content, answerer);
+        [HttpPost]
+        [Route("Api/Questions/{questionId}/Answers")]
+        public async Task<IHttpActionResult> SubmitAnswer(long questionId, string content, long answerer) {
+            var submitAnswer = await _questionAnswerService.SubmitAnswer(questionId, content, answerer);
+            return Ok(submitAnswer);
         }
 
-        public async Task AcceptAnswer(long answerId) {
+        [HttpGet]
+        [Route("Api/Questions/{questionId}/Answers")]
+        public async Task<IHttpActionResult> Answers(long questionId) {
+            var count = await _questionAnswerService.VoteUp(questionId);
+            return Ok(count);
+        }
+
+        [HttpPost]
+        [Route("Api/Answers/{answerId}/AcceptAnswer")]
+        public async Task<IHttpActionResult> AcceptAnswer(long answerId) {
             await _questionAnswerService.AcceptAnswer(answerId);
+            return Ok();
         }
     }
 }
