@@ -13,7 +13,7 @@ namespace Cartisan.QuestionAnswer.Api.Controllers {
             this._questionAnswerService = questionAnswerService;
         }
 
-        public async Task<IHttpActionResult> GetQuestions(int pageIndex, int pageSize, string sorting) {
+        public async Task<IHttpActionResult> GetQuestions(int pageIndex=1, int pageSize=10, string sorting="desc") {
             var paginated = await _questionAnswerService.GetQuestions(pageIndex, pageSize, sorting);
             return Ok(paginated);
         }
@@ -46,19 +46,19 @@ namespace Cartisan.QuestionAnswer.Api.Controllers {
 
         [HttpPost]
         [Route("Api/Questions/{questionId}/Answers")]
-        public async Task<IHttpActionResult> SubmitAnswer(long questionId, string content, long answerer) {
-            var submitAnswer = await _questionAnswerService.SubmitAnswer(questionId, content, answerer);
+        public async Task<IHttpActionResult> SubmitAnswer(AnswerDto answer) {
+            var submitAnswer = await _questionAnswerService.SubmitAnswer(answer.QuestionId, answer.Content, answer.Answerer);
             return Ok(submitAnswer);
         }
 
-        [HttpGet]
-        [Route("Api/Questions/{questionId}/Answers")]
-        public async Task<IHttpActionResult> Answers(long questionId) {
-            var count = await _questionAnswerService.VoteUp(questionId);
-            return Ok(count);
-        }
+//        [HttpGet]
+//        [Route("Api/Questions/{questionId}/Answers")]
+//        public async Task<IHttpActionResult> Answers(long questionId) {
+//            var count = await _questionAnswerService.VoteUp(questionId);
+//            return Ok(count);
+//        }
 
-        [HttpPost]
+        [HttpPut]
         [Route("Api/Answers/{answerId}/AcceptAnswer")]
         public async Task<IHttpActionResult> AcceptAnswer(long answerId) {
             await _questionAnswerService.AcceptAnswer(answerId);

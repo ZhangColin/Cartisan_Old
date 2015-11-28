@@ -37,13 +37,12 @@
                     skipCount: skipCount,
                     sorting: vm.sorting
                 }).success(function (data) {
-                    console.log(data);
                     if (append) {
-                        for (var i = 0; i < data.items.length; i++) {
-                            vm.questions.push(data.items[i]);
+                        for (var i = 0; i < data.datas.length; i++) {
+                            vm.questions.push(data.datas[i]);
                         }
                     } else {
-                        vm.questions = data.items;
+                        vm.questions = data.datas;
                     }
 
                     vm.totalQuestionCount = data.totalCount;
