@@ -1,0 +1,189 @@
+{
+	"id": "3a72877d-75ca-fe12-3823-f6f0ca91f43d",
+	"name": "Cartisan.QuestionAnswer",
+	"description": "",
+	"order": [
+		"cef639ff-de82-37d0-1897-ea3d5af96d6f",
+		"d7f0ac51-6c36-729c-04cd-3d9eaf361e27",
+		"972a7c1b-df30-28c4-599f-0789cb8619a6",
+		"a152c44a-c02d-1756-bfd3-2515e1ccd7db",
+		"78b99399-62f4-6573-24a3-6bf3de7e2bd6",
+		"168d6bab-0bae-b663-73c0-6eadfc2e0e36",
+		"d1d29911-a507-fd1e-244a-196f51aeb3c3"
+	],
+	"folders": [],
+	"timestamp": 1448592982149,
+	"owner": "89402",
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "168d6bab-0bae-b663-73c0-6eadfc2e0e36",
+			"headers": "",
+			"url": "http://localhost:50217/api/questions/1/answers/",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"collectionId": "3a72877d-75ca-fe12-3823-f6f0ca91f43d",
+			"data": [
+				{
+					"key": "content",
+					"value": "answercontent",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "questionId",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "answerer",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "回答",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1448716785496,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "78b99399-62f4-6573-24a3-6bf3de7e2bd6",
+			"headers": "",
+			"url": "http://localhost:50217/api/questions/1/votedown/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1448716811342,
+			"name": "取消投票",
+			"description": "",
+			"collectionId": "3a72877d-75ca-fe12-3823-f6f0ca91f43d"
+		},
+		{
+			"folder": null,
+			"id": "972a7c1b-df30-28c4-599f-0789cb8619a6",
+			"name": "创建问题",
+			"dataMode": "urlencoded",
+			"data": [
+				{
+					"key": "content",
+					"value": "content",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "title",
+					"value": "title",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "questioner",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "http://localhost:50217/api/questions",
+			"preRequestScript": "",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "3a72877d-75ca-fe12-3823-f6f0ca91f43d"
+		},
+		{
+			"id": "a152c44a-c02d-1756-bfd3-2515e1ccd7db",
+			"headers": "",
+			"url": "http://localhost:50217/api/questions/1/voteup/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1448716828039,
+			"name": "投票",
+			"description": "",
+			"collectionId": "3a72877d-75ca-fe12-3823-f6f0ca91f43d"
+		},
+		{
+			"id": "cef639ff-de82-37d0-1897-ea3d5af96d6f",
+			"headers": "",
+			"url": "http://localhost:50217/api/questions",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1448716946333,
+			"name": "获取问题列表",
+			"description": "",
+			"collectionId": "3a72877d-75ca-fe12-3823-f6f0ca91f43d"
+		},
+		{
+			"id": "d1d29911-a507-fd1e-244a-196f51aeb3c3",
+			"headers": "",
+			"url": "http://localhost:50217/api/answers/1/acceptanswer",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1448717452728,
+			"name": "采纳答案",
+			"description": "",
+			"collectionId": "3a72877d-75ca-fe12-3823-f6f0ca91f43d",
+			"responses": []
+		},
+		{
+			"id": "d7f0ac51-6c36-729c-04cd-3d9eaf361e27",
+			"headers": "",
+			"url": "http://localhost:50217/api/questions/1?incrementViewCount=false",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1448786708802,
+			"name": "获取问题",
+			"description": "",
+			"collectionId": "3a72877d-75ca-fe12-3823-f6f0ca91f43d"
+		}
+	]
+}
