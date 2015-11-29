@@ -17,6 +17,17 @@
             <div class="portlet light ">
                 <div class="portlet-title">
                     <div class="actions">
+                        <div class="btn-group btn-group-solid">
+                            <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-ellipsis-horizontal"></i> 根据 {{sorting}} 排序
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="sortingDirection in sortingDirections" ng-show="sortingDirection != sorting">
+                                    <a href="javascript:;"  ng-click="sort(sortingDirection)"> 根据 {{sortingDirection}} 排序 <div class="ripple-wrapper"></div></a>
+                                </li>
+                            </ul>
+                        </div>
                         <button ng-if="permissions.canCreateQuestions" ng-click="showNewQuestionDialog()" class="btn btn-square btn-sm green"> 提问 </button>
                     </div>
                 </div>

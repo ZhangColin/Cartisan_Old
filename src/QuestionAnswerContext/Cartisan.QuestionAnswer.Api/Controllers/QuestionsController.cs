@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Cartisan.QuestionAnswer.Contract.Dtos;
 using Cartisan.QuestionAnswer.Service;
@@ -63,8 +64,14 @@ namespace Cartisan.QuestionAnswer.Api.Controllers {
         [HttpPut]
         [Route("Api/Answers/{answerId}/AcceptAnswer")]
         public async Task<IHttpActionResult> AcceptAnswer(long answerId) {
-            await _questionAnswerService.AcceptAnswer(answerId);
-            return Ok();
+            try {
+                await _questionAnswerService.AcceptAnswer(answerId);
+                return Ok();
+            }
+            catch(Exception ex) {
+                return BadRequest(ex.Message);
+            }
+            
         }
     }
 }

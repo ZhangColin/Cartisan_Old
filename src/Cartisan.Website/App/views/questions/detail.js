@@ -15,7 +15,7 @@
 
             $scope.question = null;
             $scope.answerContent = '';
-            $scope.ownQuestion = false;
+            $scope.ownQuestion = true;
 
             $scope.voteUp = function() {
                 questionService.voteUp({

@@ -36,14 +36,14 @@ namespace Cartisan.Website.Controllers {
 
         [HttpPost]
         public async Task<JsonResult> VoteUp(long questionId) {
-            await $"http://localhost:50217/api/questions/{questionId}/voteup".PutAsync();
-            return Json(new { });
+            var voteCount = await $"http://localhost:50217/api/questions/{questionId}/voteup".PutAsync().ReceiveJson<int>();
+            return Json(new { voteCount });
         }
 
         [HttpPost]
         public async Task<JsonResult> VoteDown(long questionId) {
-            await $"http://localhost:50217/api/questions/{questionId}/votedown".PutAsync();
-            return Json(new { });
+            var voteCount = await $"http://localhost:50217/api/questions/{questionId}/votedown".PutAsync().ReceiveJson<int>();
+            return Json(new { voteCount });
         }
 
         [HttpPost]
