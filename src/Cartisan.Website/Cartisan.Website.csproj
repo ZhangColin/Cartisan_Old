@@ -5083,6 +5083,7 @@
     <Content Include="assets\global\plugins\mapplic\uk.html" />
     <Content Include="assets\global\plugins\mapplic\usa.html" />
     <Content Include="assets\global\plugins\mapplic\world.html" />
+    <Content Include="assets\global\plugins\moment-with-locales.min.js" />
     <Content Include="assets\global\plugins\moment.min.js" />
     <Content Include="assets\global\plugins\morris\examples\area-as-line.html" />
     <Content Include="assets\global\plugins\morris\examples\area.html" />

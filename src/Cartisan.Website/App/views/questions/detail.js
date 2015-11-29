@@ -13,73 +13,70 @@
             $rootScope.settings.layout.pageBodySolid = false;
             $rootScope.settings.layout.pageSidebarClosed = false;
 
-            var vm = this;
+            $scope.question = null;
+            $scope.answerContent = '';
+            $scope.ownQuestion = false;
 
-            vm.questions = null;
-            vm.answerText = '';
-            vm.ownQuestion = false;
-
-            vm.voteUp = function() {
+            $scope.voteUp = function() {
                 questionService.voteUp({
-                    id: vm.question.id
+                    questionId: $scope.question.id
                 }).success(function(data) {
-                    vm.question.voteCount = data.voteCount;
+                    $scope.question.voteCount = data.voteCount;
 
                     // Todo: notify
                 });
             };
 
-            vm.voteDown = function() {
+            $scope.voteDown = function() {
                 questionService.voteDown({
-                    id: vm.question.id
+                    questionId: $scope.question.id
                 }).success(function(data) {
-                    vm.question.voteCount = data.voteCount;
+                    $scope.question.voteCount = data.voteCount;
 
                     // Todo: notify
                 });
             };
 
-            vm.submitAnswer = function() {
+            $scope.submitAnswer = function() {
                 questionService.submitAnswer({
-                    questionId: vm.question.id,
-                    content: vm.answerText
+                    questionId: $scope.question.id,
+                    content: $scope.answerContent
                 }).success(function(data) {
-                    vm.question.answers.push(data.answer);
-                    vm.answerText = '';
+                    $scope.question.answers.push(data);
+                    $scope.answerContent = '';
                 });
             };
 
-            vm.acceptAnswer = function(answer) {
-                questionService, acceptAnswer({
-                    id: answer.id
+            $scope.acceptAnswer = function(answer) {
+                questionService.acceptAnswer({
+                    answerId: answer.id
                 }).success(function() {
                     // Todo: notify
 
-                    loadQuestions();
+                    loadQuestion();
                 });
             };
 
             var loadQuestion = function() {
                 // Todo: set busy
                 questionService.getQuestion({
-                    id: $state.params.id,
-                    incrementViewCount: true
+                    questionId: $state.params.id
                 }).success(function(data) {
-                    vm.question = data.question;
-                    vm.ownQuestion = vm.question.creatorUserId == '1'; // Todo: current user id
+                    $scope.question = data;
+                    //$scope.ownQuestion = $scope.question.creatorUserId == '1'; // Todo: current user id
 
                     var acceptedAnswerIndex = -1;
-                    for (var i = 0; i < vm.question.answers.length; i++) {
-                        if (vm.question.answers[i].isAccepted) {
+                    for (var i = 0; i < $scope.question.answers.length; i++) {
+                        if ($scope.question.answers[i].isAccepted) {
                             acceptedAnswerIndex = i;
                             break;
                         }
                     }
 
                     if (acceptedAnswerIndex > 0) {
-                        var acceptedAnswer = vm.question.answers[acceptedAnswerIndex];
-                        vm.question.answers.splice(acceptedAnswerIndex, 1);
-                        vm.question.answers.unshift(acceptedAnswer);
+                        var acceptedAnswer = $scope.question.answers[acceptedAnswerIndex];
+                        $scope.question.answers.splice(acceptedAnswerIndex, 1);
+                        $scope.question.answers.unshift(acceptedAnswer);
                     }
                 });
             };

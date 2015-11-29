@@ -13,66 +13,66 @@
             $rootScope.settings.layout.pageBodySolid = false;
             $rootScope.settings.layout.pageSidebarClosed = false;
 
-            var vm = this;
-            vm.dosPermissions = {
-                canCreateQuestions: ''
+            $scope.permissions = {
+                canCreateQuestions: true
             };
 
-            vm.sortingDirections = [
+            $scope.sortingDirections = [
                 '创建时间 倒序',
                 '投票数 倒序',
                 '浏览数 倒序',
                 '回答数 倒序'
             ];
 
-            vm.questions = [];
-            vm.totalQuestionCount = 0;
-            vm.sorting = '创建时间 倒序';
+            $scope.questions = [];
+            $scope.totalQuestionCount = 0;
+            $scope.sorting = '创建时间 倒序';
 
-            vm.loadQuestions = function(append) {
-                var skipCount = append ? vm.questions.length : 0;
+            $scope.loadQuestions = function(append) {
+                var skipCount = append ? $scope.questions.length : 0;
 
                 // Todo: set busy
                 questionService.getQuestions({
                     skipCount: skipCount,
-                    sorting: vm.sorting
+                    sorting: $scope.sorting
                 }).success(function (data) {
                     if (append) {
                         for (var i = 0; i < data.datas.length; i++) {
-                            vm.questions.push(data.datas[i]);
+                            $scope.questions.push(data.datas[i]);
                         }
                     } else {
-                        vm.questions = data.datas;
+                        $scope.questions = data.datas;
                     }
 
-                    vm.totalQuestionCount = data.totalCount;
+                    $scope.totalQuestionCount = data.total;
                 });
 
                 
             };
 
-            vm.showNewQuestionDialog = function() {
+            $scope.showNewQuestionDialog = function () {
                 var modalInstance = $modal.open({
                     templateUrl: '/CartisanApp/Load?viewUrl=/App/views/questions/createDialog.cshtml',
                     controller: 'questions.createDialog',
+                    backdrop: 'static',
                     size: 'md'
                 });
 
                 modalInstance.result.then(function() {
-                    vm.loadQuestions();
+                    $scope.loadQuestions();
                 });
             };
 
-            vm.sort = function(sortingDirection) {
-                vm.sorting = sortingDirection;
-                vm.loadQuestions();
+            $scope.sort = function(sortingDirection) {
+                $scope.sorting = sortingDirection;
+                $scope.loadQuestions();
             }
 
-            vm.showMore = function() {
-                vm.loadQuestions(true);
+            $scope.showMore = function() {
+                $scope.loadQuestions(true);
             };
 
-            vm.loadQuestions();
+            $scope.loadQuestions();
         }
     ]);
 })();

@@ -1,4 +1,6 @@
-﻿var cartisanApp = angular.module("cartisanApp", [
+﻿moment.locale("zh-cn");
+
+var cartisanApp = angular.module("cartisanApp", [
     "ui.router",
     "ui.bootstrap",
     "oc.lazyLoad",
@@ -146,7 +148,8 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                             insertBefore: '#ng_load_plugins_before',
                             files: [
                                 '../App/views/questions/questions.css',
-                                '../App/views/questions/index.js'
+                                '../App/views/questions/index.js',
+                                '../App/views/questions/createDialog.js'
                             ]
                         });
                     }

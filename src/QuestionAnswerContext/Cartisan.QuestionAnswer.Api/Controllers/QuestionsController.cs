@@ -18,6 +18,8 @@ namespace Cartisan.QuestionAnswer.Api.Controllers {
             return Ok(paginated);
         }
 
+        [HttpGet]
+        [Route("Api/Questions/{questionId}")]
         public async Task<IHttpActionResult> GetQuestion(long questionId, bool incrementViewCount) {
             var questionWithAnswersDto = await _questionAnswerService.GetQuestion(questionId, incrementViewCount);
             return Ok(questionWithAnswersDto);
@@ -46,8 +48,8 @@ namespace Cartisan.QuestionAnswer.Api.Controllers {
 
         [HttpPost]
         [Route("Api/Questions/{questionId}/Answers")]
-        public async Task<IHttpActionResult> SubmitAnswer(AnswerDto answer) {
-            var submitAnswer = await _questionAnswerService.SubmitAnswer(answer.QuestionId, answer.Content, answer.Answerer);
+        public async Task<IHttpActionResult> SubmitAnswer(long questionId, AnswerDto answer) {
+            var submitAnswer = await _questionAnswerService.SubmitAnswer(questionId, answer.Content, answer.Answerer);
             return Ok(submitAnswer);
         }
 

@@ -10,18 +10,18 @@
 </ul>
 <!-- END PAGE BREADCRUMB -->
 <!-- BEGIN MAIN CONTENT -->
-<div ng-controller="questions.index as vm" class="margin-top-10">
+<div ng-controller="questions.index" class="margin-top-10">
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <!-- BEGIN PORTLET-->
             <div class="portlet light ">
                 <div class="portlet-title">
                     <div class="actions">
-                        <button class="btn btn-square btn-sm green"> 提问 </button>
+                        <button ng-if="permissions.canCreateQuestions" ng-click="showNewQuestionDialog()" class="btn btn-square btn-sm green"> 提问 </button>
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div class="row list-separated question-stat"  ng-repeat="question in vm.questions">
+                    <div class="row list-separated question-stat" ng-repeat="question in questions">
                         <div class="col-md-1 col-sm-2 col-xs-6">
                             <div class="question-stat-title">
                                 {{question.voteCount}}
@@ -50,14 +50,18 @@
                             <div class="item">
                                 <div class="item-head">
                                     <div class="item-details">
-                                        <a ng-href="#/questions/{{question.id}}" class="item-name primary-link">{{question.title}}</a>
+                                        <a ng-href="#/questions/{{question.id}}" class="item-name primary-link">#{{question.id}} {{question.title}}</a>
                                         <span class="item-label"></span>
                                     </div>
                                 </div>
-                                <div class="item-body"> 分钟前 </div>
+                                <div class="item-body">{{question.questioner}}, {{question.created | fromNow}} </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="text-right"> {{questions.length}} / {{totalQuestionCount}}</div>
+                    </div>
+                    <a ng-show="totalQuestionCount>questions.length" href="javascript:void(0)" ng-click="showMore()" class="btn btn-default btn-lg btn-block withripple">更多<div class="ripple-wrapper"></div></a>
                 </div>
             </div>
             <!-- END PORTLET-->

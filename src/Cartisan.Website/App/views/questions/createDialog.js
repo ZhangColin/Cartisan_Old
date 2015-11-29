@@ -2,33 +2,34 @@
     var controllerId = 'questions.createDialog';
     var cartisanApp = angular.module('cartisanApp');
     cartisanApp.controller(controllerId, [
-        'questions.questionService', '$modalInstance', function ($state, questionService) {
-            $scope.$on('$viewContentLoaded', function () {
-                // initialize core components
-                App.initAjax();
-            });
+        '$scope', 'questions.questionService', '$uibModalInstance', function ($scope, questionService, $uibModalInstance) {
+            //            $scope.$on('$viewContentLoaded', function () {
+            //                // initialize core components
+            //                App.initAjax();
+            //            });
+            //
+            //            // set sidebar closed and body solid layout mode
+            //            $rootScope.settings.layout.pageContentWhite = true;
+            //            $rootScope.settings.layout.pageBodySolid = false;
+            //            $rootScope.settings.layout.pageSidebarClosed = false;
 
-            // set sidebar closed and body solid layout mode
-            $rootScope.settings.layout.pageContentWhite = true;
-            $rootScope.settings.layout.pageBodySolid = false;
-            $rootScope.settings.layout.pageSidebarClosed = false;
+//            console.log($uibModalInstance);
+//            $uibModalInstance.close();
 
-            var vm = this;
-
-            vm.question = {
+            $scope.question = {
                 title: '',
-                text: ''
+                content: ''
             };
 
-            vm.save = function() {
-                questionService.canCreateQuestions(vm.question)
-                    .success(function() {
-                        $modalInstance.close();
+            $scope.save = function () {
+                questionService.createQuestion($scope.question)
+                    .success(function () {
+                        $uibModalInstance.close();
                     });
             };
 
-            vm.cancel = function() {
-                $modalInstance.dismiss('cancel');
+            $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
             }
         }
     ]);
