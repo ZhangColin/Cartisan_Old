@@ -53,9 +53,9 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="container">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
-@*                    <a href="index.html">*@
-@*                        <img src="../assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">*@
-@*                    </a>*@
+                    @*                    <a href="index.html">*@
+                    @*                        <img src="../assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">*@
+                    @*                    </a>*@
                     <h1>
                         <a href="" class="font-green-sharp bold uppercase" style="text-decoration: none">Cartisan</a>
                     </h1>
@@ -1982,6 +1982,15 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="~/assets/admin/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
     <script src="~/assets/admin/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
     <!-- END THEME LAYOUT SCRIPTS -->
+    @RenderSection("Scripts", false)
+    <script>
+        jQuery(document).ready(function () {
+            $('#btnLogout').on('click', function (event) {
+                event.preventDefault();
+                $('#logoutForm').submit();
+            });
+        });
+    </script>
 </body>
 
 </html>

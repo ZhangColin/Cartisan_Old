@@ -58,6 +58,10 @@ cartisanApp.controller('HeaderController', ['$scope', function ($scope) {
     $scope.$on('$includeContentLoaded', function () {
         Layout.initHeader(); // init header
     });
+
+    $scope.logout = function() {
+        $('#logoutForm').submit();
+    }
 }]);
 
 /* Setup Layout Part - Sidebar */

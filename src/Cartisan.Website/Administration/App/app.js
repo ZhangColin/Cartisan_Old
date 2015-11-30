@@ -108,6 +108,11 @@ cartisanApp.controller('HeaderController', ['$scope', function ($scope) {
     $scope.$on('$includeContentLoaded', function () {
         Layout.initHeader(); // init header
     });
+
+    $scope.showLogo = true;
+    $scope.togglerLogo=function() {
+        $scope.showLogo = !$scope.showLogo;
+    }
 }]);
 
 /* Setup Layout Part - Sidebar */
@@ -150,38 +155,53 @@ cartisanApp.controller('FooterController', ['$scope', function ($scope) {
 /* Setup Rounting For All Pages */
 cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     // Redirect any unmatched url
-    $urlRouterProvider.otherwise("/questions");
+    $urlRouterProvider.otherwise("/home");
 
     $stateProvider
 
         // Dashboard
-//        .state('dashboard', {
-//            url: "/dashboard.html",
-//            templateUrl: "views/dashboard.html",
-//            data: { pageTitle: 'Admin Dashboard Template' },
-//            controller: "DashboardController",
-//            resolve: {
-//                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-//                    return $ocLazyLoad.load({
-//                        name: 'cartisanApp',
-//                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-//                        files: [
-//                            '../assets/global/plugins/morris/morris.css',
-//                            '../assets/global/plugins/morris/morris.min.js',
-//                            '../assets/global/plugins/morris/raphael-min.js',
-//                            '../assets/global/plugins/jquery.sparkline.min.js',
-//
-//                            '../assets/pages/scripts/dashboard.min.js',
-//                            'js/controllers/DashboardController.js',
-//                        ]
-//                    });
-//                }]
-//            }
-//        })
-        .state('dashboard', {
-            url: "/questions",
-            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/questions/index.cshtml",
-            data: { pageTitle: '问答', pageSubTitle: '交流与分享' },
+        .state('home', {
+            url: "/home",
+            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/home/index.cshtml",
+            data: { pageTitle: '控制台', pageSubTitle: '中军宝帐' },
+            controller: "home.index",
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'cartisanApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../../../assets/global/plugins/morris/morris.css',
+                            '../../../assets/global/plugins/morris/morris.min.js',
+                            '../../../assets/global/plugins/morris/raphael-min.js',
+                            '../../../assets/global/plugins/jquery.sparkline.min.js',
+
+                            '../../../assets/admin/pages/scripts/dashboard.min.js',
+                            '../../Administration/App/views/home/index.js',
+                        ]
+                    });
+                }]
+            }
+        })
+        .state('roles', {
+            url: "/roles",
+            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/roles/index.cshtml",
+            data: { pageTitle: '角色', pageSubTitle: '使用角色进行权限分组' },
+        })
+        .state('users', {
+            url: "/users",
+            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/users/index.cshtml",
+            data: { pageTitle: '用户', pageSubTitle: '管理用户及权限' },
+        })
+        .state('auditLogs', {
+            url: "/auditLogs",
+            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/auditLogs/index.cshtml",
+            data: { pageTitle: '审计日志', pageSubTitle: '' },
+        })
+        .state('settings', {
+            url: "/settings",
+            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/settings/index.cshtml",
+            data: { pageTitle: '设置', pageSubTitle: '显示和修改程序设置' },
         })
 
 }]);

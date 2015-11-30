@@ -108,7 +108,11 @@
     <Content Include="App\directives.js" />
     <Content Include="App\factory.js" />
     <Content Include="App\filters\moment_filters.js" />
-    <Content Include="App\views\questions\index.js" />
+    <Content Include="App\views\settings\index.js" />
+    <Content Include="App\views\home\index.js" />
+    <Content Include="App\views\auditLogs\index.js" />
+    <Content Include="App\views\users\index.js" />
+    <Content Include="App\views\roles\index.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +140,11 @@
     <Content Include="App\views\layout\page_head.cshtml" />
     <Content Include="App\views\layout\quick_sidebar.cshtml" />
     <Content Include="App\views\layout\sidebar.cshtml" />
-    <Content Include="App\views\questions\index.cshtml" />
+    <Content Include="App\views\home\index.cshtml" />
+    <Content Include="App\views\roles\index.cshtml" />
+    <Content Include="App\views\users\index.cshtml" />
+    <Content Include="App\views\auditLogs\index.cshtml" />
+    <Content Include="App\views\settings\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

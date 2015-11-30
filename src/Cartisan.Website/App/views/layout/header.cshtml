@@ -4,7 +4,7 @@
 <div class="page-header-top">
     <div class="container">
         <!-- BEGIN LOGO -->
-        <div class="page-logo">
+        <div class="page-logo" ng-if="showLogo">
 @*            <a href="#/dashboard.html">*@
 @*                <img src="{{settings.layoutPath}}/img/logo-default.jpg" alt="logo" class="logo-default">*@
 @*            </a>*@
@@ -12,7 +12,7 @@
         </div>
         <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-        <a href="javascript:;" class="menu-toggler"></a>
+        <a href="javascript:;" class="menu-toggler" ng-click="togglerLogo()"></a>
         <!-- END RESPONSIVE MENU TOGGLER -->
         <!-- BEGIN TOP NAVIGATION MENU -->
         <div class="top-menu">
@@ -360,8 +360,11 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="icon-key"></i> Log Out
+                            <form id="logoutForm" action="@Url.Action("Logout", "Account")" method="POST">
+                                @Html.AntiForgeryToken()
+                            </form>
+                            <a ng-click="logout()">
+                                <i class="icon-key"></i> 退出
                             </a>
                         </li>
                     </ul>
