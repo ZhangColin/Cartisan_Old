@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
@@ -8,11 +7,9 @@ using System.Text.RegularExpressions;
 using System.Web.Compilation;
 using System.Web.Http;
 using Autofac;
-using Autofac.Builder;
 using Autofac.Core;
 using Autofac.Integration.WebApi;
 using Cartisan.CommandProcessor;
-using Cartisan.Configuration;
 using Cartisan.DependencyInjection;
 using Cartisan.EntityFramework;
 using Cartisan.Repository;
@@ -48,7 +45,6 @@ namespace Cartisan.Autofac {
             //                throw;
             //            }
 
-//            builder.RegisterType<UserContext>().InstancePerHttpRequest();
             builder.RegisterAssemblyModules(assemblies);
 
             var dbContextTypes = AppDomain.CurrentDomain.GetAssemblies().Where(assembly=>assembly.FullName.StartsWith("Cartisan")).SelectMany(assembly=>assembly.GetTypes()).Where(type=>
@@ -63,18 +59,15 @@ namespace Cartisan.Autofac {
                     var implementationType = typeof(EntityFrameworkRepository<>).MakeGenericType(entityType);
                     var defineType = typeof(IRepository<>).MakeGenericType(entityType);
                     builder.RegisterType(implementationType).As(defineType)
-                        .WithParameter(new ResolvedParameter((pi, ctx)=>true, (pi, ctx)=>ctx.Resolve(dbContextType)));
+                        .WithParameter(new ResolvedParameter((pi, ctx) => true, (pi, ctx) => ctx.Resolve(dbContextType)));
+                    //                        .InstancePerRequest();
 
                 }
             }
 
-
-            //            builder.RegisterControllers(assemblies);
             builder.RegisterApiControllers(assemblies);
 
             IContainer container = builder.Build();
-//            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-//            ServiceLocator.Resolver = new MvcResolver();
 
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             ServiceLocator.Resolver = new ApiResolver();

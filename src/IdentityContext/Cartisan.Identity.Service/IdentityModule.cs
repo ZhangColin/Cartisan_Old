@@ -1,11 +1,8 @@
-﻿using System.Data.Entity;
-using Autofac;
+﻿using Autofac;
 using AutoMapper;
 using Cartisan.CommandProcessor;
-using Cartisan.EntityFramework;
 using Cartisan.Identity.Repository;
 using Cartisan.Identity.Service.Commands;
-using Cartisan.Repository;
 
 namespace Cartisan.Identity.Service {
     public class IdentityModule: Module {
@@ -14,7 +11,7 @@ namespace Cartisan.Identity.Service {
 
             builder.RegisterType<IdentityContext>()
                 //.As<ContextBase>()
-                .WithParameter("connectionString", "cartisanConnectionString");
+                .WithParameter("connectionString", "cartisanConnectionString").InstancePerDependency();
 //            builder.RegisterGeneric(typeof(EntityFrameworkRepository<>)).As(typeof(IRepository<>));
                 //.UsingConstructor(()=>ServiceLocator.GetService<IdentityContext>());
 

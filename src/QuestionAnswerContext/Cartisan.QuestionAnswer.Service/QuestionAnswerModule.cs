@@ -11,14 +11,14 @@ namespace Cartisan.QuestionAnswer.Service {
             builder.RegisterType<QuestionAnswerMapperProfile>().As<Profile>().SingleInstance();
 
             builder.RegisterType<QuestionAnswerContext>()
-//                .As<ContextBase>()
+                //                .As<ContextBase>()
                 .WithParameter("connectionString", "cartisanConnectionString");
 //            builder.RegisterGeneric(typeof(EntityFrameworkRepository<>)).As(typeof(IRepository<>));
 
             builder.RegisterType<AcceptService>().SingleInstance();
             builder.RegisterType<QuestionAnswerApplicationService>()
                 .As<IQuestionAnswerApplicationService>()
-                .InstancePerRequest();
+                .SingleInstance();
 
 
         }
