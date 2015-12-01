@@ -12,7 +12,7 @@ namespace Cartisan.QuestionAnswer.Service {
 
             builder.RegisterType<QuestionAnswerContext>()
                 //                .As<ContextBase>()
-                .WithParameter("connectionString", "cartisanConnectionString");
+                .WithParameter("connectionString", "cartisanConnectionString").InstancePerDependency();
 //            builder.RegisterGeneric(typeof(EntityFrameworkRepository<>)).As(typeof(IRepository<>));
 
             builder.RegisterType<AcceptService>().SingleInstance();

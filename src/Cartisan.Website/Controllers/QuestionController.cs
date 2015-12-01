@@ -15,9 +15,9 @@ namespace Cartisan.Website.Controllers {
             return Json(questionDtos, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> GetQuestion(long questionId) {
+        public async Task<JsonResult> GetQuestion(long questionId, bool incrementViewCount) {
             QuestionWithAnswersDto question = await $"http://localhost:50217/api/questions/{questionId}"
-                .SetQueryParams(new { incrementViewCount = true})
+                .SetQueryParams(new { incrementViewCount })
                 .GetJsonAsync<QuestionWithAnswersDto>();
             
             return Json(question, JsonRequestBehavior.AllowGet);

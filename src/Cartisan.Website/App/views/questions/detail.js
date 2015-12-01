@@ -17,6 +17,31 @@
             $scope.answerContent = '';
             $scope.ownQuestion = true;
 
+            var loadQuestion = function (incrementViewCount) {
+                // Todo: set busy
+                questionService.getQuestion({
+                    questionId: $state.params.id,
+                    incrementViewCount: incrementViewCount
+                }).success(function (data) {
+                    $scope.question = data;
+                    //$scope.ownQuestion = $scope.question.creatorUserId == '1'; // Todo: current user id
+
+                    var acceptedAnswerIndex = -1;
+                    for (var i = 0; i < $scope.question.answers.length; i++) {
+                        if ($scope.question.answers[i].isAccepted) {
+                            acceptedAnswerIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (acceptedAnswerIndex > 0) {
+                        var acceptedAnswer = $scope.question.answers[acceptedAnswerIndex];
+                        $scope.question.answers.splice(acceptedAnswerIndex, 1);
+                        $scope.question.answers.unshift(acceptedAnswer);
+                    }
+                });
+            };
+
             $scope.voteUp = function() {
                 questionService.voteUp({
                     questionId: $scope.question.id
@@ -53,35 +78,11 @@
                 }).success(function() {
                     // Todo: notify
 
-                    loadQuestion();
+                    loadQuestion(false);
                 });
             };
 
-            var loadQuestion = function() {
-                // Todo: set busy
-                questionService.getQuestion({
-                    questionId: $state.params.id
-                }).success(function(data) {
-                    $scope.question = data;
-                    //$scope.ownQuestion = $scope.question.creatorUserId == '1'; // Todo: current user id
-
-                    var acceptedAnswerIndex = -1;
-                    for (var i = 0; i < $scope.question.answers.length; i++) {
-                        if ($scope.question.answers[i].isAccepted) {
-                            acceptedAnswerIndex = i;
-                            break;
-                        }
-                    }
-
-                    if (acceptedAnswerIndex > 0) {
-                        var acceptedAnswer = $scope.question.answers[acceptedAnswerIndex];
-                        $scope.question.answers.splice(acceptedAnswerIndex, 1);
-                        $scope.question.answers.unshift(acceptedAnswer);
-                    }
-                });
-            };
-
-            loadQuestion();
+            loadQuestion(true);
         }
     ]);
 })();

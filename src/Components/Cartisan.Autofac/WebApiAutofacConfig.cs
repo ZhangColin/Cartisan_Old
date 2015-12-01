@@ -59,8 +59,10 @@ namespace Cartisan.Autofac {
                     var implementationType = typeof(EntityFrameworkRepository<>).MakeGenericType(entityType);
                     var defineType = typeof(IRepository<>).MakeGenericType(entityType);
                     builder.RegisterType(implementationType).As(defineType)
-                        .WithParameter(new ResolvedParameter((pi, ctx) => true, (pi, ctx) => ctx.Resolve(dbContextType)));
-                    //                        .InstancePerRequest();
+                        .WithParameter(new ResolvedParameter((pi, ctx) => true,
+                            (pi, ctx) => {
+                                return ctx.Resolve(dbContextType);
+                            })).InstancePerDependency();
 
                 }
             }

@@ -10,7 +10,9 @@ namespace Cartisan.QuestionAnswer.Domain.Services {
             _answerRepository = answerRepository;
         }
 
-        public async Task AcceptAnswer(Answer answer) {
+//        public async Task AcceptAnswer(Answer answer) {
+        public async Task AcceptAnswer(long answerId) {
+            var answer = _answerRepository.Get(answerId);
             var questionId = answer.QuestionId;
             var previousAcceptedAnswer =
                 (await _answerRepository.QueryAsync(a => a.QuestionId == questionId && a.IsAccepted)).FirstOrDefault();
