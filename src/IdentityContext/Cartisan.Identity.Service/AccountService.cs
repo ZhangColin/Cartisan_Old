@@ -15,7 +15,6 @@ namespace Cartisan.Identity.Service {
     public class AccountService: IAccountService {
         private readonly IRepository<UserAccount> _userRepository;
         public AccountService(IRepository<UserAccount> userRepository) {
-            var context = ServiceLocator.GetService<ContextBase>();
             _userRepository = userRepository;
         }
 
@@ -33,6 +32,12 @@ namespace Cartisan.Identity.Service {
             var userAccounts = _userRepository.All().ToList();
             return userAccounts.Select(account => account.MapTo<AccountDto>()).ToList();
         }
+
+        public AccountDto CreateAccount(string userName, string password, string email, string mobile, string trueName, string nickName) {
+            throw new NotImplementedException();
+        }
+        
+
 
         //        public void Add(string name) {
 //            _userRepository.Add(new UserAccount() {

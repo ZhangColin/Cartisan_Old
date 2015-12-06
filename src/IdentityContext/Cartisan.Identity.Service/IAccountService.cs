@@ -7,8 +7,10 @@ namespace Cartisan.Identity.Service {
         AccountDto Get(Guid userId);
         IList<AccountDto> GetAll();
 
-//        void Add(string name);
-//        void Update(Guid userId, string name);
-//        void Remove(Guid userId);
+        AccountDto CreateAccount(string userName, string password, string email, string mobile, string trueName, string nickName);
+
+        //        void Add(string name);
+        //        void Update(Guid userId, string name);
+        //        void Remove(Guid userId);
     }
 }

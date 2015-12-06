@@ -18,6 +18,11 @@ namespace Cartisan.Identity.Domain.Models {
         public virtual bool IsDeleted { get; set; }
         public virtual DateTime Created { get; set; }
 
+//        public bool TwoFactorEnabled { get; set; }
+//        public DateTime? LockoutEndDate { get; set; }
+//        public bool LockoutEnabled { get; set; }
+//        public int AccessFailedCount { get; set; }
+
         protected override IEnumerable<object> GetIdentityComponents() {
             throw new NotImplementedException();
         }

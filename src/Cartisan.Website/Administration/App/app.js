@@ -188,10 +188,23 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
             templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/roles/index.cshtml",
             data: { pageTitle: '角色', pageSubTitle: '使用角色进行权限分组' },
         })
-        .state('users', {
-            url: "/users",
-            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/users/index.cshtml",
-            data: { pageTitle: '用户', pageSubTitle: '管理用户及权限' },
+        .state('accounts', {
+            url: "/accounts",
+            templateUrl: "/CartisanApp/Load?viewUrl=/Administration/App/views/accounts/index.cshtml",
+            data: { pageTitle: '账户', pageSubTitle: '管理账户及权限' },
+            controller: "accounts.index",
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'cartisanApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../../Administration/App/views/accounts/index.js',
+                            '../../Administration/App/views/accounts/accountService.js'
+                        ]
+                    });
+                }]
+            }
         })
         .state('auditLogs', {
             url: "/auditLogs",

@@ -28,7 +28,7 @@
             $scope.totalQuestionCount = 0;
             $scope.sorting = '创建时间 倒序';
 
-            $scope.loadQuestions = function(append) {
+            var loadQuestions = function(append) {
                 var skipCount = append ? $scope.questions.length : 0;
 
                 // Todo: set busy
@@ -59,13 +59,13 @@
                 });
 
                 modalInstance.result.then(function() {
-                    $scope.loadQuestions();
+                    loadQuestions();
                 });
             };
 
             $scope.sort = function(sortingDirection) {
                 $scope.sorting = sortingDirection;
-                $scope.loadQuestions();
+                loadQuestions();
             }
 
             $scope.showMore = function() {

@@ -110,12 +110,12 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\directives.js" />
-    <Content Include="App\factory.js" />
+    <Content Include="App\views\accounts\accountService.js" />
     <Content Include="App\filters\moment_filters.js" />
     <Content Include="App\views\settings\index.js" />
     <Content Include="App\views\home\index.js" />
     <Content Include="App\views\auditLogs\index.js" />
-    <Content Include="App\views\users\index.js" />
+    <Content Include="App\views\accounts\index.js" />
     <Content Include="App\views\roles\index.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -146,7 +146,7 @@
     <Content Include="App\views\layout\sidebar.cshtml" />
     <Content Include="App\views\home\index.cshtml" />
     <Content Include="App\views\roles\index.cshtml" />
-    <Content Include="App\views\users\index.cshtml" />
+    <Content Include="App\views\accounts\index.cshtml" />
     <Content Include="App\views\auditLogs\index.cshtml" />
     <Content Include="App\views\settings\index.cshtml" />
     <None Include="Web.Debug.config">

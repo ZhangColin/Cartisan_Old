@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Cartisan.Identity.Api.Models;
 using Cartisan.Identity.Contract.Dtos;
 using Cartisan.Identity.Service;
 using Cartisan.Identity.Service.Commands;
 using Cartisan.Repository;
 
 namespace Cartisan.Identity.Api.Controllers {
+    [RoutePrefix("api/Accounts")]
     public class AccountsController : ApiController
     {
         private readonly IAccountService _accountService;
@@ -59,6 +61,20 @@ namespace Cartisan.Identity.Api.Controllers {
         // DELETE: api/Account/5
         public void DeleteAccount(DeleteUser deleteUser) {
 //            _commandBus.Submit(deleteUser);
+        }
+
+
+
+        [AllowAnonymous]
+        [Route("Register")]
+        public async Task<IHttpActionResult> Register(RegisterByEmail model) {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
+            
+
+            return Ok();
         }
     }
 }
