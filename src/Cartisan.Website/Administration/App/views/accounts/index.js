@@ -12,13 +12,10 @@
         $rootScope.settings.layout.pageBodySolid = false;
         $rootScope.settings.layout.pageSidebarClosed = false;
 
-//        $scope.pageIndex = 1;
-//        $scope.pageSize = 10;
-//        $scope.total = 0;
-//        $scope.pageTotal = 0;
+        $scope.pageIndex = 1;
+        $scope.pageSize = 10;
+        $scope.total = 0;
 
-        $scope.totalItems = 0;
-        $scope.currentPage = 0;
 
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
@@ -26,18 +23,17 @@
 
         $scope.pageChanged = function () {
             //$log.log('Page changed to: ' + $scope.currentPage);
+            loadAccounts();
         };
 
-        $scope.maxSize = 10;
-        $scope.bigTotalItems = 0;
-        $scope.bigCurrentPage = 1;
 
         $scope.accounts = [];
 
         var loadAccounts = function() {
-            accountService.getAccounts().success(function(data) {
+            accountService.getAccounts().success(function (data) {
                 $scope.accounts = data.datas;
-                $scope.bigTotalItems = data.total;
+                $scope.pageIndex = data.pageIndex;
+                $scope.total = data.total;
             });
         }
 

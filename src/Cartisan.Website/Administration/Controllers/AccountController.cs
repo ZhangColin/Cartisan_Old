@@ -5,7 +5,7 @@ using Cartisan.Repository;
 using Flurl.Http;
 
 namespace Cartisan.Admin.Controllers {
-    public class AccountController: Controller {
+    public class AccountController: Cartisan.Web.Mvc.Controllers.ControllerBase {
 
         public AccountController() {}
 
