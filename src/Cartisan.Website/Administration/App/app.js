@@ -200,7 +200,8 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
                             '../../Administration/App/views/accounts/index.js',
-                            '../../Administration/App/views/accounts/accountService.js'
+                            '../../Administration/App/views/accounts/accountService.js',
+                            '../../Administration/App/views/accounts/createDialog.js'
                         ]
                     });
                 }]

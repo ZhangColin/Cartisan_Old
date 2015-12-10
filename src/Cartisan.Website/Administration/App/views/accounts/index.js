@@ -37,6 +37,19 @@
             });
         }
 
+        $scope.showCreateDialog = function() {
+            var modalInstance = $uibModal.open({
+                templateUrl: '/CartisanApp/Load?viewUrl=/Administration/App/views/accounts/createDialog.cshtml',
+                controller: 'accounts.createDialog',
+                backdrop: 'static',
+                size: 'md'
+            });
+
+            modalInstance.result.then(function() {
+                loadAccounts();
+            });
+        }
+
         loadAccounts();
     });
 })();
