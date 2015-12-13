@@ -72,7 +72,7 @@
                 $scope.loadQuestions(true);
             };
 
-            $scope.loadQuestions();
+            loadQuestions();
         }
     ]);
 })();

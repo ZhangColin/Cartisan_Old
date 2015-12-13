@@ -15,17 +15,17 @@
 //            console.log($uibModalInstance);
 //            $uibModalInstance.close();
 
-//            $scope.question = {
-//                title: '',
-//                content: ''
-//            };
+            $scope.account = {
+                title: '',
+                content: ''
+            };
 
-//            $scope.save = function () {
+            $scope.save = function () {
 //                questionService.createQuestion($scope.question)
 //                    .success(function () {
 //                        $uibModalInstance.close();
 //                    });
-//            };
+            };
 
             $scope.cancel = function () {
                 $uibModalInstance.dismiss('cancel');
