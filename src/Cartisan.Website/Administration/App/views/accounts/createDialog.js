@@ -2,22 +2,18 @@
     var controllerId = 'accounts.createDialog';
     var cartisanApp = angular.module('cartisanApp');
     cartisanApp.controller(controllerId, function ($scope, accountService, $uibModalInstance) {
-            //            $scope.$on('$viewContentLoaded', function () {
-            //                // initialize core components
-            //                App.initAjax();
-            //            });
-            //
-            //            // set sidebar closed and body solid layout mode
-            //            $rootScope.settings.layout.pageContentWhite = true;
-            //            $rootScope.settings.layout.pageBodySolid = false;
-            //            $rootScope.settings.layout.pageSidebarClosed = false;
-
-//            console.log($uibModalInstance);
-//            $uibModalInstance.close();
-
             $scope.account = {
-                title: '',
-                content: ''
+                userName: '',
+                nickName: '',
+                trueName: '',
+                password: '',
+                confirmPassword: '',
+                email: '',
+                mobile: '',
+                isActive: false,
+                usingRandomPassword: false,
+                nextLoginNeedModifyPassword: false,
+                sendActivationEmail: false
             };
 
             $scope.save = function () {
