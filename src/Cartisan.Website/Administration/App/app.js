@@ -95,6 +95,10 @@ cartisanApp.controller('AppController', ['$scope', '$rootScope', function ($scop
         App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
     });
+
+    $scope.$on('$includeContentLoaded', function () {
+        App.initComponents();
+    });
 }]);
 
 /***
@@ -199,7 +203,6 @@ cartisanApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProv
                         name: 'cartisanApp',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            '../../../assets/global/css/plugins.min.css',
                             '../../Administration/App/views/accounts/index.js',
                             '../../Administration/App/views/accounts/accountService.js',
                             '../../Administration/App/views/accounts/createDialog.js'

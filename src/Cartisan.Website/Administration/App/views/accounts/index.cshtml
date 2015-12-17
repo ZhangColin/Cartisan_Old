@@ -27,7 +27,10 @@
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <div class="btn-group pull-right">
-                            <button class="btn sbold green" ng-click="showCreateDialog()">
+                            <button class="btn sbold green" ng-click="mh()">
+                                mh
+                                <i class="fa fa-plus"></i>
+                            </button><button class="btn sbold green" ng-click="showCreateDialog()">
                                 新建
                                 <i class="fa fa-plus"></i>
                             </button>
@@ -49,7 +52,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd gradeX" ng-repeat="account in accounts">
+                        <tr class="odd gradeX" ng-repeat="account in accounts" postrepeat>
                             <td>
                                 <input type="checkbox" class="checkboxes" value="1" />
                             </td>
@@ -63,7 +66,7 @@
                                 <span class="label label-sm label-success"> Approved </span>
                             </td>
                         </tr>
-                        <tr class="even gradeX hide">
+                        <tr class="even gradeX">
                             <td>
                                 <input type="checkbox" class="checkboxes" value="1" />
                             </td>

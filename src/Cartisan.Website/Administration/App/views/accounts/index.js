@@ -1,9 +1,23 @@
 ﻿(function () {
     var controllerId = 'accounts.index';
     var cartisanApp = angular.module('cartisanApp');
+
+    cartisanApp.directive('postrepeat', function() {
+        return function(scope,element,attrs) {
+            if (scope.$last) {
+                scope.$emit('$repeatcomplete');
+            }
+        }
+    });
+
     cartisanApp.controller(controllerId, function ($rootScope, $scope, accountService, $uibModal, $http, $timeout) {
         $scope.$on('$viewContentLoaded', function () {
             // initialize core components
+            App.initAjax();
+        });
+
+        $scope.$on('$repeatcomplete', function () {
+            //console.log('complete');
             App.initAjax();
         });
 
@@ -49,6 +63,7 @@
                 loadAccounts();
             });
         }
+
 
         loadAccounts();
     });
