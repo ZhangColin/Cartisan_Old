@@ -59,6 +59,10 @@
                 size: 'md'
             });
 
+            modalInstance.rendered.then(function() {
+                App.initAjax();
+            });
+
             modalInstance.result.then(function() {
                 loadAccounts();
             });

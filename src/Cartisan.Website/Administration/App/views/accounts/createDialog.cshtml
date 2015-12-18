@@ -36,11 +36,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="accounts.createDialog.usingRandomPassword" class="col-lg-3 control-label">使用随机密码:</label>
+                <label for="accounts.createDialog.usingRandomPassword" class="col-lg-3 control-label"></label>
                 <div class="col-lg-9">
                     <div class="checkbox">
                         <label>
-                            <input ng-model="account.usingRandomPassword" id="accounts.createDialog.usingRandomPassword" type="checkbox">
+                            <input ng-model="account.usingRandomPassword" id="accounts.createDialog.usingRandomPassword" type="checkbox"> 使用随机密码
                         </label>
                     </div>
                 </div>
@@ -55,6 +55,36 @@
                 <label for="accounts.createDialog.userName" class="col-lg-3 control-label">密码（核对）:</label>
                 <div class="col-lg-9">
                     <input ng-model="account.confirmPassword" id="accounts.createDialog.confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="密码（核对）">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="accounts.createDialog.nextLoginNeedModifyPassword" class="col-lg-3 control-label"></label>
+                <div class="col-lg-9">
+                    <div class="checkbox">
+                        <label>
+                            <input ng-model="account.nextLoginNeedModifyPassword" id="accounts.createDialog.nextLoginNeedModifyPassword" type="checkbox"> 下次登录需要修改密码
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="accounts.createDialog.sendActivationEmail" class="col-lg-3 control-label"></label>
+                <div class="col-lg-9">
+                    <div class="checkbox">
+                        <label>
+                            <input ng-model="account.sendActivationEmail" id="accounts.createDialog.sendActivationEmail" type="checkbox"> 发送激活邮件
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="accounts.createDialog.isActive" class="col-lg-3 control-label"></label>
+                <div class="col-lg-9">
+                    <div class="checkbox">
+                        <label>
+                            <input ng-model="account.isActive" id="accounts.createDialog.isActive" type="checkbox"> 激活
+                        </label>
+                    </div>
                 </div>
             </div>
         </fieldset>

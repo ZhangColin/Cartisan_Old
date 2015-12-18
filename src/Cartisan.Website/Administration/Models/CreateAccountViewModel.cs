@@ -1,4 +1,4 @@
-﻿namespace Cartisan.WebHost.Models {
+﻿namespace Cartisan.Admin.Models {
     public class CreateAccountViewModel {
         public string UserName { get; set; }
         public string NickName { get; set; }

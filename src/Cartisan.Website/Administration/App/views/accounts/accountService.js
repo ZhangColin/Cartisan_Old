@@ -13,6 +13,14 @@
                         method: 'POST',
                         data: JSON.stringify(input)
                     }, httpParams);
+                };
+
+                this.createAccount = function(input, httpParams) {
+                    return $http({
+                        url: '/admin/account/CreateAccount',
+                        method: 'POST',
+                        data: JSON.stringify(input)
+                    }, httpParams);
                 }
 
             }

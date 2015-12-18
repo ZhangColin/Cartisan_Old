@@ -110,13 +110,15 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\directives.js" />
-    <Content Include="App\views\accounts\accountService.js" />
     <Content Include="App\filters\moment_filters.js" />
+    <Content Include="App\views\accounts\accountService.js" />
+    <Content Include="App\views\accounts\createDialog.cshtml" />
     <Content Include="App\views\accounts\createDialog.js" />
+    <Content Include="App\views\accounts\index.cshtml" />
+    <Content Include="App\views\accounts\index.js" />
     <Content Include="App\views\settings\index.js" />
     <Content Include="App\views\home\index.js" />
     <Content Include="App\views\auditLogs\index.js" />
-    <Content Include="App\views\accounts\index.js" />
     <Content Include="App\views\roles\index.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -126,6 +128,7 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ToolController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\CreateAccountViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,10 +150,8 @@
     <Content Include="App\views\layout\sidebar.cshtml" />
     <Content Include="App\views\home\index.cshtml" />
     <Content Include="App\views\roles\index.cshtml" />
-    <Content Include="App\views\accounts\index.cshtml" />
     <Content Include="App\views\auditLogs\index.cshtml" />
     <Content Include="App\views\settings\index.cshtml" />
-    <Content Include="App\views\accounts\createDialog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -160,7 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\images\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Cartisan.Web\Cartisan.Web.csproj">
