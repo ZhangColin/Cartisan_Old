@@ -1,0 +1,35 @@
+{
+	"id": "e819afab-7d54-026c-b4e3-cc34281bd5c8",
+	"name": "Cartisan.Identity",
+	"description": "",
+	"order": [
+		"96f8e960-b0c8-e624-ec1a-ce7ce23cd696"
+	],
+	"folders": [],
+	"timestamp": 1449389938374,
+	"owner": "89402",
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "96f8e960-b0c8-e624-ec1a-ce7ce23cd696",
+			"headers": "",
+			"url": "http://localhost:50217/api/accounts",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "e819afab-7d54-026c-b4e3-cc34281bd5c8",
+			"data": [],
+			"dataMode": "params",
+			"name": "获取账户列表",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1449389938374,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}
