@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace Cartisan.Website {
+namespace Cartisan.Authorization {
     // 配置此应用程序中使用的应用程序用户管理器。UserManager 在 ASP.NET Identity 中定义，并由此应用程序使用。
     public class CartisanUserManager: UserManager<CartisanUser, long> {
         public CartisanUserManager(IUserStore<CartisanUser, long> store): base(store) {
@@ -32,6 +32,12 @@ namespace Cartisan.Website {
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if(dataProtectionProvider!=null) {
+                manager.UserTokenProvider = new DataProtectorTokenProvider<CartisanUser, long>(
+                    dataProtectionProvider.Create("ASP.NET Identity"));
+            }
 
             // 注册双重身份验证提供程序。此应用程序使用手机和电子邮件作为接收用于验证用户的代码的一个步骤
             // 你可以编写自己的提供程序并将其插入到此处。

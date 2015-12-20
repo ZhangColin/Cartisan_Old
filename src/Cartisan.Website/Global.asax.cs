@@ -19,6 +19,7 @@ namespace Cartisan.Website {
             ViewEngines.Engines.Add(new ThemeableRazorViewEngine());
 
             AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 

@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace Cartisan.Website {
+namespace Cartisan.Authorization {
     public class CartisanRoleManager: RoleManager<CartisanRole, long> {
         public CartisanRoleManager(IRoleStore<CartisanRole, long> store): base(store) {}
 

@@ -16,8 +16,8 @@ namespace Cartisan.WebHost
         {
             WebApiAutofacConfig.Initialize();
             AutoMapperConfig.Initialize();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

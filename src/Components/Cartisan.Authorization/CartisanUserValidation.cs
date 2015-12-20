@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace Cartisan.Website {
+namespace Cartisan.Authorization {
     public class CartisanUserValidation: IIdentityValidator<CartisanUser> {
         public Task<IdentityResult> ValidateAsync(CartisanUser item) {
             throw new System.NotImplementedException();

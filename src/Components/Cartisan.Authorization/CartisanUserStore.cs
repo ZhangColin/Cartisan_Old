@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace Cartisan.Website {
+namespace Cartisan.Authorization {
     public class CartisanUserStore: 
         IUserStore<CartisanUser, long>, 
         IUserLockoutStore<CartisanUser, long>, 

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace Cartisan.Website {
+namespace Cartisan.Authorization {
     public class CartisanRoleStore: IRoleStore<CartisanRole, long> {
         public void Dispose() {
         }

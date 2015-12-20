@@ -1,4 +1,5 @@
 ﻿using System;
+using Cartisan.Authorization;
 using Cartisan.Website;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;

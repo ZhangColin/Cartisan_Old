@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 
-namespace Cartisan.Website {
+namespace Cartisan.Authorization {
     public class CartisanPasswordHasher: IPasswordHasher {
         public string HashPassword(string password) {
             return password;

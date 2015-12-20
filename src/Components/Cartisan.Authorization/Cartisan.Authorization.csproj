@@ -88,6 +88,16 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,11 +106,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartisanApplicationOAuthProvider.cs" />
+    <Compile Include="CartisanClaimsIdentityFactory.cs" />
+    <Compile Include="CartisanPasswordHasher.cs" />
+    <Compile Include="CartisanRole.cs" />
+    <Compile Include="CartisanRoleManager.cs" />
+    <Compile Include="CartisanRoleStore.cs" />
+    <Compile Include="CartisanSignInManager.cs" />
+    <Compile Include="CartisanUser.cs" />
+    <Compile Include="CartisanUserManager.cs" />
+    <Compile Include="CartisanUserStore.cs" />
+    <Compile Include="CartisanUserValidation.cs" />
+    <Compile Include="EmailService.cs" />
+    <Compile Include="PasswordValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmsService.cs" />
+    <Compile Include="WebApi\ChallengeResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cartisan\Cartisan.csproj">
+      <Project>{fa5ef4b7-c651-4458-bf1c-deebc8d4d6ff}</Project>
+      <Name>Cartisan</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mvc\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

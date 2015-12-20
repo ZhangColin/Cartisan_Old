@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace Cartisan.Website {
+namespace Cartisan.Authorization {
     public class CartisanClaimsIdentityFactory<TUser>: ClaimsIdentityFactory<TUser> where TUser: class, IUser<string> {
         internal const string IdentityProviderClaimType = "http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider";
         internal const string DefaultIdentityProviderClaimValue = "ASP.NET Identity";
