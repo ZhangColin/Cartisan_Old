@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Cartisan.Admin.Models;
+using Cartisan.Admin.Models.Account;
 using Cartisan.Identity.Contract.Dtos;
 using Cartisan.Repository;
 using Flurl.Http;

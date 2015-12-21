@@ -2,10 +2,12 @@
 using System.Web;
 using System.Web.Mvc;
 using Cartisan.Authorization;
+using Cartisan.Web.Mvc.Filters;
 using Cartisan.Website.Models.Account;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Cartisan.Website.Controllers {
+    [CartisanAuthorize]
     public class AccountController: Controller {
 
         private CartisanSignInManager _signInManager;
@@ -36,6 +38,8 @@ namespace Cartisan.Website.Controllers {
                 _userManager = value;
             }
         }
+
+        [AllowAnonymous]
         public ActionResult Login(string returnUrl = "") {
             if(string.IsNullOrWhiteSpace(returnUrl)) {
                 returnUrl = Request.ApplicationPath;
@@ -77,18 +81,28 @@ namespace Cartisan.Website.Controllers {
             }
         }
 
-        private ActionResult RedirectToLocal(string returnUrl) {
-            if(Url.IsLocalUrl(returnUrl)) {
-                return Redirect(returnUrl);
-            }
-            return RedirectToAction("Index", "Home");
-        }
+//        [AllowAnonymous]
+//        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe) {
+//            // 要求用户已通过使用用户名/密码或外部登录名登录
+//            if(!await SignInManager.HasBeenVerifiedAsync()) {
+//                return View("Error");
+//            }
+//
+//           
+//        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Logout() {
             SignInManager.AuthenticationManager.SignOut();
             return RedirectToAction("Login");
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl) {
+            if(Url.IsLocalUrl(returnUrl)) {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

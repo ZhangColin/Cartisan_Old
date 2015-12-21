@@ -8,7 +8,7 @@ namespace Cartisan.Authorization {
         public long Id { get; set; }
         public string UserName { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<CartisanUser, long> manager, string authenticationType) {
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(CartisanUserManager manager, string authenticationType) {
             // 请注意，authenticationType 必须与 CookieAuthenticationOptions.AuthenticationType 中定义的相应项匹配
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             // 在此处添加自定义用户声明
