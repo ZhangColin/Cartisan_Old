@@ -86,6 +86,7 @@ namespace Cartisan.Identity.Api.Controllers {
                 _userManager = value;
             }
         }
+        
 
 
         [AllowAnonymous]
