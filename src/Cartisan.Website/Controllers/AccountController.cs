@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Management;
 using System.Web.Mvc;
 using Cartisan.Authorization;
 using Cartisan.Web.Mvc.Filters;
@@ -56,7 +58,15 @@ namespace Cartisan.Website.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl) {
             if(!ModelState.IsValid) {
-                return View(model);
+                if(Request.IsAjaxRequest()) {
+                    return Json(new {
+                        success = false,
+                        message = string.Join(" ", ModelState.Values.SelectMany(m => m.Errors).Select(err => err.ErrorMessage))
+                    });
+                }
+                else{
+                    return View(model);
+                }
             }
 
             // 这不会计入到为执行帐户锁定而统计的登录失败次数中
@@ -65,21 +75,52 @@ namespace Cartisan.Website.Controllers {
                 await
                     SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe,
                         shouldLockout: false);
-            switch(result) {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new {
-                        ReturnUrl = returnUrl,
-                        RememberMe = model.RememberMe
-                    });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "无效的登录尝试。");
-                    return View(model);
+            if(Request.IsAjaxRequest()) {
+                switch (result) {
+                    case SignInStatus.Success:
+                        return Json(new {
+                            success = true,
+                            returnUrl
+                        });
+                    case SignInStatus.LockedOut:
+                        return Json(new {
+                            success = false,
+                            message = "LockedOut"
+                        });
+                    case SignInStatus.RequiresVerification:
+                        return Json(new {
+                            success = true,
+                            model.RememberMe,
+                            returnUrl,
+                            message="SendCode"
+                        });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "无效的登录尝试。");
+                        return Json(new {
+                            success = false,
+                            message = string.Join(" ", ModelState.Values.SelectMany(m=>m.Errors).Select(err=>err.ErrorMessage))
+                        });
+                }
             }
+            else {
+                switch (result) {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new {
+                            ReturnUrl = returnUrl,
+                            RememberMe = model.RememberMe
+                        });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "无效的登录尝试。");
+                        return View(model);
+                }
+            }
+            
         }
 
 //        [AllowAnonymous]

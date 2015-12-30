@@ -1,4 +1,5 @@
-﻿
+﻿@using Cartisan.Extensions
+
 @{
     Layout = null;
 }
@@ -59,9 +60,9 @@
         <form class="login-form" action="@Url.Action("Login", "Account")" method="post">
             @Html.AntiForgeryToken()
             <h3 class="form-title font-green"> 登录 </h3>
-            <div class="alert alert-danger display-hide">
+            <div class="alert alert-danger @(ViewData.ModelState.IsValid?"display-hide":"") ">
                 <button class="close" data-close="alert"></button>
-                <span> 输入用户名密码. </span>
+                <span> @string.Join(" ",Html.ViewData.ModelState.SelectMany(pair=>pair.Value.Errors).Select(err=>err.ErrorMessage).ToArray()) </span>
             </div>
             <div class="form-group">
                 <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -106,7 +107,8 @@
     <script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.js" type="text/javascript"></script>
+@*    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>*@
     <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
     <script src="~/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->

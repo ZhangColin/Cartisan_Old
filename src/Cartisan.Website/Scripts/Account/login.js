@@ -3,9 +3,9 @@
     var handleLogin = function () {
 
         $('.login-form').validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-block', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
+            errorElement: 'span',
+            errorClass: 'help-block', 
+            focusInvalid: true, 
             rules: {
                 username: {
                     required: true
@@ -27,7 +27,8 @@
                 }
             },
 
-            invalidHandler: function (event, validator) { //display error alert on form submit   
+            invalidHandler: function (event, validator) {
+                $('.alert-danger span', $('.login-form')).html(validator.errorList[0].message);
                 $('.alert-danger', $('.login-form')).show();
             },
 
@@ -46,7 +47,15 @@
             },
 
             submitHandler: function (form) {
-                form.submit(); // form validation success, call ajax form submit
+                //form.submit(); // form validation success, call ajax form submit
+                $.post(form.action, $(form).serialize(), function(data) {
+                    if (data.success) {
+                        location.href = data.returnUrl;
+                    } else {
+                        $('.alert-danger span', $('.login-form')).html(data.message);
+                        $('.alert-danger', $('.login-form')).show();
+                    }
+                });
             }
         });
 
@@ -61,13 +70,13 @@
     }
 
     return {
-        //main function to initiate the module
         init: function () {
-
             handleLogin();
-
         }
-
     };
 
 }();
+
+jQuery(document).ready(function () {
+    Login.init();
+});
