@@ -144,7 +144,7 @@ namespace Cartisan.Website.Controllers {
         public async Task<ActionResult> Register(RegisterViewModel model) {
             if(ModelState.IsValid) {
                 var user = new CartisanUser() {
-                    UserName = model.Email,
+                    UserName = model.UserName,
 //                    Email = model.Email
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
